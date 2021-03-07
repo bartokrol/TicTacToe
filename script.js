@@ -10,23 +10,17 @@ const player1 = [];
 const player2 = [];
 
 const checkPlayerLength = (e) => {
-	board[e.target.dataset.row][e.target.dataset.column] = e.target;
-	e.target.removeEventListener("click", checkPlayerLength);
-
 	if (player1.length === player2.length) {
 		player1.push(e);
-		e.target.textContent = "X";
+		e.target.classList.add("cross");
 	} else {
 		player2.push(e);
-		e.target.textContent = "O";
+		e.target.classList.add("circle");
 	}
+	board[e.target.dataset.row][e.target.dataset.column] = e.target.className;
+	e.target.removeEventListener("click", checkPlayerLength);
 };
 
 boxes.forEach((box) => {
 	box.addEventListener("click", checkPlayerLength);
-	// box.forEach((box) => {
-	// 	if (box.textContent !== "") {
-	// 		box.removeEventListener("click", checkPlayerLength);
-	// 	}
-	// });
 });

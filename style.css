@@ -47,3 +47,16 @@ body {
 	border-bottom: none;
 }
 
+.circle {
+	background-image: url("/img/circle.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.cross {
+	background-image: url("/img/cross.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
