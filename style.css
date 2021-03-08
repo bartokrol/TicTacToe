@@ -11,6 +11,38 @@ body {
 	min-height: 100vh;
 }
 
+.markChoosing {
+	background-color: rgba(0, 0, 0, 0.1);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.markChoosing--window {
+	width: 400px;
+	height: 150px;
+	background-color: white;
+	padding: 20px;
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+
+.markChoosing--title {
+	grid-column: 1 / span 2;
+	text-align: center;
+}
+
+.markChoosing--btn {
+	margin: 0 10px;
+}
+
 .board {
 	width: 500px;
 	height: 500px;
@@ -21,6 +53,10 @@ body {
 
 .board--box {
 	border: 1px solid black;
+}
+
+.board--box:hover {
+	background-color: lightgrey;
 }
 
 .board--box:first-child,

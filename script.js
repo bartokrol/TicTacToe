@@ -30,13 +30,9 @@ const checkPlayerLength = (e) => {
 	}
 	board[e.target.dataset.row][e.target.dataset.column] = e.target.className;
 	e.target.removeEventListener("click", checkPlayerLength);
-	// console.log(player1);
-	// console.log(player2);
-	// console.log(board);
-	// if (player1.length > 2 || player2.length > 2) {
-	// 	checkWinner();
-	// }
-	checkWinner();
+	if (player1.length > 2 || player2.length > 2) {
+		checkWinner();
+	}
 };
 
 const checkWinner = () => {
@@ -46,8 +42,7 @@ const checkWinner = () => {
 			boxes.forEach((box) => {
 				box.removeEventListener("click", checkPlayerLength);
 			});
-		}
-		if (combination.every((el) => player2.includes(el))) {
+		} else if (combination.every((el) => player2.includes(el))) {
 			console.log("gracz drugi wygrał!");
 			boxes.forEach((box) => {
 				box.removeEventListener("click", checkPlayerLength);
@@ -55,6 +50,10 @@ const checkWinner = () => {
 		}
 	}
 };
+
+// const checkDraw = () => {
+// 	if()
+// }
 
 boxes.forEach((box) => {
 	box.addEventListener("click", checkPlayerLength);
