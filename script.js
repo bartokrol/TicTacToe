@@ -6,19 +6,54 @@ const board = [
 	[, ,],
 ];
 
+const winningCombinations = [
+	[1, 2, 3],
+	[4, 5, 6],
+	[7, 8, 9],
+	[1, 4, 7],
+	[2, 5, 8],
+	[3, 6, 9],
+	[1, 5, 9],
+	[3, 5, 7],
+];
+
 const player1 = [];
 const player2 = [];
 
 const checkPlayerLength = (e) => {
 	if (player1.length === player2.length) {
-		player1.push(e);
+		player1.push(Number(e.target.id));
 		e.target.classList.add("cross");
 	} else {
-		player2.push(e);
+		player2.push(Number(e.target.id));
 		e.target.classList.add("circle");
 	}
 	board[e.target.dataset.row][e.target.dataset.column] = e.target.className;
 	e.target.removeEventListener("click", checkPlayerLength);
+	// console.log(player1);
+	// console.log(player2);
+	// console.log(board);
+	// if (player1.length > 2 || player2.length > 2) {
+	// 	checkWinner();
+	// }
+	checkWinner();
+};
+
+const checkWinner = () => {
+	for (let combination of winningCombinations) {
+		if (combination.every((el) => player1.includes(el))) {
+			console.log("gracz pierwszy wygrał!");
+			boxes.forEach((box) => {
+				box.removeEventListener("click", checkPlayerLength);
+			});
+		}
+		if (combination.every((el) => player2.includes(el))) {
+			console.log("gracz drugi wygrał!");
+			boxes.forEach((box) => {
+				box.removeEventListener("click", checkPlayerLength);
+			});
+		}
+	}
 };
 
 boxes.forEach((box) => {
