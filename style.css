@@ -11,7 +11,7 @@ body {
 	min-height: 100vh;
 }
 
-.markChoosing {
+.mark--choice {
 	background-color: rgba(0, 0, 0, 0.1);
 	position: absolute;
 	top: 0;
@@ -23,7 +23,7 @@ body {
 	align-items: center;
 }
 
-.markChoosing--window {
+.mark--choice--window {
 	width: 400px;
 	height: 150px;
 	background-color: white;
@@ -34,13 +34,17 @@ body {
 	grid-template-rows: 1fr 1fr;
 }
 
-.markChoosing--title {
+.mark--choice--title {
 	grid-column: 1 / span 2;
 	text-align: center;
 }
 
-.markChoosing--btn {
+.mark--choice--btn {
 	margin: 0 10px;
+}
+
+.inactive {
+	visibility: hidden;
 }
 
 .board {
@@ -53,10 +57,6 @@ body {
 
 .board--box {
 	border: 1px solid black;
-}
-
-.board--box:hover {
-	background-color: lightgrey;
 }
 
 .board--box:first-child,
