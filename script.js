@@ -1,6 +1,8 @@
 const boxes = Array.from(document.querySelectorAll(".board--box"));
 const markChoice = document.querySelector(".mark--choice");
 const buttons = [...document.querySelectorAll("button")];
+const resultPlayer1 = document.querySelector(".result--player1");
+const resultPlayer2 = document.querySelector(".result--player2");
 
 const player1 = {
 	mark: null,
@@ -72,10 +74,12 @@ const checkWinner = () => {
 			console.log("gracz pierwszy wygrał!");
 			removeListenersForEachBox();
 			player1.wins++;
+			resultPlayer1.textContent = `Player1: ${player1.wins}`;
 		} else if (combination.every((el) => player2.arr.includes(el))) {
 			console.log("gracz drugi wygrał!");
 			removeListenersForEachBox();
 			player2.wins++;
+			resultPlayer2.textContent = `${player2.wins} :Player2`;
 		} else if (
 			boxes.every(
 				(box) =>
