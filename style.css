@@ -96,3 +96,19 @@ body {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+.circle--hover {
+	background-image: url("/img/circle.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.3;
+}
+
+.cross--hover {
+	background-image: url("/img/cross.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.3;
+}
