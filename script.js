@@ -30,11 +30,19 @@ const player2 = {
 };
 
 const players = [player1, player2];
-let activePlayer = players.filter((player) => player.active);
+let activePlayer = null;
+
+// function changes activePlayer after box is clicked
 
 const changeActivePlayer = () => {
 	player1.active = !player1.active;
 	player2.active = !player2.active;
+	activePlayer = players.filter((player) => player.active);
+};
+
+// function that sets first activePlayer
+
+const setActivePlayer = () => {
 	activePlayer = players.filter((player) => player.active);
 };
 
@@ -63,26 +71,37 @@ const winningCombinations = [
 
 let latestResults = [];
 
-const pushBoxIntoPlayerArr = (e, player) => {
-	player.arr.push(Number(e.target.id));
-	e.target.classList.add(player.mark);
+const removeHoverEvents = (e) => {
+	e.target.classList.remove(`${player1.mark}--hover`);
+	e.target.classList.remove(`${player2.mark}--hover`);
 };
 
-const checkPlayerLength = (e) => {
-	changeActivePlayer();
-	if (player1.arr.length === player2.arr.length) {
-		pushBoxIntoPlayerArr(e, player1);
-	} else {
-		pushBoxIntoPlayerArr(e, player2);
-	}
-	
-	board[e.target.dataset.row][e.target.dataset.column] = e.target.id;
+const checkPlayerArrLength = () => {
 	if (player1.arr.length > 2 || player2.arr.length > 2) {
 		checkWinner();
 	}
+};
 
-	e.target.classList.remove(`${player1.mark}--hover`);
-	e.target.classList.remove(`${player2.mark}--hover`);
+const pushBoxIntoPlayerArr = (e, player) => {
+	player.arr.push(Number(e.target.id));
+	e.target.classList.add(player.mark);
+	changeActivePlayer();
+};
+
+// clicked box is pushed into specific player array
+
+const addBoxToBoard = (e) => {
+	const boxRow = e.target.dataset.row;
+	const boxColumn = e.target.dataset.column;
+
+	board[boxRow][boxColumn] = e.target.id;
+};
+
+const checkPlayerLength = (e) => {
+	addBoxToBoard(e);
+	pushBoxIntoPlayerArr(e, activePlayer[0]);
+	checkPlayerArrLength();
+	removeHoverEvents(e);
 	removeEventListeners(e.target);
 };
 
@@ -140,16 +159,11 @@ const checkWinner = () => {
 };
 
 const showElementOnMouseOver = (e) => {
-	if (player1.arr.length === player2.arr.length) {
-		e.target.classList.add(`${player1.mark}--hover`);
-	} else {
-		e.target.classList.add(`${player2.mark}--hover`);
-	}
+	e.target.classList.add(`${activePlayer[0].mark}--hover`);
 };
 
 const hideElementOnMouseOut = (e) => {
-	e.target.classList.remove(`${player1.mark}--hover`);
-	e.target.classList.remove(`${player2.mark}--hover`);
+	e.target.classList.remove(`${activePlayer[0].mark}--hover`);
 };
 
 const choosePlayer = (e) => {
@@ -157,9 +171,10 @@ const choosePlayer = (e) => {
 	markChoice.classList.add("inactive");
 	if (player1.mark === "circle") {
 		player2.mark = "cross";
-	} else {
+	} else if (player1.mark === "cross") {
 		player2.mark = "circle";
 	}
+	setActivePlayer();
 };
 
 const resetPage = () => {
