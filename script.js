@@ -1,11 +1,15 @@
+// DOM Elements
+
 const boxes = Array.from(document.querySelectorAll(".board--box"));
-const markChoice = document.querySelector(".mark--choice");
-const buttons = [...document.querySelectorAll("button")];
+const markChoice = document.querySelector(".startingPage");
+const buttons = [...document.querySelectorAll(".startingPage--btn")];
 const resultPlayer1 = document.querySelector(".result--current__player1");
 const resultPlayer2 = document.querySelector(".result--current__player2");
 const latest = document.querySelector(".result--latest__results");
 const resetBtn = document.querySelector(".buttons--button__reset");
 const newGameBtn = document.querySelector(".buttons--button__newGame");
+
+// Players
 
 const player1 = {
 	name: "player1",
@@ -23,11 +27,15 @@ const player2 = {
 	winner: null,
 };
 
+// Board 3x3
+
 let board = [
 	[null, null, null],
 	[null, null, null],
 	[null, null, null],
 ];
+
+// WinningCombinations
 
 const winningCombinations = [
 	[1, 2, 3],
@@ -39,6 +47,8 @@ const winningCombinations = [
 	[1, 5, 9],
 	[3, 5, 7],
 ];
+
+// Array contains latest games results
 
 let latestResults = [];
 
@@ -129,25 +139,17 @@ const hideElementOnMouseOut = (e) => {
 	e.target.classList.remove(`${player2.mark}--hover`);
 };
 
-boxes.forEach((box) => {
-	box.addEventListener("click", checkPlayerLength);
-	box.addEventListener("mouseover", showElementOnMouseOver);
-	box.addEventListener("mouseout", hideElementOnMouseOut);
-});
+const choosePlayer = (e) => {
+	player1.mark = e.target.value;
+	markChoice.classList.add("inactive");
+	if (player1.mark === "circle") {
+		player2.mark = "cross";
+	} else {
+		player2.mark = "circle";
+	}
+};
 
-buttons.forEach((button) => {
-	button.addEventListener("click", (e) => {
-		player1.mark = e.target.value;
-		markChoice.classList.add("inactive");
-		if (player1.mark === "circle") {
-			player2.mark = "cross";
-		} else {
-			player2.mark = "circle";
-		}
-	});
-});
-
-resetBtn.addEventListener("click", () => {
+const resetPage = () => {
 	board = [
 		[null, null, null],
 		[null, null, null],
@@ -159,6 +161,7 @@ resetBtn.addEventListener("click", () => {
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
 	});
+
 	player1.arr = [];
 	player1.mark = null;
 	player1.wins = 0;
@@ -172,4 +175,20 @@ resetBtn.addEventListener("click", () => {
 	latestResults = [];
 	latest.innerHTML = "";
 	markChoice.classList.remove("inactive");
-});
+};
+
+const addListeners = () => {
+	resetBtn.addEventListener("click", resetPage);
+
+	buttons.forEach((button) => {
+		button.addEventListener("click", choosePlayer);
+	});
+
+	boxes.forEach((box) => {
+		box.addEventListener("click", checkPlayerLength);
+		box.addEventListener("mouseover", showElementOnMouseOver);
+		box.addEventListener("mouseout", hideElementOnMouseOut);
+	});
+};
+
+document.addEventListener("DOMContentLoaded", addListeners);
