@@ -14,6 +14,7 @@ const newGameBtn = document.querySelector(".buttons--button__newGame");
 const player1 = {
 	name: "player1",
 	mark: null,
+	active: true,
 	arr: [],
 	wins: null,
 	winner: null,
@@ -22,9 +23,19 @@ const player1 = {
 const player2 = {
 	name: "player2",
 	mark: null,
+	active: false,
 	arr: [],
 	wins: null,
 	winner: null,
+};
+
+const players = [player1, player2];
+let activePlayer = players.filter((player) => player.active);
+
+const changeActivePlayer = () => {
+	player1.active = !player1.active;
+	player2.active = !player2.active;
+	activePlayer = players.filter((player) => player.active);
 };
 
 // Board 3x3
@@ -58,11 +69,13 @@ const pushBoxIntoPlayerArr = (e, player) => {
 };
 
 const checkPlayerLength = (e) => {
+	changeActivePlayer();
 	if (player1.arr.length === player2.arr.length) {
 		pushBoxIntoPlayerArr(e, player1);
 	} else {
 		pushBoxIntoPlayerArr(e, player2);
 	}
+	
 	board[e.target.dataset.row][e.target.dataset.column] = e.target.id;
 	if (player1.arr.length > 2 || player2.arr.length > 2) {
 		checkWinner();
