@@ -126,7 +126,6 @@ const setLatestResults = (player) => {
 	if (player.winner) {
 		console.log(`${player.name} wygrał rundę!`);
 		latestResults.push(player);
-		console.log(latestResults);
 	}
 
 	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
@@ -171,13 +170,33 @@ const hideElementOnMouseOut = (e) => {
 
 const choosePlayer = (e) => {
 	player1.mark = e.target.value;
-	markChoice.classList.add("inactive");
 	if (player1.mark === "circle") {
 		player2.mark = "cross";
+		player1.active = true;
+		player2.active = false;
 	} else if (player1.mark === "cross") {
 		player2.mark = "circle";
+		player1.active = false;
+		player2.active = true;
 	}
+	markChoice.classList.add("inactive");
 	setActivePlayer();
+};
+
+const resetPlayer = () => {
+	for (let player of players) {
+		player.arr = [];
+		player.mark = null;
+		player.wins = 0;
+		player.winner = false;
+	}
+};
+
+const resetResults = () => {
+	resultPlayer1.textContent = `Player1: ${player1.wins}`;
+	resultPlayer2.textContent = `${player2.wins} :Player2 `;
+	latestResults = [];
+	latest.innerHTML = "";
 };
 
 const resetPage = () => {
@@ -192,19 +211,8 @@ const resetPage = () => {
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
 	});
-
-	player1.arr = [];
-	player1.mark = null;
-	player1.wins = 0;
-	player1.winner = false;
-	resultPlayer1.textContent = `Player1: ${player1.wins}`;
-	player2.arr = [];
-	player2.mark = null;
-	player2.wins = 0;
-	player2.winner = false;
-	resultPlayer2.textContent = `${player1.wins} :Player2 `;
-	latestResults = [];
-	latest.innerHTML = "";
+	resetPlayer();
+	resetResults();
 	markChoice.classList.remove("inactive");
 };
 
