@@ -48,11 +48,7 @@ const setActivePlayer = () => {
 
 // Board 3x3
 
-let board = [
-	[null, null, null],
-	[null, null, null],
-	[null, null, null],
-];
+let board = [];
 
 // WinningCombinations
 
@@ -172,13 +168,11 @@ const choosePlayer = (e) => {
 	player1.mark = e.target.value;
 	if (player1.mark === "circle") {
 		player2.mark = "cross";
-		player1.active = true;
-		player2.active = false;
 	} else if (player1.mark === "cross") {
 		player2.mark = "circle";
-		player1.active = false;
-		player2.active = true;
 	}
+	player1.active = true;
+	player2.active = false;
 	markChoice.classList.add("inactive");
 	setActivePlayer();
 };
@@ -199,25 +193,48 @@ const resetResults = () => {
 	latest.innerHTML = "";
 };
 
-const resetPage = () => {
+const resetBoard = () => {
 	board = [
 		[null, null, null],
 		[null, null, null],
 		[null, null, null],
 	];
+};
+
+const addListenersAfterReset = () => {
 	boxes.forEach((box) => {
 		box.className = "board--box";
 		box.addEventListener("click", checkPlayerLength);
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
 	});
+};
+
+const resetPage = () => {
 	resetPlayer();
 	resetResults();
+	addListenersAfterReset();
 	markChoice.classList.remove("inactive");
+};
+
+const resetPlayersArr = () => {
+	for (let player of players) {
+		player.arr = [];
+	}
+};
+
+const newGame = () => {
+	player1.active = true;
+	player2.active = false;
+	setActivePlayer();
+	resetPlayersArr();
+	addListenersAfterReset();
+	resetBoard();
 };
 
 const addListeners = () => {
 	resetBtn.addEventListener("click", resetPage);
+	newGameBtn.addEventListener("click", newGame);
 
 	buttons.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
@@ -230,4 +247,7 @@ const addListeners = () => {
 	});
 };
 
-document.addEventListener("DOMContentLoaded", addListeners);
+document.addEventListener("DOMContentLoaded", () => {
+	addListeners();
+	resetBoard();
+});
