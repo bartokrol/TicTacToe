@@ -118,44 +118,47 @@ const removeListenersForEachBox = () => {
 };
 
 const addWins = (player) => {
+	player.winner = true;
 	player.wins++;
+};
+
+const setLatestResults = (player) => {
+	if (player.winner) {
+		console.log(`${player.name} wygrał rundę!`);
+		latestResults.push(player);
+		console.log(latestResults);
+	}
+
+	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
+};
+
+const setWinner = (player) => {
+	console.log(`${player.name} wygrał!`);
+	removeListenersForEachBox();
+	addWins(player);
+	setLatestResults(player);
 };
 
 const checkWinner = () => {
 	for (let combination of winningCombinations) {
 		if (combination.every((el) => player1.arr.includes(el))) {
-			console.log("gracz pierwszy wygrał!");
-			removeListenersForEachBox();
-			addWins(player1);
-			player1.winner = true;
+			setWinner(player1);
 			resultPlayer1.textContent = `Player1: ${player1.wins}`;
 		} else if (combination.every((el) => player2.arr.includes(el))) {
-			console.log("gracz drugi wygrał!");
-			removeListenersForEachBox();
-			addWins(player2);
-			player2.winner = true;
+			setWinner(player2);
 			resultPlayer2.textContent = `${player2.wins} :Player2`;
-		} else if (
-			boxes.every(
-				(box) =>
-					box.classList.contains("circle") ||
-					box.classList.contains("cross")
-			)
-		) {
-			console.log("it's a draw!");
 		}
 	}
-	if (player1.winner) {
-		console.log("player1 has won this round");
-		latestResults.push(player1);
-		console.log(latestResults);
-	} else if (player2.winner) {
-		console.log("player2 has won this round");
-		latestResults.push(player2);
-		console.log(latestResults);
-	}
 
-	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
+	// 	else if (
+	// 			boxes.every(
+	// 				(box) =>
+	// 					box.classList.contains("circle") ||
+	// 					box.classList.contains("cross")
+	// 			)
+	// 		) {
+	// 			console.log("it's a draw!");
+	// }
 };
 
 const showElementOnMouseOver = (e) => {
