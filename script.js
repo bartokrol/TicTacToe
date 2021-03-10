@@ -1,21 +1,26 @@
 const boxes = Array.from(document.querySelectorAll(".board--box"));
 const markChoice = document.querySelector(".mark--choice");
 const buttons = [...document.querySelectorAll("button")];
-const resultPlayer1 = document.querySelector(".result--player1");
-const resultPlayer2 = document.querySelector(".result--player2");
+const resultPlayer1 = document.querySelector(".result--current__player1");
+const resultPlayer2 = document.querySelector(".result--current__player2");
+const latest = document.querySelector(".result--latest__results");
 
 const player1 = {
+	name: "player1",
 	mark: null,
 	arr: [],
 	active: true,
 	wins: null,
+	winner: null,
 };
 
 const player2 = {
+	name: "player2",
 	mark: null,
 	arr: [],
 	active: false,
 	wins: null,
+	winner: null,
 };
 
 const board = [
@@ -34,6 +39,8 @@ const winningCombinations = [
 	[1, 5, 9],
 	[3, 5, 7],
 ];
+
+const latestResults = [];
 
 const pushBoxIntoPlayerArr = (e, player) => {
 	player.arr.push(Number(e.target.id));
@@ -74,11 +81,13 @@ const checkWinner = () => {
 			console.log("gracz pierwszy wygrał!");
 			removeListenersForEachBox();
 			player1.wins++;
+			player1.winner = true;
 			resultPlayer1.textContent = `Player1: ${player1.wins}`;
 		} else if (combination.every((el) => player2.arr.includes(el))) {
 			console.log("gracz drugi wygrał!");
 			removeListenersForEachBox();
 			player2.wins++;
+			player2.winner = true;
 			resultPlayer2.textContent = `${player2.wins} :Player2`;
 		} else if (
 			boxes.every(
@@ -90,11 +99,18 @@ const checkWinner = () => {
 			console.log("it's a draw!");
 		}
 	}
-};
+	if (player1.winner) {
+		console.log("player1 has won this round");
+		latestResults.push(player1);
+		console.log(latestResults);
+	} else if (player2.winner) {
+		console.log("player2 has won this round");
+		latestResults.push(player2);
+		console.log(latestResults);
+	}
 
-// const checkDraw = () => {
-// 	if(board.length === 9 && board)
-// }
+	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
+};
 
 const showElementOnMouseOver = (e) => {
 	if (player1.arr.length === player2.arr.length) {

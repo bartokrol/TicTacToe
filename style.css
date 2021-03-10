@@ -8,7 +8,6 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
 	min-height: 100vh;
 }
 
@@ -48,29 +47,52 @@ body {
 	visibility: hidden;
 }
 
+.container {
+	width: 80%;
+	background-color: beige;
+	display: flex;
+}
+
 .result {
-	margin-bottom: 20px;
+	padding: 20px;
+	text-align: center;
+	background-color: bisque;
+	width: 40%;
+}
+
+.result--current {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 1fr);
-	padding: 20px;
-	text-align: center;
 }
 
-.result--heading {
+.result--current__heading {
 	grid-column-start: span 2;
 }
 
-.result--player1 {
+.result--current__player1 {
 	grid-row: 2;
 	grid-column: 1;
-	margin-right: 10px;
 }
 
-.result--player2 {
+.result--current__player2 {
 	grid-row: 2;
 	grid-column: 2;
-	margin-left: 10px;
+}
+
+.result--latest {
+	margin-top: 10px;
+}
+
+.steering--buttons {
+	width: 10%;
+}
+
+.board--container {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .board {
