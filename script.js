@@ -17,7 +17,7 @@ const player1 = {
 	active: true,
 	arr: [],
 	wins: null,
-	winner: null,
+	winner: false,
 };
 
 const player2 = {
@@ -26,11 +26,14 @@ const player2 = {
 	active: false,
 	arr: [],
 	wins: null,
-	winner: null,
+	winner: false,
 };
 
 const players = [player1, player2];
 let activePlayer = null;
+let isGameEnd = false;
+newGameBtn.disabled = true;
+let fullBoard = 0;
 
 // function changes activePlayer after box is clicked
 
@@ -134,26 +137,43 @@ const setWinner = (player) => {
 	setLatestResults(player);
 };
 
+const unlockNewGame = () => {
+	isGameEnd = true;
+	if (isGameEnd) {
+		newGameBtn.disabled = !newGameBtn.disabled;
+	}
+};
+
 const checkWinner = () => {
 	for (let combination of winningCombinations) {
 		if (combination.every((el) => player1.arr.includes(el))) {
 			setWinner(player1);
 			resultPlayer1.textContent = `Player1: ${player1.wins}`;
+			unlockNewGame();
 		} else if (combination.every((el) => player2.arr.includes(el))) {
 			setWinner(player2);
 			resultPlayer2.textContent = `${player2.wins} :Player2`;
+			unlockNewGame();
 		}
 	}
 
-	// 	else if (
-	// 			boxes.every(
-	// 				(box) =>
-	// 					box.classList.contains("circle") ||
-	// 					box.classList.contains("cross")
-	// 			)
-	// 		) {
-	// 			console.log("it's a draw!");
-	// }
+	for (let firstArr of board) {
+		console.log(firstArr);
+		if (firstArr.every((el) => el !== null)) {
+			fullBoard++;
+			console.log(fullBoard);
+			console.log(player1.winner);
+			console.log(player2.winner);
+			if (
+				fullBoard === 6 &&
+				player1.winner === false &&
+				player2.winner === false
+			) {
+				console.log("it's a draw");
+				unlockNewGame();
+			}
+		}
+	}
 };
 
 const showElementOnMouseOver = (e) => {
@@ -164,6 +184,11 @@ const hideElementOnMouseOut = (e) => {
 	e.target.classList.remove(`${activePlayer[0].mark}--hover`);
 };
 
+const setStartingPlayerActive = () => {
+	player1.active = true;
+	player2.active = false;
+};
+
 const choosePlayer = (e) => {
 	player1.mark = e.target.value;
 	if (player1.mark === "circle") {
@@ -171,8 +196,7 @@ const choosePlayer = (e) => {
 	} else if (player1.mark === "cross") {
 		player2.mark = "circle";
 	}
-	player1.active = true;
-	player2.active = false;
+	setStartingPlayerActive();
 	markChoice.classList.add("inactive");
 	setActivePlayer();
 };
@@ -199,6 +223,7 @@ const resetBoard = () => {
 		[null, null, null],
 		[null, null, null],
 	];
+	fullBoard = 0;
 };
 
 const addListenersAfterReset = () => {
@@ -210,10 +235,16 @@ const addListenersAfterReset = () => {
 	});
 };
 
+const disableNewGameBtn = () => {
+	isGameEnd = false;
+	newGameBtn.disabled = true;
+};
+
 const resetPage = () => {
 	resetPlayer();
 	resetResults();
 	addListenersAfterReset();
+	disableNewGameBtn();
 	markChoice.classList.remove("inactive");
 };
 
@@ -223,9 +254,9 @@ const resetPlayersArr = () => {
 	}
 };
 
-const newGame = () => {
-	player1.active = true;
-	player2.active = false;
+const startNewGame = () => {
+	setStartingPlayerActive();
+	disableNewGameBtn();
 	setActivePlayer();
 	resetPlayersArr();
 	addListenersAfterReset();
@@ -234,7 +265,7 @@ const newGame = () => {
 
 const addListeners = () => {
 	resetBtn.addEventListener("click", resetPage);
-	newGameBtn.addEventListener("click", newGame);
+	newGameBtn.addEventListener("click", startNewGame);
 
 	buttons.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
