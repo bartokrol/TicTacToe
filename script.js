@@ -144,6 +144,18 @@ const unlockNewGame = () => {
 	}
 };
 
+const checkDraw = () => {
+	if (
+		player1.arr.length === 5 &&
+		player2.arr.length === 4 &&
+		player1.winner === false &&
+		player2.winner === false
+	) {
+		console.log("it's a draw");
+		unlockNewGame();
+	}
+};
+
 const checkWinner = () => {
 	for (let combination of winningCombinations) {
 		if (combination.every((el) => player1.arr.includes(el))) {
@@ -156,16 +168,7 @@ const checkWinner = () => {
 			unlockNewGame();
 		}
 	}
-
-	if (
-		player1.arr.length === 5 &&
-		player2.arr.length === 4 &&
-		player1.winner === false &&
-		player2.winner === false
-	) {
-		console.log("it's a draw");
-		unlockNewGame();
-	}
+	checkDraw();
 };
 
 const showElementOnMouseOver = (e) => {
