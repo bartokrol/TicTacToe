@@ -29,25 +29,12 @@ const player2 = {
 	winner: false,
 };
 
+// Starting variables
+
 const players = [player1, player2];
 let activePlayer = null;
 let isGameEnd = false;
 newGameBtn.disabled = true;
-let fullBoard = 0;
-
-// function changes activePlayer after box is clicked
-
-const changeActivePlayer = () => {
-	player1.active = !player1.active;
-	player2.active = !player2.active;
-	activePlayer = players.filter((player) => player.active);
-};
-
-// function that sets first activePlayer
-
-const setActivePlayer = () => {
-	activePlayer = players.filter((player) => player.active);
-};
 
 // Board 3x3
 
@@ -70,6 +57,141 @@ const winningCombinations = [
 
 let latestResults = [];
 
+const resetResults = () => {
+	resultPlayer1.textContent = `Player1: ${player1.wins}`;
+	resultPlayer2.textContent = `${player2.wins} :Player2 `;
+	latestResults = [];
+	latest.innerHTML = "";
+};
+
+const resetPlayer = () => {
+	for (let player of players) {
+		player.arr = [];
+		player.mark = null;
+		player.wins = 0;
+	}
+	resetWinner();
+};
+
+const resetPage = () => {
+	resetPlayer();
+	resetResults();
+	addListenersAfterReset();
+	disableNewGameBtn();
+	markChoice.classList.remove("inactive");
+};
+
+const resetWinner = () => {
+	for (let player of players) {
+		player.winner = false;
+	}
+};
+
+const resetBoard = () => {
+	board = [
+		[null, null, null],
+		[null, null, null],
+		[null, null, null],
+	];
+};
+
+const addListenersAfterReset = () => {
+	boxes.forEach((box) => {
+		box.className = "board--box";
+		box.addEventListener("click", checkPlayerLength);
+		box.addEventListener("mouseover", showElementOnMouseOver);
+		box.addEventListener("mouseout", hideElementOnMouseOut);
+	});
+};
+
+const resetPlayersArr = () => {
+	for (let player of players) {
+		player.arr = [];
+	}
+};
+
+const disableNewGameBtn = () => {
+	isGameEnd = false;
+	newGameBtn.disabled = true;
+};
+
+const startNewGame = () => {
+	setStartingPlayerActive();
+	disableNewGameBtn();
+	setActivePlayer();
+	resetPlayersArr();
+	addListenersAfterReset();
+	resetBoard();
+	resetWinner();
+};
+
+const unlockNewGameBtn = () => {
+	isGameEnd = true;
+	if (isGameEnd) {
+		newGameBtn.disabled = !newGameBtn.disabled;
+	}
+};
+
+const checkDraw = () => {
+	if (
+		player1.arr.length === 5 &&
+		player2.arr.length === 4 &&
+		player1.winner === false &&
+		player2.winner === false
+	) {
+		console.log("it's a draw");
+		unlockNewGameBtn();
+	}
+};
+
+const setLatestResults = (player) => {
+	if (player.winner) {
+		console.log(`${player.name} wygrał rundę!`);
+		latestResults.push(player);
+	}
+
+	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
+};
+
+const addWins = (player) => {
+	player.winner = true;
+	player.wins++;
+};
+
+const removeListenersForEachBox = () => {
+	boxes.forEach((box) => {
+		removeEventListeners(box);
+	});
+};
+
+const setWinner = (player) => {
+	console.log(`${player.name} wygrał!`);
+	removeListenersForEachBox();
+	addWins(player);
+	setLatestResults(player);
+};
+
+const checkWinner = () => {
+	for (let combination of winningCombinations) {
+		if (combination.every((el) => player1.arr.includes(el))) {
+			setWinner(player1);
+			resultPlayer1.textContent = `Player1: ${player1.wins}`;
+			unlockNewGameBtn();
+		} else if (combination.every((el) => player2.arr.includes(el))) {
+			setWinner(player2);
+			resultPlayer2.textContent = `${player2.wins} :Player2`;
+			unlockNewGameBtn();
+		}
+	}
+	checkDraw();
+};
+
+const removeEventListeners = (el) => {
+	el.removeEventListener("click", checkPlayerLength);
+	el.removeEventListener("mouseout", hideElementOnMouseOut);
+	el.removeEventListener("mouseover", showElementOnMouseOver);
+};
+
 const removeHoverEvents = (e) => {
 	e.target.classList.remove(`${player1.mark}--hover`);
 	e.target.classList.remove(`${player2.mark}--hover`);
@@ -79,6 +201,14 @@ const checkPlayerArrLength = () => {
 	if (player1.arr.length > 2 || player2.arr.length > 2) {
 		checkWinner();
 	}
+};
+
+//  function changes activePlayer after box is clicked
+
+const changeActivePlayer = () => {
+	player1.active = !player1.active;
+	player2.active = !player2.active;
+	activePlayer = players.filter((player) => player.active);
 };
 
 const pushBoxIntoPlayerArr = (e, player) => {
@@ -104,71 +234,31 @@ const checkPlayerLength = (e) => {
 	removeEventListeners(e.target);
 };
 
-const removeEventListeners = (el) => {
-	el.removeEventListener("click", checkPlayerLength);
-	el.removeEventListener("mouseout", hideElementOnMouseOut);
-	el.removeEventListener("mouseover", showElementOnMouseOver);
+// function that sets first activePlayer
+
+const setActivePlayer = () => {
+	activePlayer = players.filter((player) => player.active);
 };
 
-const removeListenersForEachBox = () => {
-	boxes.forEach((box) => {
-		removeEventListeners(box);
-	});
+const setStartingPlayerActive = () => {
+	player1.active = true;
+	player2.active = false;
 };
 
-const addWins = (player) => {
-	player.winner = true;
-	player.wins++;
-};
-
-const setLatestResults = (player) => {
-	if (player.winner) {
-		console.log(`${player.name} wygrał rundę!`);
-		latestResults.push(player);
-	}
-
-	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
-};
-
-const setWinner = (player) => {
-	console.log(`${player.name} wygrał!`);
-	removeListenersForEachBox();
-	addWins(player);
-	setLatestResults(player);
-};
-
-const unlockNewGame = () => {
-	isGameEnd = true;
-	if (isGameEnd) {
-		newGameBtn.disabled = !newGameBtn.disabled;
+const checkMark = () => {
+	if (player1.mark === "circle") {
+		player2.mark = "cross";
+	} else if (player1.mark === "cross") {
+		player2.mark = "circle";
 	}
 };
 
-const checkDraw = () => {
-	if (
-		player1.arr.length === 5 &&
-		player2.arr.length === 4 &&
-		player1.winner === false &&
-		player2.winner === false
-	) {
-		console.log("it's a draw");
-		unlockNewGame();
-	}
-};
-
-const checkWinner = () => {
-	for (let combination of winningCombinations) {
-		if (combination.every((el) => player1.arr.includes(el))) {
-			setWinner(player1);
-			resultPlayer1.textContent = `Player1: ${player1.wins}`;
-			unlockNewGame();
-		} else if (combination.every((el) => player2.arr.includes(el))) {
-			setWinner(player2);
-			resultPlayer2.textContent = `${player2.wins} :Player2`;
-			unlockNewGame();
-		}
-	}
-	checkDraw();
+const choosePlayer = (e) => {
+	player1.mark = e.target.value;
+	checkMark();
+	setStartingPlayerActive();
+	markChoice.classList.add("inactive");
+	setActivePlayer();
 };
 
 const showElementOnMouseOver = (e) => {
@@ -179,96 +269,7 @@ const hideElementOnMouseOut = (e) => {
 	e.target.classList.remove(`${activePlayer[0].mark}--hover`);
 };
 
-const setStartingPlayerActive = () => {
-	player1.active = true;
-	player2.active = false;
-};
-
-const choosePlayer = (e) => {
-	player1.mark = e.target.value;
-	if (player1.mark === "circle") {
-		player2.mark = "cross";
-	} else if (player1.mark === "cross") {
-		player2.mark = "circle";
-	}
-	setStartingPlayerActive();
-	markChoice.classList.add("inactive");
-	setActivePlayer();
-};
-
-const resetWinner = () => {
-	for (let player of players) {
-		player.winner = false;
-	}
-};
-
-const resetPlayer = () => {
-	for (let player of players) {
-		player.arr = [];
-		player.mark = null;
-		player.wins = 0;
-	}
-	resetWinner();
-};
-
-const resetResults = () => {
-	resultPlayer1.textContent = `Player1: ${player1.wins}`;
-	resultPlayer2.textContent = `${player2.wins} :Player2 `;
-	latestResults = [];
-	latest.innerHTML = "";
-};
-
-const resetBoard = () => {
-	board = [
-		[null, null, null],
-		[null, null, null],
-		[null, null, null],
-	];
-	fullBoard = 0;
-};
-
-const addListenersAfterReset = () => {
-	boxes.forEach((box) => {
-		box.className = "board--box";
-		box.addEventListener("click", checkPlayerLength);
-		box.addEventListener("mouseover", showElementOnMouseOver);
-		box.addEventListener("mouseout", hideElementOnMouseOut);
-	});
-};
-
-const disableNewGameBtn = () => {
-	isGameEnd = false;
-	newGameBtn.disabled = true;
-};
-
-const resetPage = () => {
-	resetPlayer();
-	resetResults();
-	addListenersAfterReset();
-	disableNewGameBtn();
-	markChoice.classList.remove("inactive");
-};
-
-const resetPlayersArr = () => {
-	for (let player of players) {
-		player.arr = [];
-	}
-};
-
-const startNewGame = () => {
-	setStartingPlayerActive();
-	disableNewGameBtn();
-	setActivePlayer();
-	resetPlayersArr();
-	addListenersAfterReset();
-	resetBoard();
-	resetWinner();
-};
-
 const addListeners = () => {
-	resetBtn.addEventListener("click", resetPage);
-	newGameBtn.addEventListener("click", startNewGame);
-
 	buttons.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
 	});
@@ -278,6 +279,9 @@ const addListeners = () => {
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
 	});
+
+	resetBtn.addEventListener("click", resetPage);
+	newGameBtn.addEventListener("click", startNewGame);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
