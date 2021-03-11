@@ -157,22 +157,14 @@ const checkWinner = () => {
 		}
 	}
 
-	for (let firstArr of board) {
-		console.log(firstArr);
-		if (firstArr.every((el) => el !== null)) {
-			fullBoard++;
-			console.log(fullBoard);
-			console.log(player1.winner);
-			console.log(player2.winner);
-			if (
-				fullBoard === 6 &&
-				player1.winner === false &&
-				player2.winner === false
-			) {
-				console.log("it's a draw");
-				unlockNewGame();
-			}
-		}
+	if (
+		player1.arr.length === 5 &&
+		player2.arr.length === 4 &&
+		player1.winner === false &&
+		player2.winner === false
+	) {
+		console.log("it's a draw");
+		unlockNewGame();
 	}
 };
 
@@ -201,13 +193,19 @@ const choosePlayer = (e) => {
 	setActivePlayer();
 };
 
+const resetWinner = () => {
+	for (let player of players) {
+		player.winner = false;
+	}
+};
+
 const resetPlayer = () => {
 	for (let player of players) {
 		player.arr = [];
 		player.mark = null;
 		player.wins = 0;
-		player.winner = false;
 	}
+	resetWinner();
 };
 
 const resetResults = () => {
@@ -261,6 +259,7 @@ const startNewGame = () => {
 	resetPlayersArr();
 	addListenersAfterReset();
 	resetBoard();
+	resetWinner();
 };
 
 const addListeners = () => {
