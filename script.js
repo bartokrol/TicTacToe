@@ -3,8 +3,6 @@
 const boxes = Array.from(document.querySelectorAll(".board--box"));
 const markChoice = document.querySelector(".startingPage");
 const buttons = [...document.querySelectorAll(".startingPage--btn")];
-const resultPlayer1 = document.querySelector(".result--current__player1");
-const resultPlayer2 = document.querySelector(".result--current__player2");
 const latest = document.querySelector(".result--latest__results");
 const resetBtn = document.querySelector(".buttons--button__reset");
 const newGameBtn = document.querySelector(".buttons--button__newGame");
@@ -206,20 +204,31 @@ const setWinner = (player) => {
 	setLatestResults(player);
 };
 
-const checkWinner = () => {
+const findActivePlayer = () => {
+	if (activePlayer[0] === player1) {
+		return player2;
+	} else {
+		return player1;
+	}
+};
+
+const findWinningCombination = (resultPlayer, player) => {
 	for (let combination of winningCombinations) {
-		if (combination.every((el) => player1.arr.includes(el))) {
-			setWinner(player1);
+		if (combination.every((el) => player.arr.includes(el))) {
+			setWinner(player);
 			showWinningBoxes(combination);
-			resultPlayer1.textContent = `Player1: ${player1.wins}`;
-			unlockNewGameBtn();
-		} else if (combination.every((el) => player2.arr.includes(el))) {
-			setWinner(player2);
-			showWinningBoxes(combination);
-			resultPlayer2.textContent = `${player2.wins} :Player2`;
+			resultPlayer.textContent = `${player.wins}`;
 			unlockNewGameBtn();
 		}
 	}
+};
+
+const checkWinner = () => {
+	const player = findActivePlayer();
+	const resultPlayer = document.querySelector(
+		`.result--current__${player.name}`
+	);
+	findWinningCombination(resultPlayer, player);
 	checkDraw();
 };
 
