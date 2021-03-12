@@ -147,10 +147,10 @@ const checkDraw = () => {
 const setLatestResults = (player) => {
 	if (player.winner) {
 		console.log(`${player.name} wygrał rundę!`);
-		latestResults.push(player);
+		latestResults.push(player.name);
 	}
-
-	latest.innerHTML = latestResults.map((el) => `<li>${el.name}</li>`);
+	console.log(latestResults);
+	latest.innerHTML = latestResults.map((el) => `<li>${el}</li>`).join(" ");
 };
 
 const addWins = (player) => {
