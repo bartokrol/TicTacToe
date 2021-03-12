@@ -154,9 +154,9 @@ const getDate = () => {
 	const minutes = date.getMinutes();
 	const seconds = date.getSeconds();
 
-	const fullDate = `${hour < 10 ? "0" + hour : hour}:
-						${minutes < 10 ? "0" + minutes : minutes}:
-						${seconds < 10 ? "0" + seconds : seconds}
+	const fullDate = `${hour < 10 ? "0" + hour : hour}:${
+		minutes < 10 ? "0" + minutes : minutes
+	}:${seconds < 10 ? "0" + seconds : seconds}
 						${day < 10 ? "0" + day : day} 
 						${month < 10 ? "0" + month : month} 
 						${year}`;
@@ -166,13 +166,15 @@ const getDate = () => {
 const setLatestResults = (player) => {
 	const date = getDate();
 	if (player.winner) {
-		const winner = `${player.name} wygrał rundę!`;
-		latestResults.push(winner);
+		let winner = `${player.name} wygrał rundę!`;
+		latestResults.push({ winner, date });
 	} else {
-		latestResults.push("It was a draw!");
+		winner = "It was a draw!";
+		latestResults.push({ winner, date });
 	}
+
 	latest.innerHTML = latestResults
-		.map((el) => `<li class="latestResult">${date} ${el}</li>`)
+		.map((el) => `<li class="latestResult">${el.date} ${el.winner}</li>`)
 		.join(" ");
 };
 
