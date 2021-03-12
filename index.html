@@ -8,107 +8,111 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<div class="startingPage">
-			<div class="startingPage--window">
-				<h1 class="startingPage--title">Choose your mark</h1>
+		<div class="starting-page">
+			<div class="starting-page__window">
+				<h1 class="starting-page__window__title">Choose your mark</h1>
 				<button
-					class="startingPage--btn startingPage--btn__circle"
+					class="starting-page--btn starting-page__window--circle"
 					value="circle"
 				>
 					Circle
 				</button>
 				<button
-					class="startingPage--btn startingPage--btn__cross"
+					class="starting-page--btn starting-page__window--cross"
 					value="cross"
 				>
 					Cross
 				</button>
 			</div>
 		</div>
-		<div class="container">
-			<div class="result">
-				<div class="result--current">
-					<h1 class="result--current__heading">Current Result</h1>
-					<h2 class="result--current__player">
+		<div class="game-container">
+			<div class="game-container__results-container">
+				<div class="game-container__current-result">
+					<h1 class="game-container__current-result__heading">
+						Current Result
+					</h1>
+					<h2 class="game-container__current-result__player">
 						Player1:
-						<span
-							class="result--current__player result--current__player1"
+						<span class="game-container__current-result__player1"
 							>0</span
 						>
 					</h2>
-					<h2 class="result--current__player">
-						<span
-							class="result--current__player result--current__player2"
+					<h2 class="game-container__current-result__player">
+						<span class="game-container__current-result__player2"
 							>0</span
 						>
 						:Player2
 					</h2>
 				</div>
-				<div class="result--latest">
+				<div class="game-container__latest-results">
 					<h1>Latest Results</h1>
-					<ul class="result--latest__results"></ul>
+					<ul class="game-container__latest-results__results"></ul>
 				</div>
 			</div>
-			<div class="buttons">
-				<button class="buttons--button buttons--button__reset">
+			<div class="game-container__buttons-container">
+				<button
+					class="game-container__buttons--reset-btn buttons-container--btn"
+				>
 					Reset All
 				</button>
-				<button class="buttons--button buttons--button__newGame">
+				<button
+					class="game-container__buttons--new-game-btn buttons-container--btn"
+				>
 					New Game
 				</button>
 			</div>
-			<div class="board--container">
-				<div class="board">
+			<div class="game-container__board-container">
+				<div class="game-container__board-container__board">
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="0"
 						data-column="0"
 						id="1"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="0"
 						data-column="1"
 						id="2"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="0"
 						data-column="2"
 						id="3"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="1"
 						data-column="0"
 						id="4"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="1"
 						data-column="1"
 						id="5"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="1"
 						data-column="2"
 						id="6"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="2"
 						data-column="0"
 						id="7"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="2"
 						data-column="1"
 						id="8"
 					></div>
 					<div
-						class="board--box"
+						class="game-container__board-container__box board--box"
 						data-row="2"
 						data-column="2"
 						id="9"

@@ -11,7 +11,7 @@ body {
 	min-height: 100vh;
 }
 
-.startingPage {
+.starting-page {
 	background-color: rgba(0, 0, 0, 0.1);
 	position: absolute;
 	top: 0;
@@ -23,7 +23,7 @@ body {
 	align-items: center;
 }
 
-.startingPage--window {
+.starting-page__window {
 	width: 400px;
 	height: 150px;
 	background-color: white;
@@ -34,12 +34,12 @@ body {
 	grid-template-rows: 1fr 1fr;
 }
 
-.startingPage--title {
+.starting-page__window__title {
 	grid-column: 1 / span 2;
 	text-align: center;
 }
 
-.startingPage--btn {
+.starting-page--btn {
 	margin: 0 10px;
 }
 
@@ -47,44 +47,49 @@ body {
 	visibility: hidden;
 }
 
-.container {
+.game-container {
 	width: 80%;
 	background-color: beige;
 	display: flex;
+	padding: 50px;
 }
 
-.result {
+.game-container__results-container {
 	padding: 20px;
 	text-align: center;
 	/* background-color: bisque; */
 	width: 40%;
 }
 
-.result--current {
+.game-container__current-result {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 }
 
-.result--current__heading {
+.game-container__current-result__heading {
 	grid-column-start: span 2;
 }
 
-.result--current__player1 {
+.game-container__current-result__player1 {
 	grid-row: 2;
 	grid-column: 1;
 }
 
-.result--current__player2 {
+.game-container__current-result__player2 {
 	grid-row: 2;
 	grid-column: 2;
 }
 
-.result--latest {
+.game-container__latest-results {
 	margin-top: 10px;
 }
 
-.buttons {
+.game-container__latest-results__results {
+	background-color: aqua;
+}
+
+.game-container__buttons-container {
 	width: 10%;
 	/* background-color: coral; */
 	display: flex;
@@ -93,21 +98,21 @@ body {
 	flex-direction: column;
 }
 
-.buttons--button {
+.buttons-container--btn {
 	width: 80%;
 	height: 40px;
 	border-radius: 5px;
 	margin: 5px;
 }
 
-.board--container {
+.game-container__board-container {
 	width: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.board {
+.game-container__board-container__board {
 	width: 500px;
 	height: 500px;
 	display: grid;
@@ -181,10 +186,10 @@ body {
 	opacity: 0.3;
 }
 
-.latestResult {
+.game-container__latest-results__results__latest-result {
 	list-style-type: decimal;
 	padding-bottom: 5px;
 }
-.latestResult--winner {
+.game-container__latest-results__results__latest-result__winner {
 	font-weight: bolder;
 }

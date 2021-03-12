@@ -1,13 +1,21 @@
 // DOM Elements
 
 const boxes = Array.from(document.querySelectorAll(".board--box"));
-const markChoice = document.querySelector(".startingPage");
-const buttons = [...document.querySelectorAll(".startingPage--btn")];
-const resultPlayer1 = document.querySelector(".result--current__player1");
-const resultPlayer2 = document.querySelector(".result--current__player2");
-const latest = document.querySelector(".result--latest__results");
-const resetBtn = document.querySelector(".buttons--button__reset");
-const newGameBtn = document.querySelector(".buttons--button__newGame");
+const markChoice = document.querySelector(".starting-page");
+const buttons = [...document.querySelectorAll(".starting-page--btn")];
+const resultPlayer1 = document.querySelector(
+	".game-container__current-result__player1"
+);
+const resultPlayer2 = document.querySelector(
+	".game-container__current-result__player2"
+);
+const latest = document.querySelector(
+	".game-container__latest-results__results"
+);
+const resetBtn = document.querySelector(".game-container__buttons--reset-btn");
+const newGameBtn = document.querySelector(
+	".game-container__buttons--new-game-btn"
+);
 
 // Players
 
@@ -97,7 +105,7 @@ const resetBoard = () => {
 
 const addListenersAfterReset = () => {
 	boxes.forEach((box) => {
-		box.className = "board--box";
+		box.className = "game-container__board-container__box board--box";
 		box.addEventListener("click", checkPlayerLength);
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
@@ -174,7 +182,7 @@ const setLatestResults = (player) => {
 	latest.innerHTML = latestResults
 		.map(
 			(el) =>
-				`<li class="latestResult">${el.date} <span class="latestResult--winner">${el.winner}<span></li>`
+				`<li class="game-container__latest-results__results__latest-result">${el.date} <span class="game-container__latest-results__results__latest-result__winner">${el.winner}<span></li>`
 		)
 		.join(" ");
 };
@@ -229,7 +237,7 @@ const findWinningCombination = (resultPlayer, player) => {
 const checkWinner = () => {
 	const player = findActivePlayer();
 	const resultPlayer = document.querySelector(
-		`.result--current__${player.name}`
+		`.game-container__current-result__${player.name}`
 	);
 	findWinningCombination(resultPlayer, player);
 	checkDraw();
