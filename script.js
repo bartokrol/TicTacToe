@@ -3,6 +3,8 @@
 const boxes = Array.from(document.querySelectorAll(".board--box"));
 const markChoice = document.querySelector(".startingPage");
 const buttons = [...document.querySelectorAll(".startingPage--btn")];
+const resultPlayer1 = document.querySelector(".result--current__player1");
+const resultPlayer2 = document.querySelector(".result--current__player2");
 const latest = document.querySelector(".result--latest__results");
 const resetBtn = document.querySelector(".buttons--button__reset");
 const newGameBtn = document.querySelector(".buttons--button__newGame");
@@ -56,8 +58,8 @@ const winningCombinations = [
 let latestResults = [];
 
 const resetResults = () => {
-	resultPlayer1.textContent = `Player1: ${player1.wins}`;
-	resultPlayer2.textContent = `${player2.wins} :Player2 `;
+	resultPlayer1.textContent = player1.wins;
+	resultPlayer2.textContent = player2.wins;
 	latestResults = [];
 	latest.innerHTML = "";
 };
@@ -155,9 +157,7 @@ const getDate = () => {
 	const fullDate = `${hour < 10 ? "0" + hour : hour}:${
 		minutes < 10 ? "0" + minutes : minutes
 	}:${seconds < 10 ? "0" + seconds : seconds}
-						${day < 10 ? "0" + day : day} 
-						${month < 10 ? "0" + month : month} 
-						${year}`;
+	${day < 10 ? "0" + day : day}-${month < 10 ? "0" + month : month}-${year}`;
 	return fullDate;
 };
 
@@ -172,7 +172,10 @@ const setLatestResults = (player) => {
 	}
 
 	latest.innerHTML = latestResults
-		.map((el) => `<li class="latestResult">${el.date} ${el.winner}</li>`)
+		.map(
+			(el) =>
+				`<li class="latestResult">${el.date} <span class="latestResult--winner">${el.winner}<span></li>`
+		)
 		.join(" ");
 };
 

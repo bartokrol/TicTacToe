@@ -180,3 +180,11 @@ body {
 	background-position: center;
 	opacity: 0.3;
 }
+
+.latestResult {
+	list-style-type: decimal;
+	padding-bottom: 5px;
+}
+.latestResult--winner {
+	font-weight: bolder;
+}
