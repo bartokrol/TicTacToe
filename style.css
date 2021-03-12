@@ -150,11 +150,19 @@ body {
 	background-position: center;
 }
 
+.circle.won {
+	background-image: url("/img/winCircle.png");
+}
+
 .cross {
 	background-image: url("/img/cross.png");
 	background-size: 90%;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+.cross.won {
+	background-image: url("/img/winCross.png");
 }
 
 .circle--hover {
