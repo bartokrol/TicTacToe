@@ -149,7 +149,6 @@ const setLatestResults = (player) => {
 		console.log(`${player.name} wygrał rundę!`);
 		latestResults.push(player.name);
 	}
-	console.log(latestResults);
 	latest.innerHTML = latestResults.map((el) => `<li>${el}</li>`).join(" ");
 };
 
@@ -164,11 +163,14 @@ const removeListenersForEachBox = () => {
 	});
 };
 
-const showWinningBoxes = (player) => {
-	for (let playerNumber of player.arr) {
-		const winningBox = boxes.filter((el) => el.id == playerNumber);
-		winningBox[0].classList.add("won");
-	}
+const showWinningBoxes = (combination) => {
+	const winningArr = combination;
+
+	boxes.forEach(function (box) {
+		if (winningArr.includes(Number(box.id))) {
+			box.classList.add("won");
+		}
+	});
 };
 
 const setWinner = (player) => {
@@ -182,12 +184,13 @@ const checkWinner = () => {
 	for (let combination of winningCombinations) {
 		if (combination.every((el) => player1.arr.includes(el))) {
 			setWinner(player1);
-			showWinningBoxes(player1);
+			showWinningBoxes(combination);
 			resultPlayer1.textContent = `Player1: ${player1.wins}`;
 			unlockNewGameBtn();
 		} else if (combination.every((el) => player2.arr.includes(el))) {
 			setWinner(player2);
 			showWinningBoxes(player2);
+			showWinningBoxes(combination);
 			resultPlayer2.textContent = `${player2.wins} :Player2`;
 			unlockNewGameBtn();
 		}
