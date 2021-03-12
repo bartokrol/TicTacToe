@@ -140,16 +140,40 @@ const checkDraw = () => {
 		player2.winner === false
 	) {
 		console.log("it's a draw");
+		setLatestResults("");
 		unlockNewGameBtn();
 	}
 };
 
+const getDate = () => {
+	const date = new Date();
+	const year = date.getFullYear();
+	const month = date.getMonth();
+	const day = date.getDate();
+	const hour = date.getHours();
+	const minutes = date.getMinutes();
+	const seconds = date.getSeconds();
+
+	const fullDate = `${hour < 10 ? "0" + hour : hour}:
+						${minutes < 10 ? "0" + minutes : minutes}:
+						${seconds < 10 ? "0" + seconds : seconds}
+						${day < 10 ? "0" + day : day} 
+						${month < 10 ? "0" + month : month} 
+						${year}`;
+	return fullDate;
+};
+
 const setLatestResults = (player) => {
+	const date = getDate();
 	if (player.winner) {
-		console.log(`${player.name} wygrał rundę!`);
-		latestResults.push(player.name);
+		const winner = `${player.name} wygrał rundę!`;
+		latestResults.push(winner);
+	} else {
+		latestResults.push("It was a draw!");
 	}
-	latest.innerHTML = latestResults.map((el) => `<li>${el}</li>`).join(" ");
+	latest.innerHTML = latestResults
+		.map((el) => `<li class="latestResult">${date} ${el}</li>`)
+		.join(" ");
 };
 
 const addWins = (player) => {
@@ -189,7 +213,6 @@ const checkWinner = () => {
 			unlockNewGameBtn();
 		} else if (combination.every((el) => player2.arr.includes(el))) {
 			setWinner(player2);
-			showWinningBoxes(player2);
 			showWinningBoxes(combination);
 			resultPlayer2.textContent = `${player2.wins} :Player2`;
 			unlockNewGameBtn();
