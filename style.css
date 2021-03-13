@@ -9,10 +9,11 @@ body {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	font-family: "Akaya Telivigala", cursive;
 }
 
 .starting-page {
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: rgba(0, 0, 0, 0.8);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -32,15 +33,26 @@ body {
 	justify-content: center;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
+	border-radius: 5px;
+	border: 3px solid black;
 }
 
 .starting-page__window__title {
+	font-family: "Akaya Telivigala", cursive;
 	grid-column: 1 / span 2;
 	text-align: center;
+	font-size: 40px;
+	padding-bottom: 20px;
 }
 
 .starting-page--btn {
-	margin: 0 10px;
+	font-family: "Akaya Telivigala", cursive;
+	border-radius: 2px;
+	font-size: 40px;
+	width: 50%;
+	margin: 0 auto;
+	border: 3px solid black;
+	background-color: white;
 }
 
 .inactive {
@@ -64,7 +76,7 @@ body {
 .game-container__current-result {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 }
 
 .game-container__current-result__heading {
@@ -73,12 +85,12 @@ body {
 
 .game-container__current-result__player1 {
 	grid-row: 2;
-	grid-column: 1;
+	grid-column: span 2;
 }
 
 .game-container__current-result__player2 {
-	grid-row: 2;
-	grid-column: 2;
+	grid-row: 3;
+	grid-column: span 2;
 }
 
 .game-container__latest-results {
@@ -122,6 +134,10 @@ body {
 
 .board--box {
 	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 100px;
 }
 
 .board--box:first-child,
@@ -148,42 +164,12 @@ body {
 	border-bottom: none;
 }
 
-.circle {
-	background-image: url("/img/circle.png");
-	background-size: 90%;
-	background-repeat: no-repeat;
-	background-position: center;
+.board--box--hover {
+	opacity: 0.5;
 }
 
-.circle.won {
-	background-image: url("/img/winCircle.png");
-}
-
-.cross {
-	background-image: url("/img/cross.png");
-	background-size: 90%;
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
-.cross.won {
-	background-image: url("/img/winCross.png");
-}
-
-.circle--hover {
-	background-image: url("/img/circle.png");
-	background-size: 90%;
-	background-repeat: no-repeat;
-	background-position: center;
-	opacity: 0.3;
-}
-
-.cross--hover {
-	background-image: url("/img/cross.png");
-	background-size: 90%;
-	background-repeat: no-repeat;
-	background-position: center;
-	opacity: 0.3;
+.won {
+	color: red;
 }
 
 .game-container__latest-results__results__latest-result {

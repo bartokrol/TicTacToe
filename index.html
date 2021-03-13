@@ -5,6 +5,16 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tic Tac Toe</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
@@ -12,16 +22,16 @@
 			<div class="starting-page__window">
 				<h1 class="starting-page__window__title">Choose your mark</h1>
 				<button
-					class="starting-page--btn starting-page__window--circle"
-					value="circle"
+					class="starting-page--btn starting-page__window--circle-btn"
+					value="X"
 				>
-					Circle
+					X
 				</button>
 				<button
-					class="starting-page--btn starting-page__window--cross"
-					value="cross"
+					class="starting-page--btn starting-page__window--cross-btn"
+					value="O"
 				>
-					Cross
+					O
 				</button>
 			</div>
 		</div>
@@ -31,17 +41,19 @@
 					<h1 class="game-container__current-result__heading">
 						Current Result
 					</h1>
-					<h2 class="game-container__current-result__player">
+					<h2 class="game-container__current-result__player1">
 						Player1:
-						<span class="game-container__current-result__player1"
+						<span
+							class="game-container__current-result__player1__wins"
 							>0</span
 						>
 					</h2>
-					<h2 class="game-container__current-result__player">
-						<span class="game-container__current-result__player2"
+					<h2 class="game-container__current-result__player2">
+						Player2:
+						<span
+							class="game-container__current-result__player2__wins"
 							>0</span
 						>
-						:Player2
 					</h2>
 				</div>
 				<div class="game-container__latest-results">

@@ -1,13 +1,15 @@
 // DOM Elements
 
-const boxes = Array.from(document.querySelectorAll(".board--box"));
+const boxes = Array.from(
+	document.querySelectorAll(".game-container__board-container__box")
+);
 const markChoice = document.querySelector(".starting-page");
 const buttons = [...document.querySelectorAll(".starting-page--btn")];
 const resultPlayer1 = document.querySelector(
-	".game-container__current-result__player1"
+	".game-container__current-result__player1__wins"
 );
 const resultPlayer2 = document.querySelector(
-	".game-container__current-result__player2"
+	".game-container__current-result__player2__wins"
 );
 const latest = document.querySelector(
 	".game-container__latest-results__results"
@@ -106,6 +108,7 @@ const resetBoard = () => {
 const addListenersAfterReset = () => {
 	boxes.forEach((box) => {
 		box.className = "game-container__board-container__box board--box";
+		box.textContent = "";
 		box.addEventListener("click", checkPlayerLength);
 		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
@@ -193,6 +196,7 @@ const addWins = (player) => {
 };
 
 const removeListenersForEachBox = () => {
+	console.log("usunięte");
 	boxes.forEach((box) => {
 		removeEventListeners(box);
 	});
@@ -216,10 +220,12 @@ const setWinner = (player) => {
 };
 
 const findActivePlayer = () => {
+	console.log(activePlayer);
 	if (activePlayer[0] === player1) {
-		return player2;
-	} else {
+		console.log(activePlayer);
 		return player1;
+	} else {
+		return player2;
 	}
 };
 
@@ -235,9 +241,9 @@ const findWinningCombination = (resultPlayer, player) => {
 };
 
 const checkWinner = () => {
-	const player = findActivePlayer();
+	const player = activePlayer[0];
 	const resultPlayer = document.querySelector(
-		`.game-container__current-result__${player.name}`
+		`.game-container__current-result__${player.name}__wins`
 	);
 	findWinningCombination(resultPlayer, player);
 	checkDraw();
@@ -250,8 +256,7 @@ const removeEventListeners = (el) => {
 };
 
 const removeHoverEvents = (e) => {
-	e.target.classList.remove(`${player1.mark}--hover`);
-	e.target.classList.remove(`${player2.mark}--hover`);
+	e.target.textContent = "";
 };
 
 const checkPlayerArrLength = () => {
@@ -270,8 +275,7 @@ const changeActivePlayer = () => {
 
 const pushBoxIntoPlayerArr = (e, player) => {
 	player.arr.push(Number(e.target.id));
-	e.target.classList.add(player.mark);
-	changeActivePlayer();
+	e.target.textContent = `${player.mark}`;
 };
 
 // clicked box is pushed into specific player array
@@ -284,11 +288,13 @@ const addBoxToBoard = (e) => {
 };
 
 const checkPlayerLength = (e) => {
+	e.target.classList.remove("board--box--hover");
 	addBoxToBoard(e);
-	pushBoxIntoPlayerArr(e, activePlayer[0]);
-	checkPlayerArrLength();
 	removeHoverEvents(e);
 	removeEventListeners(e.target);
+	pushBoxIntoPlayerArr(e, activePlayer[0]);
+	checkPlayerArrLength();
+	changeActivePlayer();
 };
 
 // function that sets first activePlayer
@@ -303,10 +309,10 @@ const setStartingPlayerActive = () => {
 };
 
 const checkMark = () => {
-	if (player1.mark === "circle") {
-		player2.mark = "cross";
-	} else if (player1.mark === "cross") {
-		player2.mark = "circle";
+	if (player1.mark === "O") {
+		player2.mark = "X";
+	} else if (player1.mark === "X") {
+		player2.mark = "O";
 	}
 };
 
@@ -319,11 +325,13 @@ const choosePlayer = (e) => {
 };
 
 const showElementOnMouseOver = (e) => {
-	e.target.classList.add(`${activePlayer[0].mark}--hover`);
+	e.target.textContent = `${activePlayer[0].mark}`;
+	e.target.classList.add("board--box--hover");
 };
 
 const hideElementOnMouseOut = (e) => {
-	e.target.classList.remove(`${activePlayer[0].mark}--hover`);
+	e.target.textContent = "";
+	e.target.classList.remove("board--box--hover");
 };
 
 const addListeners = () => {
@@ -332,9 +340,9 @@ const addListeners = () => {
 	});
 
 	boxes.forEach((box) => {
-		box.addEventListener("click", checkPlayerLength);
-		box.addEventListener("mouseover", showElementOnMouseOver);
 		box.addEventListener("mouseout", hideElementOnMouseOut);
+		box.addEventListener("mouseover", showElementOnMouseOver);
+		box.addEventListener("click", checkPlayerLength);
 	});
 
 	resetBtn.addEventListener("click", resetPage);
