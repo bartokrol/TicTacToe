@@ -196,7 +196,6 @@ const addWins = (player) => {
 };
 
 const removeListenersForEachBox = () => {
-	console.log("usunięte");
 	boxes.forEach((box) => {
 		removeEventListeners(box);
 	});
@@ -297,7 +296,15 @@ const checkPlayerLength = (e) => {
 	changeActivePlayer();
 };
 
-// function that sets first activePlayer
+const showElementOnMouseOver = (e) => {
+	e.target.textContent = `${activePlayer[0].mark}`;
+	e.target.classList.add("board--box--hover");
+};
+
+const hideElementOnMouseOut = (e) => {
+	e.target.textContent = "";
+	e.target.classList.remove("board--box--hover");
+};
 
 const setActivePlayer = () => {
 	activePlayer = players.filter((player) => player.active);
@@ -306,6 +313,7 @@ const setActivePlayer = () => {
 const setStartingPlayerActive = () => {
 	player1.active = true;
 	player2.active = false;
+	setActivePlayer();
 };
 
 const checkMark = () => {
@@ -321,17 +329,6 @@ const choosePlayer = (e) => {
 	checkMark();
 	setStartingPlayerActive();
 	markChoice.classList.add("inactive");
-	setActivePlayer();
-};
-
-const showElementOnMouseOver = (e) => {
-	e.target.textContent = `${activePlayer[0].mark}`;
-	e.target.classList.add("board--box--hover");
-};
-
-const hideElementOnMouseOut = (e) => {
-	e.target.textContent = "";
-	e.target.classList.remove("board--box--hover");
 };
 
 const addListeners = () => {
