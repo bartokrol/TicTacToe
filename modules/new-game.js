@@ -14,6 +14,7 @@ class NewGame extends Game {
 	constructor(
 		player1,
 		player2,
+		latestResults,
 		addEventListenersToEachBox,
 		findActivePlayer
 	) {
@@ -27,28 +28,21 @@ class NewGame extends Game {
 				[null, null, null],
 			]),
 			(this.activePlayer = null),
+			(this.latestResults = latestResults),
 			this.startNewGame();
 	}
 
 	startNewGame = () => {
-		this.findActivePlayer();
-		this.addEventListenersToEachBox();
 		this.resetBoxes();
+		this.findActivePlayer();
 		newGameBtn.disabled = true;
+		this.addEventListenersToEachBox();
 	};
 
 	resetBoxes = () => {
 		boxes.forEach((box) => {
 			box.className = "game-container__board-container__box board--box";
 			box.textContent = "";
-		});
-	};
-
-	addEventListenersToEachBox = () => {
-		boxes.forEach((box) => {
-			box.addEventListener("mouseout", this.hideElementOnMouseOut);
-			box.addEventListener("mouseover", this.showElementOnMouseOver);
-			box.addEventListener("click", this.clickBox);
 		});
 	};
 }

@@ -35,6 +35,27 @@ const choosePlayer = (e) => {
 	markChoice.classList.add("inactive");
 	game.startNewGame();
 	game.addEventListenersToEachBox();
+	newGameBtn.addEventListener("click", () => {
+		const newGame = new NewGame(
+			{
+				name: "player1",
+				mark: game.player1.mark,
+				active: true,
+				arr: [],
+				wins: game.player1.wins,
+				winner: false,
+			},
+			{
+				name: "player2",
+				mark: game.player2.mark,
+				active: false,
+				arr: [],
+				wins: game.player2.wins,
+				winner: false,
+			},
+			game.latestResults
+		);
+	});
 };
 
 const addListeners = () => {

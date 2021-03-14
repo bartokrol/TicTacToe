@@ -9,6 +9,7 @@ import {
 	newGameBtn,
 } from "./dom-elems.js";
 import { NewGame } from "./new-game.js";
+import { LatestResults } from "./latest-results.js";
 
 class Game {
 	constructor(player1, player2) {
@@ -33,13 +34,15 @@ class Game {
 				[3, 5, 7],
 			]),
 			(this.latestResults = []),
-			((this.newGameBtn = {
+			(this.newGameBtn = {
 				disabled: true,
-			}),
-			(this.startNewGame = () => {
-				this.findActivePlayer();
-			}));
+			});
 	}
+
+	startNewGame = () => {
+		this.findActivePlayer();
+	};
+
 	findActivePlayer = () => {
 		this.activePlayer = this.players.filter((player) => player.active);
 	};
@@ -107,19 +110,15 @@ class Game {
 
 	checkWinner = () => {
 		const player = this.activePlayer[0];
-		const resultPlayer = document.querySelector(
-			`.game-container__current-result__${player.name}__wins`
-		);
-		this.findWinningCombination(resultPlayer, player);
+		this.findWinningCombination( player);
 		this.checkDraw();
 	};
 
-	findWinningCombination = (resultPlayer, player) => {
+	findWinningCombination = ( player) => {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.setWinner(player);
 				this.showWinningBoxes(combination);
-				resultPlayer.textContent = `${player.wins}`;
 				this.unlockNewGameBtn();
 			}
 		}
@@ -133,7 +132,7 @@ class Game {
 			this.player2.winner === false
 		) {
 			console.log("it's a draw");
-			this.setLatestResults("");
+			const results = new LatestResults("", this.latestResults);
 			this.unlockNewGameBtn();
 		}
 	};
@@ -142,7 +141,6 @@ class Game {
 		console.log(`${player.name} wygrał!`);
 		this.removeListenersForEachBox();
 		this.addWins(player);
-		this.setLatestResults(player);
 	};
 
 	showWinningBoxes = (combination) => {
@@ -160,26 +158,6 @@ class Game {
 		if (this.isGameEnd) {
 			this.newGameBtn.disabled = !this.newGameBtn.disabled;
 			newGameBtn.disabled = this.newGameBtn.disabled;
-			newGameBtn.addEventListener("click", () => {
-				const newGame = new NewGame(
-					{
-						name: "player1",
-						mark: this.player1.mark,
-						active: true,
-						arr: [],
-						wins: this.player1.wins,
-						winner: false,
-					},
-					{
-						name: "player2",
-						mark: this.player2.mark,
-						active: false,
-						arr: [],
-						wins: this.player2.wins,
-						winner: false,
-					}
-				);
-			});
 		}
 	};
 
@@ -192,39 +170,7 @@ class Game {
 	addWins = (player) => {
 		player.winner = true;
 		player.wins++;
-	};
-
-	getDate = () => {
-		const date = new Date();
-		const year = date.getFullYear();
-		const month = date.getMonth();
-		const day = date.getDate();
-		const hour = date.getHours();
-		const minutes = date.getMinutes();
-		const seconds = date.getSeconds();
-
-		const fullDate = `${hour < 10 ? "0" + hour : hour}:${
-			minutes < 10 ? "0" + minutes : minutes
-		}:${seconds < 10 ? "0" + seconds : seconds}
-	${day < 10 ? "0" + day : day}-${month < 10 ? "0" + month : month}-${year}`;
-		return fullDate;
-	};
-
-	setLatestResults = (player) => {
-		const date = this.getDate();
-		if (player.winner) {
-			let winner = `${player.name} wygrał rundę!`;
-			this.latestResults.push({ winner, date });
-		} else {
-			let winner = "It was a draw!";
-			this.latestResults.push({ winner, date });
-		}
-		latest.innerHTML = this.latestResults
-			.map(
-				(el) =>
-					`<li class="game-container__latest-results__results__latest-result">${el.date} <span class="game-container__latest-results__results__latest-result__winner">${el.winner}<span></li>`
-			)
-			.join(" ");
+		const results = new LatestResults(player, this.latestResults);
 	};
 }
 

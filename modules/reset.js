@@ -22,6 +22,7 @@ class Reset {
 				[null, null, null],
 				[null, null, null],
 			]),
+			(this.latestResults = []),
 			this.resetPage();
 	}
 	resetPage = () => {
@@ -35,7 +36,7 @@ class Reset {
 		resultPlayer2.textContent = this.player2.wins;
 		// this.latestResults = [];
 		// const latestResults = new latestResults();
-		// latest.innerHTML = "";
+		latest.innerHTML = "";
 	};
 
 	resetBoxes = () => {
