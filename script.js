@@ -57,26 +57,26 @@ const addListeners = () => {
 	buttons.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
 	});
-	resetBtn.addEventListener("click", () => {
-		const reset = new Reset(
-			{
-				name: "player1",
-				mark: null,
-				active: true,
-				arr: [],
-				wins: 0,
-				winner: false,
-			},
-			{
-				name: "player2",
-				mark: null,
-				active: false,
-				arr: [],
-				wins: 0,
-				winner: false,
-			}
-		);
-	});
+	// resetBtn.addEventListener("click", () => {
+	// 	const reset = new Reset(
+	// 		{
+	// 			name: "player1",
+	// 			mark: null,
+	// 			active: true,
+	// 			arr: [],
+	// 			wins: 0,
+	// 			winner: false,
+	// 		},
+	// 		{
+	// 			name: "player2",
+	// 			mark: null,
+	// 			active: false,
+	// 			arr: [],
+	// 			wins: 0,
+	// 			winner: false,
+	// 		}
+	// 	);
+	// });
 };
 
 document.addEventListener("DOMContentLoaded", () => {

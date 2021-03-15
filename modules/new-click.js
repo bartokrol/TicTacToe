@@ -21,7 +21,8 @@ class Click {
 		players,
 		winningCombinations,
 		latestResults,
-		isGameEnd
+		isGameEnd,
+		endEvent
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -37,9 +38,9 @@ class Click {
 		e.target.classList.remove("board--box--hover");
 		this.addBoxToBoard(e);
 		this.removeHoverEvents(e);
-		this.removeEventListeners(e.target);
+		// this.removeEventListeners(e.target);
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
-		this.checkPlayerArrLength();
+		this.checkPlayerArrLength(e);
 	};
 
 	addBoxToBoard = (e) => {
@@ -52,44 +53,44 @@ class Click {
 		e.target.textContent = "";
 	};
 
-	removeEventListeners = (el) => {
-		el.removeEventListener("click", this.clickBox);
-		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
-		el.removeEventListener("mouseover", this.showElementOnMouseOver);
-	};
+	// removeEventListeners = (el) => {
+	// 	el.removeEventListener("click", this.clickBox);
+	// 	el.removeEventListener("mouseout", this.hideElementOnMouseOut);
+	// 	el.removeEventListener("mouseover", this.showElementOnMouseOver);
+	// };
 
-	showElementOnMouseOver = (e) => {
-		console.log(this.activePlayer);
-		e.target.textContent = `${this.activePlayer[0].mark}`;
-		e.target.classList.add("board--box--hover");
-	};
+	// showElementOnMouseOver = (e) => {
+	// 	console.log(this.activePlayer);
+	// 	e.target.textContent = `${this.activePlayer[0].mark}`;
+	// 	e.target.classList.add("board--box--hover");
+	// };
 
-	hideElementOnMouseOut = (e) => {
-		e.target.textContent = "";
-		e.target.classList.remove("board--box--hover");
-	};
+	// hideElementOnMouseOut = (e) => {
+	// 	e.target.textContent = "";
+	// 	e.target.classList.remove("board--box--hover");
+	// };
 
 	pushBoxIntoPlayerArr = (e, player) => {
 		player.arr.push(Number(e.target.id));
 		e.target.textContent = `${player.mark}`;
 	};
 
-	checkPlayerArrLength = () => {
+	checkPlayerArrLength = (e) => {
 		if (this.player1.arr.length > 2 || this.player2.arr.length > 2) {
-			this.checkWinner();
+			this.checkWinner(e);
 		}
 	};
 
-	checkWinner = () => {
+	checkWinner = (e) => {
 		const player = this.activePlayer[0];
-		this.findWinningCombination(player);
+		this.findWinningCombination(player, e);
 		this.checkDraw();
 	};
 
-	findWinningCombination = (player) => {
+	findWinningCombination = (player, e) => {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
-				this.setWinner(player);
+				this.setWinner(player, e);
 				this.showWinningBoxes(combination);
 				this.unlockNewGameBtn();
 			}
@@ -111,7 +112,7 @@ class Click {
 
 	setWinner = (player) => {
 		console.log(`${player.name} wygrał!`);
-		this.removeListenersForEachBox();
+		// this.endEvent(e);
 		this.addWins(player);
 	};
 

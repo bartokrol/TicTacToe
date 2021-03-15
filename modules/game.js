@@ -1,4 +1,13 @@
-import { boxes, newGameBtn } from "./dom-elems.js";
+import {
+	boxes,
+	markChoice,
+	buttons,
+	resultPlayer1,
+	resultPlayer2,
+	latest,
+	resetBtn,
+	newGameBtn,
+} from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
 import { Reset } from "./reset.js";
 import { Click } from "./new-click.js";
@@ -34,7 +43,6 @@ class Game {
 
 	findActivePlayer = () => {
 		this.activePlayer = this.players.filter((player) => player.active);
-		console.log(this.activePlayer);
 	};
 
 	addEventListenersToEachBox = () => {
@@ -44,6 +52,31 @@ class Game {
 			box.addEventListener("click", this.clickBox);
 		});
 		newGameBtn.addEventListener("click", this.startNewGame);
+		resetBtn.addEventListener("click", () => {
+			this.resetPage();
+		});
+	};
+
+	resetPage = () => {
+		this.resetResults();
+		this.resetBoxes();
+		this.resetPlayersWins();
+		this.resetPlayersArr();
+		this.resetBoard();
+		markChoice.classList.remove("inactive");
+	};
+
+	resetResults = () => {
+		resultPlayer1.textContent = this.player1.wins;
+		resultPlayer2.textContent = this.player2.wins;
+		latest.innerHTML = "";
+	};
+
+	resetBoxes = () => {
+		boxes.forEach((box) => {
+			box.className = "game-container__board-container__box board--box";
+			box.textContent = "";
+		});
 	};
 
 	clickBox = (e) => {
@@ -56,9 +89,26 @@ class Game {
 			this.player2,
 			this.players,
 			this.winningCombinations,
-			this.latestResults
+			this.latestResults,
+			this.removeEventListeners(e.target)
 		);
 		this.changeActivePlayer();
+	};
+
+	removeEventListeners = (el) => {
+		el.removeEventListener("click", this.clickBox);
+		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
+		el.removeEventListener("mouseover", this.showElementOnMouseOver);
+	};
+
+	showElementOnMouseOver = (e) => {
+		e.target.textContent = `${this.activePlayer[0].mark}`;
+		e.target.classList.add("board--box--hover");
+	};
+
+	hideElementOnMouseOut = (e) => {
+		e.target.textContent = "";
+		e.target.classList.remove("board--box--hover");
 	};
 
 	changeActivePlayer = () => {
@@ -75,13 +125,6 @@ class Game {
 		this.addEventListenersToEachBox();
 		this.resetBoard();
 		this.resetPlayersArr();
-	};
-
-	resetBoxes = () => {
-		boxes.forEach((box) => {
-			box.className = "game-container__board-container__box board--box";
-			box.textContent = "";
-		});
 	};
 
 	resetPlayersWins = () => {
