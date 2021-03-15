@@ -1,18 +1,10 @@
-import {
-	boxes,
-	markChoice,
-	buttons,
-	resultPlayer1,
-	resultPlayer2,
-	latest,
-	resetBtn,
-	newGameBtn,
-} from "./dom-elems.js";
-import { NewGame } from "./new-game.js";
+import { boxes, newGameBtn } from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
-
+import { NewGame } from "./new-game.js";
+import { Reset } from "./reset.js";
 class Game {
 	constructor(player1, player2) {
+		// super();
 		(this.player1 = player1),
 			(this.player2 = player2),
 			(this.players = [this.player1, this.player2]),
@@ -33,10 +25,7 @@ class Game {
 				[1, 5, 9],
 				[3, 5, 7],
 			]),
-			(this.latestResults = []),
-			(this.newGameBtn = {
-				disabled: true,
-			});
+			(this.latestResults = []);
 	}
 
 	startNewGame = () => {
@@ -53,6 +42,7 @@ class Game {
 			box.addEventListener("mouseover", this.showElementOnMouseOver);
 			box.addEventListener("click", this.clickBox);
 		});
+		newGameBtn.addEventListener("click", this.startNewGame);
 	};
 
 	showElementOnMouseOver = (e) => {
@@ -73,6 +63,7 @@ class Game {
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
 		this.checkPlayerArrLength();
 		this.changeActivePlayer();
+		return;
 	};
 
 	addBoxToBoard = (e) => {
@@ -110,11 +101,11 @@ class Game {
 
 	checkWinner = () => {
 		const player = this.activePlayer[0];
-		this.findWinningCombination( player);
+		this.findWinningCombination(player);
 		this.checkDraw();
 	};
 
-	findWinningCombination = ( player) => {
+	findWinningCombination = (player) => {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.setWinner(player);
@@ -155,9 +146,10 @@ class Game {
 
 	unlockNewGameBtn = () => {
 		this.isGameEnd = true;
+
 		if (this.isGameEnd) {
-			this.newGameBtn.disabled = !this.newGameBtn.disabled;
-			newGameBtn.disabled = this.newGameBtn.disabled;
+			console.log(newGameBtn);
+			newGameBtn.disabled = false;
 		}
 	};
 
@@ -171,6 +163,39 @@ class Game {
 		player.winner = true;
 		player.wins++;
 		const results = new LatestResults(player, this.latestResults);
+		// const newGame = new NewGame(this.player1, this.player2);
+	};
+
+	startNewGame = () => {
+		this.player1.active = true;
+		this.player2.active = false;
+		this.resetBoxes();
+		this.findActivePlayer();
+		newGameBtn.disabled = true;
+		this.addEventListenersToEachBox();
+		this.resetBoard();
+		this.resetPlayersArr();
+	};
+
+	resetBoxes = () => {
+		boxes.forEach((box) => {
+			box.className = "game-container__board-container__box board--box";
+			box.textContent = "";
+		});
+	};
+
+	resetBoard = () => {
+		this.board = [
+			[null, null, null],
+			[null, null, null],
+			[null, null, null],
+		];
+	};
+
+	resetPlayersArr = () => {
+		for (let player of this.players) {
+			player.arr = [];
+		}
 	};
 }
 

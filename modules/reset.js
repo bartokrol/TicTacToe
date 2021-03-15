@@ -1,14 +1,10 @@
 import {
 	boxes,
 	markChoice,
-	buttons,
 	resultPlayer1,
 	resultPlayer2,
 	latest,
-	resetBtn,
-	newGameBtn,
 } from "./dom-elems.js";
-import { Game } from "./game.js";
 
 class Reset {
 	constructor(player1, player2) {
@@ -34,8 +30,6 @@ class Reset {
 	resetResults = () => {
 		resultPlayer1.textContent = this.player1.wins;
 		resultPlayer2.textContent = this.player2.wins;
-		// this.latestResults = [];
-		// const latestResults = new latestResults();
 		latest.innerHTML = "";
 	};
 

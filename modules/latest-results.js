@@ -1,14 +1,6 @@
 import {
-	boxes,
-	markChoice,
-	buttons,
-	resultPlayer1,
-	resultPlayer2,
 	latest,
-	resetBtn,
-	newGameBtn,
 } from "./dom-elems.js";
-import { Game } from "./game.js";
 
 class LatestResults {
 	constructor(player, latestResults) {

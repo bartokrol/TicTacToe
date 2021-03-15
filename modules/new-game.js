@@ -1,13 +1,4 @@
-import {
-	boxes,
-	markChoice,
-	buttons,
-	resultPlayer1,
-	resultPlayer2,
-	latest,
-	resetBtn,
-	newGameBtn,
-} from "./dom-elems.js";
+import { boxes, newGameBtn } from "./dom-elems.js";
 import { Game } from "./game.js";
 
 class NewGame extends Game {
