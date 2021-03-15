@@ -58,15 +58,17 @@ class Game {
 	};
 
 	resetPage = () => {
-		this.resetResults();
 		this.resetBoxes();
 		this.resetPlayersWins();
 		this.resetPlayersArr();
+		this.resetResults();
 		this.resetBoard();
 		markChoice.classList.remove("inactive");
 	};
 
 	resetResults = () => {
+		console.log(this.player1);
+		console.log(this.player2);
 		resultPlayer1.textContent = this.player1.wins;
 		resultPlayer2.textContent = this.player2.wins;
 		latest.innerHTML = "";
@@ -132,6 +134,8 @@ class Game {
 		this.player2.active = false;
 		this.player1.winner = false;
 		this.player2.winner = false;
+		this.player1.wins = 0;
+		this.player2.wins = 0;
 	};
 
 	resetBoard = () => {
