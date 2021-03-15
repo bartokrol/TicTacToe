@@ -61,7 +61,6 @@ class Game {
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
 		this.checkPlayerArrLength();
 		this.changeActivePlayer();
-		return;
 	};
 
 	addBoxToBoard = (e) => {
@@ -114,6 +113,10 @@ class Game {
 	};
 
 	checkDraw = () => {
+		console.log(this.player1.arr);
+		console.log(this.player2.arr);
+		console.log(this.player1);
+		console.log(this.player2);
 		if (
 			this.player1.arr.length === 5 &&
 			this.player2.arr.length === 4 &&
@@ -161,12 +164,10 @@ class Game {
 		player.winner = true;
 		player.wins++;
 		const results = new LatestResults(player, this.latestResults);
-		// const newGame = new NewGame(this.player1, this.player2);
 	};
 
 	startNewGame = () => {
-		this.player1.active = true;
-		this.player2.active = false;
+		this.resetPlayersWins();
 		this.resetBoxes();
 		this.findActivePlayer();
 		newGameBtn.disabled = true;
@@ -180,6 +181,13 @@ class Game {
 			box.className = "game-container__board-container__box board--box";
 			box.textContent = "";
 		});
+	};
+
+	resetPlayersWins = () => {
+		this.player1.active = true;
+		this.player2.active = false;
+		this.player1.winner = false;
+		this.player2.winner = false;
 	};
 
 	resetBoard = () => {

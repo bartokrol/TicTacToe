@@ -1,6 +1,4 @@
-import {
-	latest,
-} from "./dom-elems.js";
+import { latest } from "./dom-elems.js";
 
 class LatestResults {
 	constructor(player, latestResults) {
@@ -12,6 +10,10 @@ class LatestResults {
 		if (player.winner) {
 			let winner = `${player.name} wygrał rundę!`;
 			this.latestResults.push({ winner, date });
+			const resultPlayer = document.querySelector(
+				`.game-container__current-result__${player.name}__wins`
+			);
+			resultPlayer.textContent = `${player.wins}`;
 		} else {
 			let winner = "It was a draw!";
 			this.latestResults.push({ winner, date });
@@ -22,11 +24,6 @@ class LatestResults {
 					`<li class="game-container__latest-results__results__latest-result">${el.date} <span class="game-container__latest-results__results__latest-result__winner">${el.winner}<span></li>`
 			)
 			.join(" ");
-
-		const resultPlayer = document.querySelector(
-			`.game-container__current-result__${player.name}__wins`
-		);
-		resultPlayer.textContent = `${player.wins}`;
 	};
 
 	getDate = () => {
