@@ -1,14 +1,4 @@
-import {
-	boxes,
-	markChoice,
-	buttons,
-	resultPlayer1,
-	resultPlayer2,
-	latest,
-	resetBtn,
-	newGameBtn,
-} from "./dom-elems.js";
-import { LatestResults } from "./latest-results.js";
+import { boxes, resetBtn, newGameBtn } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { Click } from "./new-click.js";
 
@@ -72,30 +62,6 @@ class Game {
 		);
 	};
 
-	// resetPageAfterResetBtn = () => {
-	// 	this.resetBoxes();
-	// 	this.resetPlayersWins();
-	// 	this.resetPlayersArr();
-	// 	this.resetResults();
-	// 	this.resetBoard();
-	// 	markChoice.classList.remove("inactive");
-	// };
-
-	// resetResults = () => {
-	// 	console.log(this.player1);
-	// 	console.log(this.player2);
-	// 	resultPlayer1.textContent = this.player1.wins;
-	// 	resultPlayer2.textContent = this.player2.wins;
-	// 	latest.innerHTML = "";
-	// };
-
-	// resetBoxes = () => {
-	// 	boxes.forEach((box) => {
-	// 		box.className = "game-container__board-container__box board--box";
-	// 		box.textContent = "";
-	// 	});
-	// };
-
 	clickBox = (e) => {
 		e.target.classList.remove("board--box--hover");
 		const click = new Click(
@@ -133,40 +99,6 @@ class Game {
 		this.player2.active = !this.player2.active;
 		this.activePlayer = this.players.filter((player) => player.active);
 	};
-
-	// startNewGame = () => {
-	// 	// this.resetPageAfterNewGame()
-	// 	this.resetPlayersWins();
-	// 	this.resetBoxes();
-	// 	this.findActivePlayer();
-	// 	newGameBtn.disabled = true;
-	// 	this.addEventListenersToEachBox();
-	// 	this.resetBoard();
-	// 	this.resetPlayersArr();
-	// };
-
-	// resetPlayersWins = () => {
-	// 	this.player1.active = true;
-	// 	this.player2.active = false;
-	// 	this.player1.winner = false;
-	// 	this.player2.winner = false;
-	// 	this.player1.wins = 0;
-	// 	this.player2.wins = 0;
-	// };
-
-	// resetBoard = () => {
-	// 	this.board = [
-	// 		[null, null, null],
-	// 		[null, null, null],
-	// 		[null, null, null],
-	// 	];
-	// };
-
-	// resetPlayersArr = () => {
-	// 	for (let player of this.players) {
-	// 		player.arr = [];
-	// 	}
-	// };
 }
 
 export { Game };

@@ -1,11 +1,5 @@
 import { Game } from "./modules/game.js";
-import {
-	markChoice,
-	buttons,
-	resetBtn,
-	newGameBtn,
-} from "./modules/dom-elems.js";
-// import { Reset } from "./modules/reset.js";
+import { markChoice, buttons, newGameBtn } from "./modules/dom-elems.js";
 
 const choosePlayer = (e) => {
 	const game = new Game(
@@ -30,53 +24,12 @@ const choosePlayer = (e) => {
 	markChoice.classList.add("inactive");
 	game.startNewGame();
 	game.addEventListenersToEachBox();
-	// newGameBtn.addEventListener("click", () => {
-	// 	const newGame = new NewGame(
-	// 		{
-	// 			name: "player1",
-	// 			mark: game.player1.mark,
-	// 			active: true,
-	// 			arr: [],
-	// 			wins: game.player1.wins,
-	// 			winner: false,
-	// 		},
-	// 		{
-	// 			name: "player2",
-	// 			mark: game.player2.mark,
-	// 			active: false,
-	// 			arr: [],
-	// 			wins: game.player2.wins,
-	// 			winner: false,
-	// 		},
-	// 		game.latestResults
-	// 	);
-	// });
 };
 
 const addListeners = () => {
 	buttons.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
 	});
-	// resetBtn.addEventListener("click", () => {
-	// 	const reset = new Reset(
-	// 		{
-	// 			name: "player1",
-	// 			mark: null,
-	// 			active: true,
-	// 			arr: [],
-	// 			wins: 0,
-	// 			winner: false,
-	// 		},
-	// 		{
-	// 			name: "player2",
-	// 			mark: null,
-	// 			active: false,
-	// 			arr: [],
-	// 			wins: 0,
-	// 			winner: false,
-	// 		}
-	// 	);
-	// });
 };
 
 document.addEventListener("DOMContentLoaded", () => {

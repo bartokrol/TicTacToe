@@ -1,15 +1,5 @@
-import {
-	boxes,
-	markChoice,
-	buttons,
-	resultPlayer1,
-	resultPlayer2,
-	latest,
-	resetBtn,
-	newGameBtn,
-} from "./dom-elems.js";
+import { boxes, newGameBtn } from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
-// import { Reset } from "./reset.js";
 
 class Click {
 	constructor(
@@ -20,9 +10,7 @@ class Click {
 		player2,
 		players,
 		winningCombinations,
-		latestResults,
-		isGameEnd,
-		endEvent
+		latestResults
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -38,7 +26,6 @@ class Click {
 		e.target.classList.remove("board--box--hover");
 		this.addBoxToBoard(e);
 		this.removeHoverEvents(e);
-		// this.removeEventListeners(e.target);
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
 		this.checkPlayerArrLength(e);
 	};
@@ -52,23 +39,6 @@ class Click {
 	removeHoverEvents = (e) => {
 		e.target.textContent = "";
 	};
-
-	// removeEventListeners = (el) => {
-	// 	el.removeEventListener("click", this.clickBox);
-	// 	el.removeEventListener("mouseout", this.hideElementOnMouseOut);
-	// 	el.removeEventListener("mouseover", this.showElementOnMouseOver);
-	// };
-
-	// showElementOnMouseOver = (e) => {
-	// 	console.log(this.activePlayer);
-	// 	e.target.textContent = `${this.activePlayer[0].mark}`;
-	// 	e.target.classList.add("board--box--hover");
-	// };
-
-	// hideElementOnMouseOut = (e) => {
-	// 	e.target.textContent = "";
-	// 	e.target.classList.remove("board--box--hover");
-	// };
 
 	pushBoxIntoPlayerArr = (e, player) => {
 		player.arr.push(Number(e.target.id));
@@ -112,7 +82,6 @@ class Click {
 
 	setWinner = (player) => {
 		console.log(`${player.name} wygrał!`);
-		// this.endEvent(e);
 		this.addWins(player);
 	};
 
