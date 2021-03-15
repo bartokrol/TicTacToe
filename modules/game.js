@@ -1,10 +1,8 @@
 import { boxes, newGameBtn } from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
-import { NewGame } from "./new-game.js";
 import { Reset } from "./reset.js";
 class Game {
 	constructor(player1, player2) {
-		// super();
 		(this.player1 = player1),
 			(this.player2 = player2),
 			(this.players = [this.player1, this.player2]),

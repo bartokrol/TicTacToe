@@ -1,4 +1,3 @@
-import { NewGame } from "./modules/new-game.js";
 import { Reset } from "./modules/reset.js";
 import { Game } from "./modules/game.js";
 import {
