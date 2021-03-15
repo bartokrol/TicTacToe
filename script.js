@@ -5,7 +5,7 @@ import {
 	resetBtn,
 	newGameBtn,
 } from "./modules/dom-elems.js";
-import { Reset } from "./modules/reset.js";
+// import { Reset } from "./modules/reset.js";
 
 const choosePlayer = (e) => {
 	const game = new Game(
