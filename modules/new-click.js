@@ -10,8 +10,7 @@ class Click {
 		player2,
 		players,
 		winningCombinations,
-		latestResults,
-		// removeEventListeners,
+		latestResults
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -26,7 +25,6 @@ class Click {
 	click = (e) => {
 		e.target.classList.remove("board--box--hover");
 		this.addBoxToBoard(e);
-		this.removeHoverEvents(e);
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
 		this.checkPlayerArrLength(e);
 	};
@@ -37,10 +35,6 @@ class Click {
 		this.board[boxRow][boxColumn] = e.target.id;
 	};
 
-	removeHoverEvents = (e) => {
-		e.target.textContent = "";
-	};
-
 	pushBoxIntoPlayerArr = (e, player) => {
 		player.arr.push(Number(e.target.id));
 		e.target.textContent = `${player.mark}`;
@@ -48,14 +42,13 @@ class Click {
 
 	checkPlayerArrLength = (e) => {
 		if (this.player1.arr.length > 2 || this.player2.arr.length > 2) {
-			this.checkWinner(e);
+			this.checkForWinner(e);
 		}
 	};
 
-	checkWinner = (e) => {
+	checkForWinner = (e) => {
 		const player = this.activePlayer[0];
 		this.findWinningCombination(player, e);
-		this.checkDraw();
 	};
 
 	findWinningCombination = (player, e) => {
@@ -66,19 +59,7 @@ class Click {
 				this.unlockNewGameBtn();
 			}
 		}
-	};
-
-	checkDraw = () => {
-		if (
-			this.player1.arr.length === 5 &&
-			this.player2.arr.length === 4 &&
-			this.player1.winner === false &&
-			this.player2.winner === false
-		) {
-			console.log("it's a draw");
-			const results = new LatestResults("", this.latestResults);
-			this.unlockNewGameBtn();
-		}
+		this.checkDraw();
 	};
 
 	setWinner = (player) => {
@@ -101,6 +82,19 @@ class Click {
 
 		if (this.isGameEnd) {
 			newGameBtn.disabled = false;
+		}
+	};
+
+	checkDraw = () => {
+		if (
+			this.player1.arr.length === 5 &&
+			this.player2.arr.length === 4 &&
+			this.player1.winner === false &&
+			this.player2.winner === false
+		) {
+			console.log("it's a draw");
+			const results = new LatestResults("", this.latestResults);
+			this.unlockNewGameBtn();
 		}
 	};
 

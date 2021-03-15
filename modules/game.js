@@ -76,10 +76,6 @@ class Game {
 		);
 		this.removeEventListeners(e.target);
 		this.changeActivePlayer();
-		this.checkForWinner();
-	};
-
-	checkForWinner = () => {
 		if (this.player1.winner || this.player2.winner) {
 			this.removeListenersForEachBox();
 		}
