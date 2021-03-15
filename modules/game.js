@@ -1,6 +1,6 @@
 import { boxes, resetBtn, newGameBtn } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { Click } from "./new-click.js";
+import { Click } from "./click.js";
 
 class Game {
 	constructor(player1, player2) {

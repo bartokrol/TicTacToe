@@ -7,7 +7,6 @@ import {
 	newGameBtn,
 } from "./dom-elems.js";
 
-
 function resetPageAfterResetBtn(player1, player2, players, board) {
 	resetBoxes();
 	resetPlayersWins(player1, player2);

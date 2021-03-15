@@ -59,7 +59,7 @@ class Click {
 				this.unlockNewGameBtn();
 			}
 		}
-		this.checkDraw();
+		this.checkDraw(); 
 	};
 
 	setWinner = (player) => {
