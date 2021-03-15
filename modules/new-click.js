@@ -10,7 +10,8 @@ class Click {
 		player2,
 		players,
 		winningCombinations,
-		latestResults
+		latestResults,
+		// removeEventListeners,
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -101,12 +102,6 @@ class Click {
 		if (this.isGameEnd) {
 			newGameBtn.disabled = false;
 		}
-	};
-
-	removeListenersForEachBox = () => {
-		boxes.forEach((box) => {
-			this.removeEventListeners(box);
-		});
 	};
 
 	addWins = (player) => {

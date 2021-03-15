@@ -72,10 +72,23 @@ class Game {
 			this.player2,
 			this.players,
 			this.winningCombinations,
-			this.latestResults,
-			this.removeEventListeners(e.target)
+			this.latestResults
 		);
+		this.removeEventListeners(e.target);
 		this.changeActivePlayer();
+		this.checkForWinner();
+	};
+
+	checkForWinner = () => {
+		if (this.player1.winner || this.player2.winner) {
+			this.removeListenersForEachBox();
+		}
+	};
+
+	removeListenersForEachBox = () => {
+		boxes.forEach((box) => {
+			this.removeEventListeners(box);
+		});
 	};
 
 	removeEventListeners = (el) => {
