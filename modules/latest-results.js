@@ -1,4 +1,5 @@
 import { latest } from "./dom-elems.js";
+import { Click } from "./new-click.js";
 
 class LatestResults {
 	constructor(player, latestResults) {
