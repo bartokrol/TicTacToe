@@ -1,4 +1,4 @@
-import { boxes, newGameBtn } from "./dom-elems.js";
+import { boxes, newGameBtn, winnerAnnoucement, winner } from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
 
 class Click {
@@ -59,11 +59,16 @@ class Click {
 				this.unlockNewGameBtn();
 			}
 		}
-		this.checkDraw(); 
+		this.checkDraw();
 	};
 
 	setWinner = (player) => {
 		console.log(`${player.name} wygrał!`);
+		winnerAnnoucement.classList.remove("hidden");
+		setTimeout(() => {
+			winnerAnnoucement.classList.add("hidden");
+		}, 3000);
+		winner.textContent = `${player.name} ( ${player.mark} )`;
 		this.addWins(player);
 	};
 

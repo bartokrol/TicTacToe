@@ -179,3 +179,27 @@ body {
 .game-container__latest-results__results__latest-result__winner {
 	font-weight: bolder;
 }
+
+.winner-annoucement-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 150px;
+	background-color: red;
+	transform: translate(-50%, -50%);
+	transition: 1s all ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 30px;
+}
+
+.hidden {
+	width: 0;
+	height: 0;
+	transition: 1s all ease;
+	overflow: hidden;
+	font-size: 0;
+}

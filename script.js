@@ -4,7 +4,7 @@ import { markChoice, buttons, newGameBtn } from "./modules/dom-elems.js";
 const choosePlayer = (e) => {
 	const game = new Game(
 		{
-			name: "player1",
+			name: "Player1",
 			mark: e.target.value,
 			active: true,
 			arr: [],
@@ -12,7 +12,7 @@ const choosePlayer = (e) => {
 			winner: false,
 		},
 		{
-			name: "player2",
+			name: "Player2",
 			mark: e.target.value === "X" ? "O" : "X",
 			active: false,
 			arr: [],

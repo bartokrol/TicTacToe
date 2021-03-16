@@ -19,6 +19,11 @@ const newGameBtn = document.querySelector(
 	".game-container__buttons--new-game-btn"
 );
 
+const winnerAnnoucement = document.querySelector(
+	".winner-annoucement-container"
+);
+const winner = document.querySelector(".winner-annoucement-container__winner");
+
 export {
 	boxes,
 	markChoice,
@@ -28,4 +33,6 @@ export {
 	latest,
 	resetBtn,
 	newGameBtn,
+	winnerAnnoucement,
+	winner,
 };
