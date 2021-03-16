@@ -1,0 +1,16 @@
+@import "./variables.scss";
+@import "./starting-page.scss";
+@import "./game-container.scss";
+@import "./winner-annoucement.scss";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	@include centerBox();
+	min-height: 100vh;
+	font-family: "Akaya Telivigala", cursive;
+}

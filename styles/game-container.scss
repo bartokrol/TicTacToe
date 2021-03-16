@@ -1,0 +1,100 @@
+.game-container {
+	width: 80%;
+	background-color: beige;
+	display: flex;
+	padding: 50px;
+	&__results-container {
+		padding: 20px;
+		text-align: center;
+		width: 40%;
+	}
+	&__current-result {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		&__heading {
+			grid-column-start: span 2;
+		}
+		&__player1 {
+			grid-row: 2;
+			grid-column: span 2;
+		}
+		&__player2 {
+			grid-row: 3;
+			grid-column: span 2;
+		}
+	}
+	&__latest-results {
+		margin-top: 10px;
+		&__results {
+			background-color: burlywood;
+			&__latest-result {
+				list-style-type: decimal;
+				padding-bottom: 5px;
+				&__winner {
+					font-weight: bolder;
+				}
+			}
+		}
+	}
+	&__buttons-container {
+		width: 10%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		&--btn {
+			width: 80%;
+			height: 40px;
+			border-radius: 5px;
+			margin: 5px;
+		}
+	}
+	&__board-container {
+		width: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&__board {
+			width: 500px;
+			height: 500px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 1fr 1fr 1fr;
+			.board--box {
+				border: 1px solid black;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 100px;
+				&:first-child,
+				&:nth-child(2),
+				&:nth-child(3) {
+					border-top: none;
+				}
+				&:first-child,
+				&:nth-child(4),
+				&:nth-child(7) {
+					border-left: none;
+				}
+				&:nth-child(3),
+				&:nth-child(6),
+				&:nth-child(9) {
+					border-right: none;
+				}
+				&:nth-child(7),
+				&:nth-child(8),
+				&:nth-child(9) {
+					border-bottom: none;
+				}
+				&--hover {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
+}
+
+.won {
+	color: red;
+}

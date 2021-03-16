@@ -14,9 +14,11 @@ const resultPlayer2 = document.querySelector(
 const latest = document.querySelector(
 	".game-container__latest-results__results"
 );
-const resetBtn = document.querySelector(".game-container__buttons--reset-btn");
+const resetBtn = document.querySelector(
+	".game-container__buttons-container--reset-btn"
+);
 const newGameBtn = document.querySelector(
-	".game-container__buttons--new-game-btn"
+	".game-container__buttons-container--new-game-btn"
 );
 
 const winnerAnnoucement = document.querySelector(
