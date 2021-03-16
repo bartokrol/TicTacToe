@@ -9,15 +9,14 @@ class LatestResults {
 		const date = this.getDate();
 		if (player.winner) {
 			let winner = `${player.name} wygrał rundę!`;
-			this.latestResults.push({ winner, date });
+			this.latestResults.unshift({ winner, date });
 			const resultPlayer = document.querySelector(
 				`.game-container__current-result__${player.name}__wins`
 			);
 			resultPlayer.textContent = `${player.wins}`;
-			console.log(this.latestResults);
 		} else {
 			let winner = "It was a draw!";
-			this.latestResults.push({ winner, date });
+			this.latestResults.unshift({ winner, date });
 		}
 		latest.innerHTML = this.latestResults
 			.map(
@@ -45,7 +44,6 @@ class LatestResults {
 	};
 
 	removeLatestResult = () => {
-		console.log("usunęło");
 		if (this.latestResults.length > 2) {
 			this.latestResults.pop();
 		}

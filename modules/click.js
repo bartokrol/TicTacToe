@@ -100,6 +100,11 @@ class Click {
 			console.log("it's a draw");
 			const results = new LatestResults("", this.latestResults);
 			this.unlockNewGameBtn();
+			winnerAnnoucement.classList.remove("hidden");
+			setTimeout(() => {
+				winnerAnnoucement.classList.add("hidden");
+			}, 3000);
+			winner.textContent = "It's a draw...";
 		}
 	};
 
