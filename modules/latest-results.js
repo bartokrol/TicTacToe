@@ -14,6 +14,7 @@ class LatestResults {
 				`.game-container__current-result__${player.name}__wins`
 			);
 			resultPlayer.textContent = `${player.wins}`;
+			console.log(this.latestResults);
 		} else {
 			let winner = "It was a draw!";
 			this.latestResults.push({ winner, date });
@@ -24,6 +25,7 @@ class LatestResults {
 					`<li class="game-container__latest-results__results__latest-result">${el.date} <span class="game-container__latest-results__results__latest-result__winner">${el.winner}<span></li>`
 			)
 			.join(" ");
+		this.removeLatestResult();
 	};
 
 	getDate = () => {
@@ -40,6 +42,13 @@ class LatestResults {
 		}:${seconds < 10 ? "0" + seconds : seconds}
 	${day < 10 ? "0" + day : day}-${month < 10 ? "0" + month : month}-${year}`;
 		return fullDate;
+	};
+
+	removeLatestResult = () => {
+		console.log("usunęło");
+		if (this.latestResults.length > 2) {
+			this.latestResults.pop();
+		}
 	};
 }
 
