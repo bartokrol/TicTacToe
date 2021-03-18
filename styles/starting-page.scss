@@ -1,5 +1,56 @@
 @import "./variables.scss";
 
+// .starting-page {
+// 	background-color: $startBgrClr;
+// 	position: absolute;
+// 	top: 0;
+// 	left: 0;
+// 	width: 100vw;
+// 	height: 100vh;
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+
+// 	&__window {
+// 		width: 400px;
+// 		height: 150px;
+// 		background-color: $backgroundClr;
+// 		padding: 20px;
+// 		display: grid;
+// 		justify-content: center;
+// 		grid-template-columns: 1fr 1fr;
+// 		grid-template-rows: 1fr 1fr;
+// 		border-radius: 5px;
+// 		border: 3px solid $basicClr;
+// 		&__title {
+// 			font-family: "Akaya Telivigala", cursive;
+// 			grid-column: 1 / span 2;
+// 			text-align: center;
+// 			font-size: 40px;
+// 			padding-bottom: 20px;
+// 			color: $basicClr;
+// 		}
+// 	}
+// 	&--btn {
+// 		font-family: "Akaya Telivigala", cursive;
+// 		border-radius: 2px;
+// 		font-size: 40px;
+// 		width: 50%;
+// 		margin: 0 auto;
+// 		border: 3px solid $winningClr;
+// 		background-color: $backgroundClr;
+// 		color: $winningClr;
+// 		&:hover {
+// 			background-color: $winningClr;
+// 			color: $backgroundClr;
+// 		}
+// 	}
+
+// 	&.inactive {
+// 		visibility: hidden;
+// 	}
+// }
+
 .starting-page {
 	background-color: $startBgrClr;
 	position: absolute;
@@ -7,13 +58,11 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	@include centerBox();
 
 	&__window {
-		width: 400px;
-		height: 150px;
+		width: 100%;
+		height: 200px;
 		background-color: $backgroundClr;
 		padding: 20px;
 		display: grid;
@@ -27,7 +76,7 @@
 			grid-column: 1 / span 2;
 			text-align: center;
 			font-size: 40px;
-			padding-bottom: 20px;
+			margin-bottom: 10px;
 			color: $basicClr;
 		}
 	}
@@ -45,8 +94,24 @@
 			color: $backgroundClr;
 		}
 	}
+
+	&.inactive {
+		visibility: hidden;
+	}
 }
 
-.inactive {
-	visibility: hidden;
+@media (min-width: 351px) {
+	.starting-page {
+		background-color: $startBgrClr;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		@include centerBox();
+
+		&__window {
+			width: 350px;
+		}
+	}
 }

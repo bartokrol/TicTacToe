@@ -1,10 +1,53 @@
 @import "./variables.scss";
 
+// .winner-annoucement-container {
+// 	position: absolute;
+// 	top: 50%;
+// 	left: 50%;
+// 	width: 300px;
+// 	height: 150px;
+// 	border-radius: 50px;
+// 	background-color: $secondaryClr;
+// 	color: $basicClr;
+// 	transform: translate(-50%, -50%);
+// 	transition: 1s all ease;
+// 	flex-direction: column;
+// 	font-size: 30px;
+// 	@include centerBox();
+
+// 	&__heading {
+// 		font-size: 30px;
+// 		transition: 1s all ease;
+// 	}
+// 	&__winner {
+// 		font-size: 40px;
+// 		transition: 1s all ease;
+// 		color: $winningClr;
+// 	}
+
+// 	&.hidden {
+// 		width: 0;
+// 		height: 0;
+// 		transition: 1s all ease;
+// 		overflow: hidden;
+// 		font-size: 0;
+
+// 		.winner-annoucement-container__heading {
+// 			font-size: 0;
+// 			transition: 1s all ease;
+// 		}
+// 		.winner-annoucement-container__winner {
+// 			font-size: 0;
+// 			transition: 1s all ease;
+// 		}
+// 	}
+// }
+
 .winner-annoucement-container {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 300px;
+	width: 100%;
 	height: 150px;
 	border-radius: 50px;
 	background-color: $secondaryClr;
@@ -40,5 +83,11 @@
 			font-size: 0;
 			transition: 1s all ease;
 		}
+	}
+}
+
+@media (min-width: 351px) {
+	.winner-annoucement-container {
+		width: 350px;
 	}
 }
