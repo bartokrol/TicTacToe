@@ -2,14 +2,18 @@
 
 .game-container {
 	border-radius: 50px;
-	width: 80%;
+	// width: 80%;
 	background-color: $backgroundClr;
-	display: flex;
-	padding: 50px;
+	// display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 6fr;
+	padding: 20px;
 	&__results-container {
+		grid-column: 1;
+		grid-row: 2;
 		padding: 20px;
 		text-align: center;
-		width: 40%;
 	}
 	&__current-result {
 		display: grid;
@@ -62,16 +66,16 @@
 		}
 	}
 	&__buttons-container {
-		width: 10%;
+		grid-column: 1 / span 2;
+		grid-row: 1;
 		@include centerBox();
-		flex-direction: column;
 		&--btn {
-			width: 100%;
+			width: 30%;
 			height: 40px;
 			border-radius: 5px;
 			margin: 5px;
 			font-family: "Akaya Telivigala", cursive;
-			font-size: 18px;
+			font-size: 30px;
 			border: 3px solid $winningClr;
 			background-color: $backgroundClr;
 			color: $basicClr;
@@ -82,7 +86,9 @@
 		}
 	}
 	&__board-container {
-		width: 50%;
+		grid-column: 2;
+		grid-row: 2;
+		// width: 50%;
 		@include centerBox();
 		&__board {
 			width: 500px;

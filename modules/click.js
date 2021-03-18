@@ -1,5 +1,6 @@
 import {
 	boxes,
+	resetBtn,
 	newGameBtn,
 	winnerAnnoucement,
 	winner,
@@ -62,7 +63,6 @@ class Click {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.setWinner(player, e);
 				this.showWinningBoxes(combination);
-				this.unlockNewGameBtn();
 			}
 		}
 		this.checkDraw();
@@ -70,12 +70,7 @@ class Click {
 
 	setWinner = (player) => {
 		console.log(`${player.name} wygrał!`);
-		endgameMessage.textContent = "Winner!";
-		winnerAnnoucement.classList.remove("hidden");
-		setTimeout(() => {
-			winnerAnnoucement.classList.add("hidden");
-		}, 3000);
-		winner.textContent = `${player.name} ( ${player.mark} )`;
+		this.showWinningMessage(player);
 		this.addWins(player);
 	};
 
@@ -106,13 +101,7 @@ class Click {
 		) {
 			console.log("it's a draw");
 			const results = new LatestResults("", this.latestResults);
-			this.unlockNewGameBtn();
-			endgameMessage.textContent = "";
-			winnerAnnoucement.classList.remove("hidden");
-			setTimeout(() => {
-				winnerAnnoucement.classList.add("hidden");
-			}, 3000);
-			winner.textContent = "It's a draw...";
+			this.showDrawMessage();
 		}
 	};
 
@@ -120,6 +109,28 @@ class Click {
 		player.winner = true;
 		player.wins++;
 		const results = new LatestResults(player, this.latestResults);
+	};
+
+	showDrawMessage = () => {
+		endgameMessage.textContent = "";
+		this.showAndHideWinnerBox();
+		winner.textContent = "It's a draw...";
+	};
+
+	showWinningMessage = (player) => {
+		endgameMessage.textContent = "Winner!";
+		this.showAndHideWinnerBox();
+		winner.textContent = `${player.name} ( ${player.mark} )`;
+	};
+
+	showAndHideWinnerBox = () => {
+		resetBtn.disabled = true;
+		winnerAnnoucement.classList.remove("hidden");
+		setTimeout(() => {
+			this.unlockNewGameBtn();
+			resetBtn.disabled = false;
+			winnerAnnoucement.classList.add("hidden");
+		}, 3000);
 	};
 }
 

@@ -1,17 +1,22 @@
 .game-container {
   border-radius: 50px;
-  width: 80%;
   background-color: #fbeeac;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 6fr;
+      grid-template-rows: 1fr 6fr;
+  padding: 20px;
 }
 
 .game-container__results-container {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 2;
+  grid-row: 2;
   padding: 20px;
   text-align: center;
-  width: 40%;
 }
 
 .game-container__current-result {
@@ -82,7 +87,11 @@
 }
 
 .game-container__buttons-container {
-  width: 10%;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -92,19 +101,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .game-container__buttons-container--btn {
-  width: 100%;
+  width: 30%;
   height: 40px;
   border-radius: 5px;
   margin: 5px;
   font-family: "Akaya Telivigala", cursive;
-  font-size: 18px;
+  font-size: 30px;
   border: 3px solid #28527a;
   background-color: #fbeeac;
   color: #8ac4d0;
@@ -116,7 +121,10 @@
 }
 
 .game-container__board-container {
-  width: 50%;
+  -ms-grid-column: 2;
+  grid-column: 2;
+  -ms-grid-row: 2;
+  grid-row: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
