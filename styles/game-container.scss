@@ -2,9 +2,7 @@
 
 .game-container {
 	border-radius: 50px;
-	// width: 80%;
 	background-color: $backgroundClr;
-	// display: flex;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 6fr;
@@ -88,7 +86,6 @@
 	&__board-container {
 		grid-column: 2;
 		grid-row: 2;
-		// width: 50%;
 		@include centerBox();
 		&__board {
 			width: 500px;

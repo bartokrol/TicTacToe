@@ -69,7 +69,6 @@ class Click {
 	};
 
 	setWinner = (player) => {
-		console.log(`${player.name} wygrał!`);
 		this.showWinningMessage(player);
 		this.addWins(player);
 	};
@@ -99,7 +98,6 @@ class Click {
 			this.player1.winner === false &&
 			this.player2.winner === false
 		) {
-			console.log("it's a draw");
 			const results = new LatestResults("", this.latestResults);
 			this.showDrawMessage();
 		}
