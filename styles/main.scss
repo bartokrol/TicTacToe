@@ -11,6 +11,8 @@
 
 body {
 	@include centerBox();
+	color: $basicClr;
 	min-height: 100vh;
 	font-family: "Akaya Telivigala", cursive;
+	background-color: $basicClr;
 }

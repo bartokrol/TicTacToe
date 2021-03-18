@@ -1,23 +1,44 @@
+@import "./variables.scss";
+
 .winner-annoucement-container {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	width: 300px;
 	height: 150px;
-	background-color: red;
+	border-radius: 50px;
+	background-color: $secondaryClr;
+	color: $basicClr;
 	transform: translate(-50%, -50%);
 	transition: 1s all ease;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	font-size: 30px;
-}
+	@include centerBox();
 
-.hidden {
-	width: 0;
-	height: 0;
-	transition: 1s all ease;
-	overflow: hidden;
-	font-size: 0;
+	&__heading {
+		font-size: 30px;
+		transition: 1s all ease;
+	}
+	&__winner {
+		font-size: 40px;
+		transition: 1s all ease;
+		color: $winningClr;
+	}
+
+	&.hidden {
+		width: 0;
+		height: 0;
+		transition: 1s all ease;
+		overflow: hidden;
+		font-size: 0;
+
+		.winner-annoucement-container__heading {
+			font-size: 0;
+			transition: 1s all ease;
+		}
+		.winner-annoucement-container__winner {
+			font-size: 0;
+			transition: 1s all ease;
+		}
+	}
 }

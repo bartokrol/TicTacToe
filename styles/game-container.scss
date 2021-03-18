@@ -1,6 +1,9 @@
+@import "./variables.scss";
+
 .game-container {
+	border-radius: 50px;
 	width: 80%;
-	background-color: beige;
+	background-color: $backgroundClr;
 	display: flex;
 	padding: 50px;
 	&__results-container {
@@ -14,47 +17,73 @@
 		grid-template-rows: repeat(3, 1fr);
 		&__heading {
 			grid-column-start: span 2;
+			color: $winningClr;
+			font-size: 40px;
 		}
 		&__Player1 {
 			grid-row: 2;
 			grid-column: span 2;
+			font-size: 25px;
+			margin: auto 0;
+			&__wins {
+				font-size: 35px;
+				color: $winningClr;
+			}
 		}
 		&__Player2 {
 			grid-row: 3;
 			grid-column: span 2;
+			font-size: 25px;
+			margin: auto 0;
+			&__wins {
+				font-size: 35px;
+				color: $winningClr;
+			}
 		}
 	}
 	&__latest-results {
 		margin-top: 10px;
+		color: $winningClr;
+		&__heading {
+			color: $winningClr;
+			font-size: 35px;
+		}
 		&__results {
-			background-color: burlywood;
+			font-size: 20px;
 			&__latest-result {
+				color: $basicClr;
 				list-style-type: decimal;
 				padding-bottom: 5px;
 				&__winner {
 					font-weight: bolder;
+					color: $winningClr;
 				}
 			}
 		}
 	}
 	&__buttons-container {
 		width: 10%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		@include centerBox();
 		flex-direction: column;
 		&--btn {
-			width: 80%;
+			width: 100%;
 			height: 40px;
 			border-radius: 5px;
 			margin: 5px;
+			font-family: "Akaya Telivigala", cursive;
+			font-size: 18px;
+			border: 3px solid $winningClr;
+			background-color: $backgroundClr;
+			color: $basicClr;
+			&:hover {
+				background-color: $basicClr;
+				color: $backgroundClr;
+			}
 		}
 	}
 	&__board-container {
 		width: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		@include centerBox();
 		&__board {
 			width: 500px;
 			height: 500px;
@@ -62,10 +91,8 @@
 			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: 1fr 1fr 1fr;
 			.board--box {
-				border: 1px solid black;
-				display: flex;
-				justify-content: center;
-				align-items: center;
+				border: 3px solid $secondaryClr;
+				@include centerBox();
 				font-size: 100px;
 				&:first-child,
 				&:nth-child(2),
@@ -96,5 +123,5 @@
 }
 
 .won {
-	color: red;
+	color: $winningClr;
 }

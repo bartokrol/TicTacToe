@@ -1,5 +1,7 @@
+@import "./variables.scss";
+
 .starting-page {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: $startBgrClr;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -12,20 +14,21 @@
 	&__window {
 		width: 400px;
 		height: 150px;
-		background-color: white;
+		background-color: $backgroundClr;
 		padding: 20px;
 		display: grid;
 		justify-content: center;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
 		border-radius: 5px;
-		border: 3px solid black;
+		border: 3px solid $basicClr;
 		&__title {
 			font-family: "Akaya Telivigala", cursive;
 			grid-column: 1 / span 2;
 			text-align: center;
 			font-size: 40px;
 			padding-bottom: 20px;
+			color: $basicClr;
 		}
 	}
 	&--btn {
@@ -34,8 +37,14 @@
 		font-size: 40px;
 		width: 50%;
 		margin: 0 auto;
-		border: 3px solid black;
-		background-color: white;
+		border: 3px solid $winningClr;
+		background-color: $backgroundClr;
+		color: $winningClr;
+		&:hover {
+			background-color: $winningClr;
+			color: $backgroundClr;
+			border: 3px solid $backgroundClr;
+		}
 	}
 }
 
