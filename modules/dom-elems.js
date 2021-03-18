@@ -25,6 +25,9 @@ const winnerAnnoucement = document.querySelector(
 	".winner-annoucement-container"
 );
 const winner = document.querySelector(".winner-annoucement-container__winner");
+const endgameMessage = document.querySelector(
+	".winner-annoucement-container__heading"
+);
 
 export {
 	boxes,
@@ -37,4 +40,5 @@ export {
 	newGameBtn,
 	winnerAnnoucement,
 	winner,
+	endgameMessage,
 };

@@ -44,7 +44,7 @@ class LatestResults {
 	};
 
 	removeLatestResult = () => {
-		if (this.latestResults.length > 2) {
+		if (this.latestResults.length > 4) {
 			this.latestResults.pop();
 		}
 	};

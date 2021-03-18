@@ -1,4 +1,4 @@
-import { boxes, resetBtn, newGameBtn } from "./dom-elems.js";
+import { boxes, resetBtn, newGameBtn, endgameMessage } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { Click } from "./click.js";
 

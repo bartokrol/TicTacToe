@@ -1,4 +1,10 @@
-import { boxes, newGameBtn, winnerAnnoucement, winner } from "./dom-elems.js";
+import {
+	boxes,
+	newGameBtn,
+	winnerAnnoucement,
+	winner,
+	endgameMessage,
+} from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
 
 class Click {
@@ -64,6 +70,7 @@ class Click {
 
 	setWinner = (player) => {
 		console.log(`${player.name} wygrał!`);
+		endgameMessage.textContent = "Winner!";
 		winnerAnnoucement.classList.remove("hidden");
 		setTimeout(() => {
 			winnerAnnoucement.classList.add("hidden");
@@ -100,6 +107,7 @@ class Click {
 			console.log("it's a draw");
 			const results = new LatestResults("", this.latestResults);
 			this.unlockNewGameBtn();
+			endgameMessage.textContent = "";
 			winnerAnnoucement.classList.remove("hidden");
 			setTimeout(() => {
 				winnerAnnoucement.classList.add("hidden");
