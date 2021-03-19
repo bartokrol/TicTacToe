@@ -128,6 +128,7 @@ class Click {
 			this.unlockNewGameBtn();
 			resetBtn.disabled = false;
 			winnerAnnoucement.classList.add("hidden");
+			newGameBtn.classList.remove("disabled");
 		}, 3000);
 	};
 }

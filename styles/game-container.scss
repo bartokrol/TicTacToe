@@ -64,6 +64,11 @@
 				color: $backgroundClr;
 			}
 		}
+		&--new-game-btn {
+			&.disabled {
+				opacity: 0.5;
+			}
+		}
 	}
 	&__board-container {
 		grid-row: 2;
@@ -98,7 +103,7 @@
 			&:nth-child(9) {
 				border-bottom: none;
 			}
-			&--hover {
+			&.board--box--hover {
 				opacity: 0.5;
 			}
 		}
@@ -172,6 +177,7 @@
 
 @media (orientation: portrait) and (min-width: 450px) {
 	.game-container {
+		border-radius: 5px;
 		width: 450px;
 		margin: auto;
 		&__board-container {
@@ -194,69 +200,19 @@
 
 @media (orientation: landscape) and (min-width: 1000px) {
 	.game-container {
-		height: 600px;
+		height: 650px;
 		width: 1000px;
 		border-radius: 50px;
 		display: grid;
 		grid-template-columns: 40% 60%;
 		grid-template-rows: 1fr 6fr;
-		background-color: $backgroundClr;
 		&__results-container {
 			grid-column: 1;
 			grid-row: 2;
 		}
-		&__current-result {
-			padding: 5px;
-			@include centerBox();
-			flex-direction: column;
-			&__heading {
-				color: $winningClr;
-			}
-			&__Player1 {
-				&__wins {
-					color: $winningClr;
-				}
-			}
-			&__Player2 {
-				&__wins {
-					color: $winningClr;
-				}
-			}
-		}
-		&__latest-results {
-			text-align: center;
-			&__heading {
-				color: $winningClr;
-			}
-			&__results {
-				text-align: center;
-				width: 90%;
-				list-style: decimal;
-				margin: 0 auto;
-			}
-		}
-
 		&__buttons-container {
 			grid-column: 1 / span 2;
 			grid-row: 1;
-			padding: 5px;
-			@include centerBox();
-			&--btn {
-				width: 150px;
-				height: 80%;
-				margin: 5px;
-				padding: 5px;
-				background-color: $backgroundClr;
-				border: 3px solid $winningClr;
-				border-radius: 5px;
-				color: $basicClr;
-				font-family: "Akaya Telivigala", cursive;
-				font-size: 30px;
-				&:hover {
-					background-color: $basicClr;
-					color: $backgroundClr;
-				}
-			}
 		}
 		&__board-container {
 			grid-column: 2;
@@ -265,17 +221,14 @@
 			height: 100%;
 			display: contents;
 			&__board {
-				padding: 5px;
-				display: grid;
-				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: 1fr 1fr 1fr;
 				height: 500px;
 				width: 500px;
-				margin: 0 auto;
 			}
 			&__box {
-				@include centerBox();
 				font-size: 100px;
+				.board--box--hover {
+					opacity: 0.5;
+				}
 			}
 		}
 	}

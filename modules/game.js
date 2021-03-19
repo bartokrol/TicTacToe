@@ -42,6 +42,7 @@ class Game {
 			box.addEventListener("click", this.clickBox);
 		});
 		newGameBtn.addEventListener("click", () => {
+			newGameBtn.classList.add("disabled");
 			resetPageAfterNewGameBtn(
 				this.player1,
 				this.player2,
@@ -52,14 +53,15 @@ class Game {
 			this.findActivePlayer();
 			this.addEventListenersToEachBox();
 		});
-		resetBtn.addEventListener("click", () =>
+		resetBtn.addEventListener("click", () => {
+			newGameBtn.classList.add("disabled");
 			resetPageAfterResetBtn(
 				this.player1,
 				this.player2,
 				this.players,
 				this.board
-			)
-		);
+			);
+		});
 	};
 
 	clickBox = (e) => {

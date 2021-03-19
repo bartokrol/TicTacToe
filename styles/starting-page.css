@@ -63,4 +63,10 @@
 .starting-page.inactive {
   visibility: hidden;
 }
+
+@media (min-width: 351px) {
+  .starting-page__window {
+    width: 350px;
+  }
+}
 /*# sourceMappingURL=starting-page.css.map */
