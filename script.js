@@ -1,5 +1,10 @@
 import { Game } from "./modules/game.js";
-import { markChoice, buttons, newGameBtn } from "./modules/dom-elems.js";
+import {
+	markChoice,
+	buttons,
+	newGameBtn,
+	bodyOverflow,
+} from "./modules/dom-elems.js";
 
 const choosePlayer = (e) => {
 	const game = new Game(
@@ -20,6 +25,7 @@ const choosePlayer = (e) => {
 			winner: false,
 		}
 	);
+	bodyOverflow.classList.remove("body-hidden");
 	newGameBtn.disabled = true;
 	markChoice.classList.add("inactive");
 	game.startNewGame();

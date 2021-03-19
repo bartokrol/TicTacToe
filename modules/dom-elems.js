@@ -29,6 +29,8 @@ const endgameMessage = document.querySelector(
 	".winner-annoucement-container__heading"
 );
 
+const bodyOverflow = document.querySelector(".body");
+
 export {
 	boxes,
 	markChoice,
@@ -41,4 +43,5 @@ export {
 	winnerAnnoucement,
 	winner,
 	endgameMessage,
+	bodyOverflow,
 };

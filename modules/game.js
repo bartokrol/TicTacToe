@@ -1,4 +1,10 @@
-import { boxes, resetBtn, newGameBtn, endgameMessage } from "./dom-elems.js";
+import {
+	boxes,
+	resetBtn,
+	newGameBtn,
+	endgameMessage,
+	bodyOverflow,
+} from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { Click } from "./click.js";
 
@@ -55,6 +61,7 @@ class Game {
 		});
 		resetBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
+			bodyOverflow.classList.add("body-hidden");
 			resetPageAfterResetBtn(
 				this.player1,
 				this.player2,

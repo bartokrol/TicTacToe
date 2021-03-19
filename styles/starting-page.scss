@@ -2,11 +2,14 @@
 
 .starting-page {
 	position: absolute;
+	background-color: $startBgrClr;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100vh;
 	@include centerBox();
+	z-index: 10;
+	overflow: hidden;
 
 	&__window {
 		width: 100%;
@@ -56,18 +59,10 @@
 	}
 }
 
-// @media (orientation: landscape) {
-// 	.starting-page {
-// 		background-color: $startBgrClr;
-// 		position: absolute;
-// 		top: 0;
-// 		left: 0;
-// 		width: 100%;
-// 		height: 100%;
-// 		@include centerBox();
-
-// 		&__window {
-// 			width: 350px;
-// 		}
-// 	}
-// }
+@media (orientation: landscape) {
+	.starting-page {
+		&__window {
+			width: 350px;
+		}
+	}
+}
