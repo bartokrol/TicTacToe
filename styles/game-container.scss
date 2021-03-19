@@ -5,75 +5,60 @@
 }
 
 .game-container {
-	width: 100%;
-	height: 100%;
-	background-color: $backgroundClr;
 	display: grid;
-	grid-template-columns: 100%;
-	grid-template-rows: 6fr 1fr 5fr;
-	padding: 8px;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 3fr 4fr;
+	grid-gap: 20px;
+	background-color: $backgroundClr;
 	&__results-container {
-		grid-column: 1;
 		grid-row: 3;
-		padding: 20px;
-		text-align: center;
 	}
 	&__current-result {
+		padding: 5px;
+		@include centerBox();
+		flex-direction: column;
 		&__heading {
 			color: $winningClr;
-			font-size: 40px;
 		}
 		&__Player1 {
-			font-size: 25px;
 			&__wins {
-				font-size: 35px;
 				color: $winningClr;
 			}
 		}
 		&__Player2 {
-			font-size: 25px;
 			&__wins {
-				font-size: 35px;
 				color: $winningClr;
 			}
 		}
 	}
 	&__latest-results {
-		margin-top: 10px;
-		color: $winningClr;
+		text-align: center;
 		&__heading {
 			color: $winningClr;
-			font-size: 35px;
 		}
 		&__results {
-			font-size: 20px;
-			@include centerBox();
-			flex-direction: column;
-			&__latest-result {
-				color: $basicClr;
-				list-style-type: decimal;
-				padding-bottom: 5px;
-				&__winner {
-					font-weight: bolder;
-					color: $winningClr;
-				}
-			}
+			text-align: center;
+			width: 90%;
+			list-style: decimal;
+			margin: 0 auto;
 		}
 	}
+
 	&__buttons-container {
-		grid-column: 1;
-		grid-row: 2;
+		grid-row: 1;
+		padding: 5px;
 		@include centerBox();
 		&--btn {
 			width: 50%;
-			height: 80px;
-			border-radius: 5px;
+			height: 80%;
 			margin: 5px;
+			padding: 5px;
+			background-color: $backgroundClr;
+			border: 3px solid $winningClr;
+			border-radius: 5px;
+			color: $basicClr;
 			font-family: "Akaya Telivigala", cursive;
 			font-size: 30px;
-			border: 3px solid $winningClr;
-			background-color: $backgroundClr;
-			color: $basicClr;
 			&:hover {
 				background-color: $basicClr;
 				color: $backgroundClr;
@@ -81,20 +66,17 @@
 		}
 	}
 	&__board-container {
-		grid-column: 1;
-		grid-row: 1;
-		margin-bottom: 20px;
-		@include centerBox();
+		grid-row: 2;
 		&__board {
-			width: 500px;
-			height: 400px;
+			padding: 5px;
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: 1fr 1fr 1fr;
+			height: 400px;
 			.board--box {
-				border: 3px solid $secondaryClr;
 				@include centerBox();
-				font-size: 100px;
+				font-size: 75px;
+				border: 3px solid $secondaryClr;
 				&:first-child,
 				&:nth-child(2),
 				&:nth-child(3) {
@@ -117,175 +99,6 @@
 				}
 				&--hover {
 					opacity: 0.5;
-				}
-			}
-		}
-	}
-}
-
-@media (min-width: 351px) {
-	.game-container {
-		&__buttons-container {
-			&--btn {
-				width: 200px;
-			}
-		}
-	}
-}
-
-@media (max-height: 412px) {
-	.game-container {
-		width: 100%;
-		height: 100%;
-		grid-template-rows: 3fr 1fr 5fr;
-		&__board-container {
-			height: 100%;
-			margin-bottom: 30px;
-			&__board {
-				height: 90vh;
-				.board--box {
-					font-size: 65px;
-				}
-			}
-		}
-	}
-}
-
-@media (min-height: 520px) {
-	.game-container {
-		grid-template-rows: 1fr 6fr 5fr;
-		&__buttons-container {
-			grid-row: 1;
-		}
-		&__board-container {
-			grid-row: 2;
-		}
-	}
-}
-
-@media (min-width: 1024px) {
-	.game-container {
-		height: 600px;
-		margin: 20px;
-		border-radius: 50px;
-		background-color: $backgroundClr;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr 6fr;
-		padding: 20px;
-		&__results-container {
-			grid-column: 1;
-			grid-row: 2;
-			padding: 20px;
-			text-align: center;
-		}
-		&__current-result {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: repeat(3, 1fr);
-			&__heading {
-				grid-column-start: span 2;
-				color: $winningClr;
-				font-size: 40px;
-			}
-			&__Player1 {
-				grid-row: 2;
-				grid-column: span 2;
-				font-size: 25px;
-				margin: auto 0;
-				&__wins {
-					font-size: 35px;
-					color: $winningClr;
-				}
-			}
-			&__Player2 {
-				grid-row: 3;
-				grid-column: span 2;
-				font-size: 25px;
-				margin: auto 0;
-				&__wins {
-					font-size: 35px;
-					color: $winningClr;
-				}
-			}
-		}
-		&__latest-results {
-			margin-top: 10px;
-			color: $winningClr;
-			&__heading {
-				color: $winningClr;
-				font-size: 35px;
-			}
-			&__results {
-				font-size: 20px;
-				&__latest-result {
-					color: $basicClr;
-					list-style-type: decimal;
-					padding-bottom: 5px;
-					&__winner {
-						font-weight: bolder;
-						color: $winningClr;
-					}
-				}
-			}
-		}
-		&__buttons-container {
-			grid-column: 1 / span 2;
-			grid-row: 1;
-			@include centerBox();
-			&--btn {
-				width: 30%;
-				height: 40px;
-				border-radius: 5px;
-				margin: 5px;
-				font-family: "Akaya Telivigala", cursive;
-				font-size: 30px;
-				border: 3px solid $winningClr;
-				background-color: $backgroundClr;
-				color: $basicClr;
-				&:hover {
-					background-color: $basicClr;
-					color: $backgroundClr;
-				}
-			}
-		}
-		&__board-container {
-			grid-column: 2;
-			grid-row: 2;
-			@include centerBox();
-			&__board {
-				width: 500px;
-				height: 500px;
-				display: grid;
-				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: 1fr 1fr 1fr;
-				.board--box {
-					border: 3px solid $secondaryClr;
-					@include centerBox();
-					font-size: 100px;
-					&:first-child,
-					&:nth-child(2),
-					&:nth-child(3) {
-						border-top: none;
-					}
-					&:first-child,
-					&:nth-child(4),
-					&:nth-child(7) {
-						border-left: none;
-					}
-					&:nth-child(3),
-					&:nth-child(6),
-					&:nth-child(9) {
-						border-right: none;
-					}
-					&:nth-child(7),
-					&:nth-child(8),
-					&:nth-child(9) {
-						border-bottom: none;
-					}
-					&--hover {
-						opacity: 0.5;
-					}
 				}
 			}
 		}

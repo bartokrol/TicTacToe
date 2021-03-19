@@ -64,27 +64,4 @@
 .starting-page.inactive {
   visibility: hidden;
 }
-
-@media (min-width: 351px) {
-  .starting-page {
-    background-color: rgba(244, 209, 96, 0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .starting-page__window {
-    width: 350px;
-  }
-}
 /*# sourceMappingURL=starting-page.css.map */

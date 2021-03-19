@@ -65,90 +65,28 @@
   visibility: hidden;
 }
 
-@media (min-width: 351px) {
-  .starting-page {
-    background-color: rgba(244, 209, 96, 0.7);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .starting-page__window {
-    width: 350px;
-  }
-}
-
 .won {
   color: #28527a;
 }
 
 .game-container {
-  width: 100%;
-  height: 100%;
-  background-color: #fbeeac;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 100%;
-      grid-template-columns: 100%;
-  -ms-grid-rows: 6fr 1fr 5fr;
-      grid-template-rows: 6fr 1fr 5fr;
-  padding: 8px;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr 3fr 4fr;
+      grid-template-rows: 1fr 3fr 4fr;
+  grid-gap: 20px;
+  background-color: #fbeeac;
 }
 
 .game-container__results-container {
-  -ms-grid-column: 1;
-  grid-column: 1;
   -ms-grid-row: 3;
   grid-row: 3;
-  padding: 20px;
-  text-align: center;
 }
 
-.game-container__current-result__heading {
-  color: #28527a;
-  font-size: 40px;
-}
-
-.game-container__current-result__Player1 {
-  font-size: 25px;
-}
-
-.game-container__current-result__Player1__wins {
-  font-size: 35px;
-  color: #28527a;
-}
-
-.game-container__current-result__Player2 {
-  font-size: 25px;
-}
-
-.game-container__current-result__Player2__wins {
-  font-size: 35px;
-  color: #28527a;
-}
-
-.game-container__latest-results {
-  margin-top: 10px;
-  color: #28527a;
-}
-
-.game-container__latest-results__heading {
-  color: #28527a;
-  font-size: 35px;
-}
-
-.game-container__latest-results__results {
-  font-size: 20px;
+.game-container__current-result {
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -164,22 +102,37 @@
           flex-direction: column;
 }
 
-.game-container__latest-results__results__latest-result {
-  color: #8ac4d0;
-  list-style-type: decimal;
-  padding-bottom: 5px;
-}
-
-.game-container__latest-results__results__latest-result__winner {
-  font-weight: bolder;
+.game-container__current-result__heading {
   color: #28527a;
 }
 
+.game-container__current-result__Player1__wins {
+  color: #28527a;
+}
+
+.game-container__current-result__Player2__wins {
+  color: #28527a;
+}
+
+.game-container__latest-results {
+  text-align: center;
+}
+
+.game-container__latest-results__heading {
+  color: #28527a;
+}
+
+.game-container__latest-results__results {
+  text-align: center;
+  width: 90%;
+  list-style: decimal;
+  margin: 0 auto;
+}
+
 .game-container__buttons-container {
-  -ms-grid-column: 1;
-  grid-column: 1;
-  -ms-grid-row: 2;
-  grid-row: 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -193,14 +146,15 @@
 
 .game-container__buttons-container--btn {
   width: 50%;
-  height: 80px;
-  border-radius: 5px;
+  height: 80%;
   margin: 5px;
+  padding: 5px;
+  background-color: #fbeeac;
+  border: 3px solid #28527a;
+  border-radius: 5px;
+  color: #8ac4d0;
   font-family: "Akaya Telivigala", cursive;
   font-size: 30px;
-  border: 3px solid #28527a;
-  background-color: #fbeeac;
-  color: #8ac4d0;
 }
 
 .game-container__buttons-container--btn:hover {
@@ -209,35 +163,22 @@
 }
 
 .game-container__board-container {
-  -ms-grid-column: 1;
-  grid-column: 1;
-  -ms-grid-row: 1;
-  grid-row: 1;
-  margin-bottom: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-grid-row: 2;
+  grid-row: 2;
 }
 
 .game-container__board-container__board {
-  width: 500px;
-  height: 400px;
+  padding: 5px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
   -ms-grid-rows: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+  height: 400px;
 }
 
 .game-container__board-container__board .board--box {
-  border: 3px solid #f4d160;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -247,7 +188,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 100px;
+  font-size: 75px;
+  border: 3px solid #f4d160;
 }
 
 .game-container__board-container__board .board--box:first-child, .game-container__board-container__board .board--box:nth-child(2), .game-container__board-container__board .board--box:nth-child(3) {
@@ -268,210 +210,6 @@
 
 .game-container__board-container__board .board--box--hover {
   opacity: 0.5;
-}
-
-@media (min-width: 351px) {
-  .game-container__buttons-container--btn {
-    width: 200px;
-  }
-}
-
-@media (max-height: 412px) {
-  .game-container {
-    width: 100%;
-    height: 100%;
-    -ms-grid-rows: 3fr 1fr 5fr;
-        grid-template-rows: 3fr 1fr 5fr;
-  }
-  .game-container__board-container {
-    height: 100%;
-    margin-bottom: 30px;
-  }
-  .game-container__board-container__board {
-    height: 90vh;
-  }
-  .game-container__board-container__board .board--box {
-    font-size: 65px;
-  }
-}
-
-@media (min-height: 520px) {
-  .game-container {
-    -ms-grid-rows: 1fr 6fr 5fr;
-        grid-template-rows: 1fr 6fr 5fr;
-  }
-  .game-container__buttons-container {
-    -ms-grid-row: 1;
-    grid-row: 1;
-  }
-  .game-container__board-container {
-    -ms-grid-row: 2;
-    grid-row: 2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .game-container {
-    height: 600px;
-    margin: 20px;
-    border-radius: 50px;
-    background-color: #fbeeac;
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: 1fr 6fr;
-        grid-template-rows: 1fr 6fr;
-    padding: 20px;
-  }
-  .game-container__results-container {
-    -ms-grid-column: 1;
-    grid-column: 1;
-    -ms-grid-row: 2;
-    grid-row: 2;
-    padding: 20px;
-    text-align: center;
-  }
-  .game-container__current-result {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: (1fr)[2];
-        grid-template-columns: repeat(2, 1fr);
-    -ms-grid-rows: (1fr)[3];
-        grid-template-rows: repeat(3, 1fr);
-  }
-  .game-container__current-result__heading {
-    -ms-grid-column: span 2;
-        grid-column-start: span 2;
-    color: #28527a;
-    font-size: 40px;
-  }
-  .game-container__current-result__Player1 {
-    -ms-grid-row: 2;
-    grid-row: 2;
-    grid-column: span 2;
-    font-size: 25px;
-    margin: auto 0;
-  }
-  .game-container__current-result__Player1__wins {
-    font-size: 35px;
-    color: #28527a;
-  }
-  .game-container__current-result__Player2 {
-    -ms-grid-row: 3;
-    grid-row: 3;
-    grid-column: span 2;
-    font-size: 25px;
-    margin: auto 0;
-  }
-  .game-container__current-result__Player2__wins {
-    font-size: 35px;
-    color: #28527a;
-  }
-  .game-container__latest-results {
-    margin-top: 10px;
-    color: #28527a;
-  }
-  .game-container__latest-results__heading {
-    color: #28527a;
-    font-size: 35px;
-  }
-  .game-container__latest-results__results {
-    font-size: 20px;
-  }
-  .game-container__latest-results__results__latest-result {
-    color: #8ac4d0;
-    list-style-type: decimal;
-    padding-bottom: 5px;
-  }
-  .game-container__latest-results__results__latest-result__winner {
-    font-weight: bolder;
-    color: #28527a;
-  }
-  .game-container__buttons-container {
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 2;
-    grid-column: 1 / span 2;
-    -ms-grid-row: 1;
-    grid-row: 1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .game-container__buttons-container--btn {
-    width: 30%;
-    height: 40px;
-    border-radius: 5px;
-    margin: 5px;
-    font-family: "Akaya Telivigala", cursive;
-    font-size: 30px;
-    border: 3px solid #28527a;
-    background-color: #fbeeac;
-    color: #8ac4d0;
-  }
-  .game-container__buttons-container--btn:hover {
-    background-color: #8ac4d0;
-    color: #fbeeac;
-  }
-  .game-container__board-container {
-    -ms-grid-column: 2;
-    grid-column: 2;
-    -ms-grid-row: 2;
-    grid-row: 2;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .game-container__board-container__board {
-    width: 500px;
-    height: 500px;
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr 1fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
-    -ms-grid-rows: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-  }
-  .game-container__board-container__board .board--box {
-    border: 3px solid #f4d160;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    font-size: 100px;
-  }
-  .game-container__board-container__board .board--box:first-child, .game-container__board-container__board .board--box:nth-child(2), .game-container__board-container__board .board--box:nth-child(3) {
-    border-top: none;
-  }
-  .game-container__board-container__board .board--box:first-child, .game-container__board-container__board .board--box:nth-child(4), .game-container__board-container__board .board--box:nth-child(7) {
-    border-left: none;
-  }
-  .game-container__board-container__board .board--box:nth-child(3), .game-container__board-container__board .board--box:nth-child(6), .game-container__board-container__board .board--box:nth-child(9) {
-    border-right: none;
-  }
-  .game-container__board-container__board .board--box:nth-child(7), .game-container__board-container__board .board--box:nth-child(8), .game-container__board-container__board .board--box:nth-child(9) {
-    border-bottom: none;
-  }
-  .game-container__board-container__board .board--box--hover {
-    opacity: 0.5;
-  }
 }
 
 .winner-annoucement-container {
@@ -551,17 +289,7 @@
 }
 
 body {
-  height: 100vh;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  color: black;
   color: #8ac4d0;
   font-family: "Akaya Telivigala", cursive;
   background-color: #8ac4d0;
