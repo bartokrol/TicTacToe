@@ -7,7 +7,7 @@
 .game-container {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 3fr 4fr;
+	grid-template-rows: 1fr 3fr 3fr;
 	grid-gap: 20px;
 	background-color: $backgroundClr;
 	&__results-container {
@@ -73,33 +73,209 @@
 			grid-template-columns: 1fr 1fr 1fr;
 			grid-template-rows: 1fr 1fr 1fr;
 			height: 400px;
-			.board--box {
-				@include centerBox();
+		}
+		&__box {
+			@include centerBox();
+			font-size: 75px;
+			border: 3px solid $boxClr;
+			&:first-child,
+			&:nth-child(2),
+			&:nth-child(3) {
+				border-top: none;
+			}
+			&:first-child,
+			&:nth-child(4),
+			&:nth-child(7) {
+				border-left: none;
+			}
+			&:nth-child(3),
+			&:nth-child(6),
+			&:nth-child(9) {
+				border-right: none;
+			}
+			&:nth-child(7),
+			&:nth-child(8),
+			&:nth-child(9) {
+				border-bottom: none;
+			}
+			&--hover {
+				opacity: 0.5;
+			}
+		}
+	}
+}
+
+@media (orientation: landscape) {
+	.game-container {
+		grid-template-rows: 100vh 1fr 3fr;
+		&__buttons-container {
+			grid-row: 2;
+			@include centerBox();
+			&--btn {
+				width: 200px;
+			}
+		}
+		&__board-container {
+			grid-row: 1;
+			&__board {
+				height: 100%;
+			}
+			&__box {
+				font-size: 60px;
+			}
+		}
+	}
+}
+
+@media (orientation: landscape) and (min-height: 360px) {
+	.game-container {
+		&__board-container {
+			&__box {
 				font-size: 75px;
-				border: 3px solid $secondaryClr;
-				&:first-child,
-				&:nth-child(2),
-				&:nth-child(3) {
-					border-top: none;
+			}
+		}
+	}
+}
+
+@media (orientation: landscape) and (min-height: 400px) {
+	.game-container {
+		grid-template-rows: 80vh 1fr 3fr;
+		&__buttons-container {
+			grid-row: 2;
+			@include centerBox();
+			&--btn {
+				width: 200px;
+			}
+		}
+		&__board-container {
+			grid-row: 1;
+			width: 500px;
+			margin: 0 auto;
+			&__board {
+				height: 100%;
+			}
+			&__box {
+				font-size: 75px;
+			}
+		}
+	}
+}
+
+@media (orientation: landscape) and (min-width: 650px) {
+	.game-container {
+		&__board-container {
+			width: 500px;
+			margin: 0 auto;
+		}
+	}
+}
+
+@media (orientation: portrait) and (min-width: 450px) {
+	.game-container {
+		width: 450px;
+		margin: auto;
+		&__board-container {
+			width: 400px;
+			margin: 0 auto;
+		}
+	}
+}
+
+@media (orientation: landscape) and (min-width: 750px) {
+	.game-container {
+		width: 450px;
+		margin: auto;
+		&__board-container {
+			width: 400px;
+			margin: 0 auto;
+		}
+	}
+}
+
+@media (orientation: landscape) and (min-width: 1000px) {
+	.game-container {
+		height: 600px;
+		width: 1000px;
+		border-radius: 50px;
+		display: grid;
+		grid-template-columns: 40% 60%;
+		grid-template-rows: 1fr 6fr;
+		background-color: $backgroundClr;
+		&__results-container {
+			grid-column: 1;
+			grid-row: 2;
+		}
+		&__current-result {
+			padding: 5px;
+			@include centerBox();
+			flex-direction: column;
+			&__heading {
+				color: $winningClr;
+			}
+			&__Player1 {
+				&__wins {
+					color: $winningClr;
 				}
-				&:first-child,
-				&:nth-child(4),
-				&:nth-child(7) {
-					border-left: none;
+			}
+			&__Player2 {
+				&__wins {
+					color: $winningClr;
 				}
-				&:nth-child(3),
-				&:nth-child(6),
-				&:nth-child(9) {
-					border-right: none;
+			}
+		}
+		&__latest-results {
+			text-align: center;
+			&__heading {
+				color: $winningClr;
+			}
+			&__results {
+				text-align: center;
+				width: 90%;
+				list-style: decimal;
+				margin: 0 auto;
+			}
+		}
+
+		&__buttons-container {
+			grid-column: 1 / span 2;
+			grid-row: 1;
+			padding: 5px;
+			@include centerBox();
+			&--btn {
+				width: 150px;
+				height: 80%;
+				margin: 5px;
+				padding: 5px;
+				background-color: $backgroundClr;
+				border: 3px solid $winningClr;
+				border-radius: 5px;
+				color: $basicClr;
+				font-family: "Akaya Telivigala", cursive;
+				font-size: 30px;
+				&:hover {
+					background-color: $basicClr;
+					color: $backgroundClr;
 				}
-				&:nth-child(7),
-				&:nth-child(8),
-				&:nth-child(9) {
-					border-bottom: none;
-				}
-				&--hover {
-					opacity: 0.5;
-				}
+			}
+		}
+		&__board-container {
+			grid-column: 2;
+			grid-row: 2;
+			width: 100%;
+			height: 100%;
+			display: contents;
+			&__board {
+				padding: 5px;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr 1fr 1fr;
+				height: 500px;
+				width: 500px;
+				margin: 0 auto;
+			}
+			&__box {
+				@include centerBox();
+				font-size: 100px;
 			}
 		}
 	}

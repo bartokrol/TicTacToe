@@ -10,8 +10,27 @@
 }
 
 body {
-	color: black;
 	color: $basicClr;
 	font-family: "Akaya Telivigala", cursive;
 	background-color: $basicClr;
+}
+
+@media (orientation: portrait) and (min-width: 450px) {
+	body {
+		@include centerBox();
+	}
+}
+
+@media (orientation: portrait) and (min-height: 830px) {
+	body {
+		height: 100vh;
+		@include centerBox();
+	}
+}
+
+@media (orientation: landscape) and (min-width: 750px) {
+	body {
+		height: 100vh;
+		@include centerBox();
+	}
 }

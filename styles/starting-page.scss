@@ -1,11 +1,10 @@
 @import "./variables.scss";
 
 .starting-page {
-	background-color: $startBgrClr;
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 	@include centerBox();
 
@@ -50,6 +49,22 @@
 }
 
 // @media (min-width: 351px) {
+// 	.starting-page {
+// 		background-color: $startBgrClr;
+// 		position: absolute;
+// 		top: 0;
+// 		left: 0;
+// 		width: 100%;
+// 		height: 100%;
+// 		@include centerBox();
+
+// 		&__window {
+// 			width: 350px;
+// 		}
+// 	}
+// }
+
+// @media (orientation: landscape) {
 // 	.starting-page {
 // 		background-color: $startBgrClr;
 // 		position: absolute;

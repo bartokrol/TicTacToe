@@ -60,10 +60,4 @@
   -webkit-transition: 1s all ease;
   transition: 1s all ease;
 }
-
-@media (min-width: 351px) {
-  .winner-annoucement-container {
-    width: 350px;
-  }
-}
 /*# sourceMappingURL=winner-annoucement.css.map */
