@@ -11,7 +11,7 @@ const choosePlayer = (e) => {
 		{
 			name: "Player1",
 			mark: e.target.value,
-			active: true,
+			active: e.target.value === "X" ? true : false,
 			arr: [],
 			wins: 0,
 			winner: false,
@@ -19,7 +19,7 @@ const choosePlayer = (e) => {
 		{
 			name: "Player2",
 			mark: e.target.value === "X" ? "O" : "X",
-			active: false,
+			active: e.target.value === "O" ? true : false,
 			arr: [],
 			wins: 0,
 			winner: false,

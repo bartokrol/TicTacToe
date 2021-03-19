@@ -5,11 +5,14 @@ const boxes = Array.from(
 );
 const markChoice = document.querySelector(".starting-page");
 const buttons = [...document.querySelectorAll(".starting-page--btn")];
-const resultPlayer1 = document.querySelector(
-	".game-container__current-result__Player1__wins"
+const resultWins = document.querySelector(
+	".game-container__current-result__wins__number"
 );
-const resultPlayer2 = document.querySelector(
-	".game-container__current-result__Player2__wins"
+const resultDraws = document.querySelector(
+	".game-container__current-result__draws__number"
+);
+const resultDefeats = document.querySelector(
+	".game-container__current-result__defeats__number"
 );
 const latest = document.querySelector(
 	".game-container__latest-results__results"
@@ -35,8 +38,9 @@ export {
 	boxes,
 	markChoice,
 	buttons,
-	resultPlayer1,
-	resultPlayer2,
+	resultWins,
+	resultDraws,
+	resultDefeats,
 	latest,
 	resetBtn,
 	newGameBtn,

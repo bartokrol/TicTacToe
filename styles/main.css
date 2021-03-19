@@ -120,11 +120,15 @@
   color: #28527a;
 }
 
-.game-container__current-result__Player1__wins {
+.game-container__current-result__wins__number {
   color: #28527a;
 }
 
-.game-container__current-result__Player2__wins {
+.game-container__current-result__draws__number {
+  color: #28527a;
+}
+
+.game-container__current-result__defeats__number {
   color: #28527a;
 }
 

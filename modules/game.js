@@ -1,10 +1,4 @@
-import {
-	boxes,
-	resetBtn,
-	newGameBtn,
-	endgameMessage,
-	bodyOverflow,
-} from "./dom-elems.js";
+import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { Click } from "./click.js";
 
@@ -39,6 +33,7 @@ class Game {
 
 	findActivePlayer = () => {
 		this.activePlayer = this.players.filter((player) => player.active);
+		console.log(this.activePlayer);
 	};
 
 	addEventListenersToEachBox = () => {

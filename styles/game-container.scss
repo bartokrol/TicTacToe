@@ -20,13 +20,18 @@
 		&__heading {
 			color: $winningClr;
 		}
-		&__Player1 {
-			&__wins {
+		&__wins {
+			&__number {
 				color: $winningClr;
 			}
 		}
-		&__Player2 {
-			&__wins {
+		&__draws {
+			&__number {
+				color: $winningClr;
+			}
+		}
+		&__defeats {
+			&__number {
 				color: $winningClr;
 			}
 		}

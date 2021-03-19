@@ -1,4 +1,4 @@
-import { latest, resultPlayer1 } from "./dom-elems.js";
+import { latest } from "./dom-elems.js";
 
 class LatestResults {
 	constructor(player, latestResults) {

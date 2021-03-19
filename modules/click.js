@@ -34,6 +34,12 @@ class Click {
 		this.addBoxToBoard(e);
 		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
 		this.checkPlayerArrLength(e);
+		const emptyBoxes = boxes.filter((box) => box.textContent === "");
+		if (emptyBoxes.length % 2 === 0) {
+			emptyBoxes[
+				Math.floor(Math.random() * (emptyBoxes.length + 1))
+			].textContent = "O";
+		}
 	};
 
 	addBoxToBoard = (e) => {

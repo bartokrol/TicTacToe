@@ -1,8 +1,9 @@
 import {
 	boxes,
 	markChoice,
-	resultPlayer1,
-	resultPlayer2,
+	resultWins,
+	resultDraws,
+	resultDefeats,
 	latest,
 	newGameBtn,
 } from "./dom-elems.js";
@@ -32,8 +33,10 @@ const resetBoxes = () => {
 };
 
 const resetResults = (player1, player2) => {
-	resultPlayer1.textContent = player1.wins;
-	resultPlayer2.textContent = player2.wins;
+	console.log(resultWins, resultDraws, resultDefeats);
+	resultWins.textContent = player1.wins;
+	resultDraws.textContent = player2.wins;
+	resultDefeats.textContent = player2.wins;
 	latest.innerHTML = "";
 };
 
