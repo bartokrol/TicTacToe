@@ -8,18 +8,18 @@ import {
 	newGameBtn,
 } from "./dom-elems.js";
 
-function resetPageAfterResetBtn(player1, player2, players, board) {
+function resetPageAfterResetBtn(player, computer, players, board) {
 	resetBoxes();
-	resetPlayersWins(player1, player2);
+	resetPlayersWins(player, computer);
 	resetPlayersArr(players);
-	resetResults(player1, player2);
+	resetResults(player, computer);
 	resetBoard(board);
 	markChoice.classList.remove("inactive");
 }
 
-function resetPageAfterNewGameBtn(player1, player2, players, board) {
+function resetPageAfterNewGameBtn(player, computer, players, board) {
 	resetBoxes();
-	resetPlayers(player1, player2);
+	resetPlayers(player, computer);
 	resetPlayersArr(players);
 	resetBoard(board);
 	newGameBtn.disabled = true;
@@ -32,25 +32,25 @@ const resetBoxes = () => {
 	});
 };
 
-const resetResults = (player1, player2) => {
+const resetResults = (player, computer) => {
 	console.log(resultWins, resultDraws, resultDefeats);
-	resultWins.textContent = player1.wins;
-	resultDraws.textContent = player2.wins;
-	resultDefeats.textContent = player2.wins;
+	resultWins.textContent = player.wins;
+	resultDraws.textContent = computer.wins;
+	resultDefeats.textContent = computer.wins;
 	latest.innerHTML = "";
 };
 
-const resetPlayersWins = (player1, player2) => {
-	player1.wins = 0;
-	player2.wins = 0;
-	resetPlayers(player1, player2);
+const resetPlayersWins = (player, computer) => {
+	player.wins = 0;
+	computer.wins = 0;
+	resetPlayers(player, computer);
 };
 
-const resetPlayers = (player1, player2) => {
-	player1.active = true;
-	player2.active = false;
-	player1.winner = false;
-	player2.winner = false;
+const resetPlayers = (player, computer) => {
+	player.active = true;
+	computer.active = false;
+	player.winner = false;
+	computer.winner = false;
 };
 
 const resetBoard = (board) => {

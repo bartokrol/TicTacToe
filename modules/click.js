@@ -6,55 +6,41 @@ import {
 	winner,
 	endgameMessage,
 } from "./dom-elems.js";
+import { Game } from "./game.js";
 import { LatestResults } from "./latest-results.js";
 
-class Click {
+class Click extends Game {
 	constructor(
 		e,
 		board,
 		activePlayer,
-		player1,
-		player2,
+		player,
+		computer,
 		players,
 		winningCombinations,
 		latestResults
 	) {
+		super();
 		(this.e = e),
 			(this.board = board),
 			(this.activePlayer = activePlayer),
-			(this.player1 = player1),
-			(this.player2 = player2),
+			(this.player = player),
+			(this.computer = computer),
 			(this.players = players),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
 			this.click(this.e);
 	}
 	click = (e) => {
-		e.target.classList.remove("board--box--hover");
-		this.addBoxToBoard(e);
-		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
-		this.checkPlayerArrLength(e);
-		const emptyBoxes = boxes.filter((box) => box.textContent === "");
-		if (emptyBoxes.length % 2 === 0) {
-			emptyBoxes[
-				Math.floor(Math.random() * (emptyBoxes.length + 1))
-			].textContent = "O";
-		}
-	};
-
-	addBoxToBoard = (e) => {
-		const boxRow = e.target.dataset.row;
-		const boxColumn = e.target.dataset.column;
-		this.board[boxRow][boxColumn] = e.target.id;
-	};
-
-	pushBoxIntoPlayerArr = (e, player) => {
-		player.arr.push(Number(e.target.id));
-		e.target.textContent = `${player.mark}`;
+		const box = e.target;
+		box.classList.remove("board--box--hover");
+		this.addBoxToBoard(box);
+		this.pushBoxIntoPlayerArr(box, this.activePlayer[0]);
+		this.checkPlayerArrLength(box);
 	};
 
 	checkPlayerArrLength = (e) => {
-		if (this.player1.arr.length > 2 || this.player2.arr.length > 2) {
+		if (this.player.arr.length > 2 || this.computer.arr.length > 2) {
 			this.checkForWinner(e);
 		}
 	};
@@ -99,10 +85,10 @@ class Click {
 
 	checkDraw = () => {
 		if (
-			this.player1.arr.length === 5 &&
-			this.player2.arr.length === 4 &&
-			this.player1.winner === false &&
-			this.player2.winner === false
+			this.player.arr.length === 5 &&
+			this.computer.arr.length === 4 &&
+			this.player.winner === false &&
+			this.computer.winner === false
 		) {
 			const results = new LatestResults("", this.latestResults);
 			this.showDrawMessage();
