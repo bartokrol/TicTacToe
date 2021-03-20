@@ -1,15 +1,21 @@
-import {
-	boxes,
-	resetBtn,
-	newGameBtn,
-	winnerAnnoucement,
-	winner,
-	endgameMessage,
-} from "./dom-elems.js";
-import { Game } from "./game.js";
-import { LatestResults } from "./latest-results.js";
+// import {
+// 	boxes,
+// 	resetBtn,
+// 	newGameBtn,
+// 	winnerAnnoucement,
+// 	winner,
+// 	bodyOverflow,
+// 	endgameMessage,
+// 	resultWins,
+// 	resultDraws,
+// 	resultDefeats,
+// } from "./dom-elems.js";
+// import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
+// import { Events } from "./event-listeners.js";
+import { BoxClick } from "./box-click.js";
+// import { ComputerClick } from "./computer-click.js";
 
-class Click extends Game {
+class Click extends BoxClick {
 	constructor(
 		e,
 		board,

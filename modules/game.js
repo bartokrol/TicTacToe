@@ -1,3 +1,4 @@
+import { Events } from "./event-listeners.js";
 import {
 	boxes,
 	resetBtn,
@@ -11,8 +12,7 @@ import {
 	resultDefeats,
 } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { Click } from "./player-click.js";
-import { Events } from "./event-listeners.js";
+import { BoxClick } from "./box-click.js";
 
 class Game extends Events {
 	constructor(player, computer) {
@@ -44,24 +44,38 @@ class Game extends Events {
 
 	startNewGame = () => {
 		this.findActivePlayer();
+		this.addEventListenersToEachBox();
 	};
 
 	findActivePlayer = () => {
 		this.activePlayer = this.players.filter((player) => player.active);
 		setTimeout(() => {
-			this.addEventListenersToEachBox();
-			this.findComputerMove();
+			// this.findComputerMove();
 		}, 1000);
+		console.log(this.activePlayer);
 	};
 
 	findComputerMove = () => {
+		console.log("click");
 		if (this.activePlayer.includes(this.computer)) {
-			this.setComputerMove();
+			const boxClick = new BoxClick(
+				this.emptyBoxes,
+				this.player,
+				this.computer,
+				this.players,
+				this.board,
+				this.activePlayer
+			);
+			// this.setComputerMove();
 		}
 	};
 
 	setComputerMove = () => {
-		if (this.emptyBoxes.length > 0) {
+		if (
+			this.emptyBoxes.length > 0 &&
+			!this.player.wins &&
+			!this.computer.wins
+		) {
 			const randomBox = Math.floor(
 				Math.random() * this.emptyBoxes.length
 			);
@@ -77,7 +91,6 @@ class Game extends Events {
 	};
 
 	filterEmptyBoxes = () => {
-		console.log(this.emptyBoxes);
 		this.emptyBoxes = this.emptyBoxes.filter(
 			(box) => box.textContent == ""
 		);
@@ -221,16 +234,16 @@ class Game extends Events {
 
 	clickBox = (e) => {
 		e.target.classList.remove("board--box--hover");
-		const click = new Click(
-			e,
-			this.board,
-			this.activePlayer,
-			this.player,
-			this.computer,
-			this.players,
-			this.winningCombinations,
-			this.latestResults
-		);
+		// const click = new Click(
+		// 	e,
+		// 	this.board,
+		// 	this.activePlayer,
+		// 	this.player,
+		// 	this.computer,
+		// 	this.players,
+		// 	this.winningCombinations,
+		// 	this.latestResults
+		// );
 		this.removeEventListeners(e.target);
 		if (this.player.winner || this.computer.winner) {
 			this.removeListenersForEachBox();
@@ -238,7 +251,6 @@ class Game extends Events {
 		this.changeActivePlayer();
 		this.filterEmptyBoxes();
 		this.findComputerMove();
-		console.log("click");
 	};
 
 	changeActivePlayer = () => {
