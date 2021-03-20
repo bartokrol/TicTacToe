@@ -77,6 +77,7 @@ class Game extends Events {
 	};
 
 	filterEmptyBoxes = () => {
+		console.log(this.emptyBoxes);
 		this.emptyBoxes = this.emptyBoxes.filter(
 			(box) => box.textContent == ""
 		);
@@ -105,7 +106,6 @@ class Game extends Events {
 	};
 
 	findWinningCombination = (player) => {
-		console.log(player);
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.setWinner(player);
@@ -203,6 +203,7 @@ class Game extends Events {
 				this.board,
 				this.activePlayer
 			);
+			this.emptyBoxes = boxes;
 			this.findActivePlayer();
 			this.addEventListenersToEachBox();
 		});
@@ -237,6 +238,7 @@ class Game extends Events {
 		this.changeActivePlayer();
 		this.filterEmptyBoxes();
 		this.findComputerMove();
+		console.log("click");
 	};
 
 	changeActivePlayer = () => {
