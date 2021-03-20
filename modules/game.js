@@ -1,6 +1,17 @@
-import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
+import {
+	boxes,
+	resetBtn,
+	newGameBtn,
+	winnerAnnoucement,
+	winner,
+	bodyOverflow,
+	endgameMessage,
+	resultWins,
+	resultDraws,
+	resultDefeats,
+} from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { Click } from "./click.js";
+import { Click } from "./player-click.js";
 import { Events } from "./event-listeners.js";
 
 class Game extends Events {
@@ -10,6 +21,7 @@ class Game extends Events {
 			(this.computer = computer),
 			(this.players = [this.player, this.computer]),
 			(this.activePlayer = null),
+			(this.draws = 0),
 			(this.isGameEnd = false),
 			(this.board = [
 				[null, null, null],
@@ -49,14 +61,19 @@ class Game extends Events {
 	};
 
 	setComputerMove = () => {
-		const randomBox = Math.floor(Math.random() * this.emptyBoxes.length);
-		const box = this.emptyBoxes[randomBox];
-		this.removeEventListeners(box);
-		box.textContent = this.computer.mark;
-		this.addBoxToBoard(box);
-		this.pushBoxIntoPlayerArr(box, this.activePlayer[0]);
-		this.changeActivePlayer();
-		this.filterEmptyBoxes();
+		if (this.emptyBoxes.length > 0) {
+			const randomBox = Math.floor(
+				Math.random() * this.emptyBoxes.length
+			);
+			const box = this.emptyBoxes[randomBox];
+			this.removeEventListeners(box);
+			box.textContent = this.computer.mark;
+			this.addBoxToBoard(box);
+			this.pushBoxIntoActivePlayerArr(box, this.activePlayer[0]);
+			this.filterEmptyBoxes();
+			this.checkPlayerArrLength();
+			this.changeActivePlayer();
+		}
 	};
 
 	filterEmptyBoxes = () => {
@@ -71,9 +88,104 @@ class Game extends Events {
 		this.board[boxRow][boxColumn] = box.id;
 	};
 
-	pushBoxIntoPlayerArr = (box, player) => {
+	pushBoxIntoActivePlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
 		box.textContent = `${player.mark}`;
+	};
+
+	checkPlayerArrLength = () => {
+		if (this.player.arr.length > 2 || this.computer.arr.length > 2) {
+			this.checkForWinner();
+		}
+	};
+
+	checkForWinner = () => {
+		const player = this.activePlayer[0];
+		this.findWinningCombination(player);
+	};
+
+	findWinningCombination = (player) => {
+		console.log(player);
+		for (let combination of this.winningCombinations) {
+			if (combination.every((el) => player.arr.includes(el))) {
+				this.setWinner(player);
+				this.showWinningBoxes(combination);
+			}
+		}
+		this.checkDraw();
+	};
+
+	setWinner = (player) => {
+		this.showWinningMessage(player);
+		this.addWins(player);
+	};
+
+	showWinningBoxes = (combination) => {
+		const winningArr = combination;
+
+		boxes.forEach(function (box) {
+			if (winningArr.includes(Number(box.id))) {
+				box.classList.add("won");
+			}
+		});
+	};
+
+	unlockNewGameBtn = () => {
+		this.isGameEnd = true;
+
+		if (this.isGameEnd) {
+			newGameBtn.disabled = false;
+		}
+	};
+
+	checkDraw = () => {
+		if (
+			this.player.arr.length === 5 &&
+			this.computer.arr.length === 4 &&
+			this.player.winner === false &&
+			this.computer.winner === false
+		) {
+			this.draws++;
+			console.log(this.draws);
+			resultDraws.textContent = this.draws;
+			// const results = new LatestResults("", this.latestResults);
+			resultDraws.textContent = this.showDrawMessage();
+		}
+	};
+
+	addWins = (player) => {
+		player.winner = true;
+		player.wins++;
+		if (player.name == "Player") {
+			resultWins.textContent = player.wins;
+		} else if (player.name == "Computer") {
+			resultDefeats.textContent = player.wins;
+		}
+
+		// const results = new LatestResults(player, this.latestResults);
+	};
+
+	showDrawMessage = () => {
+		endgameMessage.textContent = "";
+		this.showAndHideWinnerBox();
+		winner.textContent = "It's a draw...";
+	};
+
+	showWinningMessage = (player) => {
+		endgameMessage.textContent = "Winner!";
+		this.showAndHideWinnerBox();
+		winner.textContent = `${player.name} ( ${player.mark} )`;
+	};
+
+	showAndHideWinnerBox = () => {
+		resetBtn.disabled = true;
+		winnerAnnoucement.classList.remove("hidden");
+		setTimeout(() => {
+			this.unlockNewGameBtn();
+			resetBtn.disabled = false;
+			winnerAnnoucement.classList.add("hidden");
+			newGameBtn.classList.remove("disabled");
+		}, 3000);
 	};
 
 	addEventListenersToEachBox = () => {
@@ -92,7 +204,7 @@ class Game extends Events {
 				this.activePlayer
 			);
 			this.findActivePlayer();
-			setTimeout(() => this.addEventListenersToEachBox(), 1500);
+			this.addEventListenersToEachBox();
 		});
 		resetBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");

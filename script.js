@@ -4,7 +4,7 @@ import {
 	newGameBtn,
 	bodyOverflow,
 } from "./modules/dom-elems.js";
-import { Click } from "./modules/click.js";
+import { Click } from "./modules/player-click.js";
 import { Game } from "./modules/game.js";
 const choosePlayer = (e) => {
 	const game = new Game(

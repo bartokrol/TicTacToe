@@ -33,7 +33,6 @@ const resetBoxes = () => {
 };
 
 const resetResults = (player, computer) => {
-	console.log(resultWins, resultDraws, resultDefeats);
 	resultWins.textContent = player.wins;
 	resultDraws.textContent = computer.wins;
 	resultDefeats.textContent = computer.wins;
@@ -47,8 +46,8 @@ const resetPlayersWins = (player, computer) => {
 };
 
 const resetPlayers = (player, computer) => {
-	player.active = true;
-	computer.active = false;
+	player.active = player.mark === "X" ? true : false;
+	computer.active = computer.mark === "X" ? true : false;
 	player.winner = false;
 	computer.winner = false;
 };
