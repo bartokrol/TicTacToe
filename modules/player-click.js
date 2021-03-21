@@ -12,10 +12,10 @@
 // } from "./dom-elems.js";
 // import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 // import { Events } from "./event-listeners.js";
-import { BoxClick } from "./box-click.js";
+import { Click } from "./click.js";
 // import { ComputerClick } from "./computer-click.js";
 
-class Click extends BoxClick {
+class PlayerClick extends Click {
 	constructor(
 		e,
 		board,
@@ -47,4 +47,4 @@ class Click extends BoxClick {
 	};
 }
 
-export { Click };
+export { PlayerClick };

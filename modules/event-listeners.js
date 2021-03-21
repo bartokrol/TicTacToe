@@ -1,6 +1,6 @@
 // import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 // import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-// import { Click } from "./player-click.js";
+// import { PlayerClick } from "./player-click.js";
 // import { BoxClick } from "./box-click.js";
 
 class Events {

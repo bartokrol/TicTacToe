@@ -10,11 +10,11 @@ import {
 	resultDraws,
 	resultDefeats,
 } from "./dom-elems.js";
+import { ComputerClick } from "./computer-click.js";
+import { PlayerClick } from "./player-click.js";
 import { Game } from "./game.js";
-// import { ComputerClick } from "./computer-click.js";
-// import { Click } from "./player-click.js";
 
-class BoxClick extends Game {
+class Click extends Game {
 	constructor() {
 		super();
 		this.showMessage();
@@ -22,8 +22,8 @@ class BoxClick extends Game {
 
 	showMessage = () => {
 		console.log("działa");
-		// const computerClick = new ComputerClick();
-		// const playerClick = new Click();
+		const computerClick = new ComputerClick();
+		const playerClick = new PlayerClick();
 	};
 	filterEmptyBoxes = () => {
 		this.emptyBoxes = this.emptyBoxes.filter(
@@ -144,4 +144,4 @@ class BoxClick extends Game {
 	};
 }
 
-export { BoxClick };
+export { Click };

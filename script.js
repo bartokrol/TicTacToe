@@ -5,8 +5,8 @@ import {
 	bodyOverflow,
 } from "./modules/dom-elems.js";
 import { ComputerClick } from "./modules/computer-click.js";
-import { Click } from "./modules/player-click.js";
-import { BoxClick } from "./modules/box-click.js";
+import { PlayerClick } from "./modules/player-click.js";
+import { Click } from "./modules/click.js";
 import { Events } from "./modules/event-listeners.js";
 import { Game } from "./modules/game.js";
 const choosePlayer = (e) => {

@@ -1,4 +1,5 @@
 import { Events } from "./event-listeners.js";
+import { Click } from "./click.js";
 import {
 	boxes,
 	resetBtn,
@@ -12,7 +13,6 @@ import {
 	resultDefeats,
 } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { BoxClick } from "./box-click.js";
 
 class Game extends Events {
 	constructor(player, computer) {
@@ -58,7 +58,7 @@ class Game extends Events {
 	findComputerMove = () => {
 		console.log("click");
 		if (this.activePlayer.includes(this.computer)) {
-			const boxClick = new BoxClick(
+			const click = new Click(
 				this.emptyBoxes,
 				this.player,
 				this.computer,
