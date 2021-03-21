@@ -10,41 +10,56 @@ import {
 	resultDraws,
 	resultDefeats,
 } from "./dom-elems.js";
-import { ComputerClick } from "./computer-click.js";
-import { PlayerClick } from "./player-click.js";
-import { Game } from "./game.js";
+import { LatestResults } from "./latest-results.js";
 
-class Click extends Game {
-	constructor() {
-		super();
-		this.showMessage();
+class Click {
+	constructor(
+		e,
+		board,
+		activePlayer,
+		player1,
+		player2,
+		players,
+		winningCombinations,
+		latestResults
+	) {
+		(this.e = e),
+			(this.board = board),
+			(this.activePlayer = activePlayer),
+			(this.player1 = player1),
+			(this.player2 = player2),
+			(this.players = players),
+			(this.winningCombinations = winningCombinations),
+			(this.latestResults = latestResults),
+			this.click(this.e);
 	}
-
-	showMessage = () => {
-		console.log("działa");
-		const computerClick = new ComputerClick();
-		const playerClick = new PlayerClick();
-	};
-	filterEmptyBoxes = () => {
-		this.emptyBoxes = this.emptyBoxes.filter(
-			(box) => box.textContent == ""
-		);
-	};
-
-	addBoxToBoard = (box) => {
-		const boxRow = box.dataset.row;
-		const boxColumn = box.dataset.column;
-		this.board[boxRow][boxColumn] = box.id;
+	click = (e) => {
+		e.target.classList.remove("board--box--hover");
+		this.addBoxToBoard(e);
+		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
+		this.checkPlayerArrLength(e);
+		const emptyBoxes = boxes.filter((box) => box.textContent === "");
+		if (emptyBoxes.length % 2 === 0) {
+			emptyBoxes[
+				Math.floor(Math.random() * (emptyBoxes.length + 1))
+			].textContent = "O";
+		}
 	};
 
-	pushBoxIntoActivePlayerArr = (box, player) => {
-		player.arr.push(Number(box.id));
-		box.textContent = `${player.mark}`;
+	addBoxToBoard = (e) => {
+		const boxRow = e.target.dataset.row;
+		const boxColumn = e.target.dataset.column;
+		this.board[boxRow][boxColumn] = e.target.id;
 	};
 
-	checkPlayerArrLength = (player, computer) => {
-		if (player.arr.length > 2 || computer.arr.length > 2) {
-			this.checkForWinner();
+	pushBoxIntoPlayerArr = (e, player) => {
+		player.arr.push(Number(e.target.id));
+		e.target.textContent = `${player.mark}`;
+	};
+
+	checkPlayerArrLength = (e) => {
+		if (this.player1.arr.length > 2 || this.player2.arr.length > 2) {
+			this.checkForWinner(e);
 		}
 	};
 
@@ -88,10 +103,10 @@ class Click extends Game {
 
 	checkDraw = () => {
 		if (
-			this.player.arr.length === 5 &&
-			this.computer.arr.length === 4 &&
-			this.player.winner === false &&
-			this.computer.winner === false
+			this.player1.arr.length === 5 &&
+			this.player2.arr.length === 4 &&
+			this.player1.winner === false &&
+			this.player2.winner === false
 		) {
 			this.draws++;
 			console.log(this.draws);

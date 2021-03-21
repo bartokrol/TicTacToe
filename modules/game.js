@@ -1,25 +1,13 @@
-import { Events } from "./event-listeners.js";
-import { Click } from "./click.js";
-import {
-	boxes,
-	resetBtn,
-	newGameBtn,
-	winnerAnnoucement,
-	winner,
-	bodyOverflow,
-	endgameMessage,
-	resultWins,
-	resultDraws,
-	resultDefeats,
-} from "./dom-elems.js";
+import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
+import { Click } from "./click.js";
+import { FindActivePlayer } from "./find-active-player.js";
 
-class Game extends Events {
-	constructor(player, computer) {
-		super();
-		(this.player = player),
-			(this.computer = computer),
-			(this.players = [this.player, this.computer]),
+class Game {
+	constructor(player1, player2) {
+		(this.player1 = player1),
+			(this.player2 = player2),
+			(this.players = [this.player1, this.player2]),
 			(this.activePlayer = null),
 			(this.draws = 0),
 			(this.isGameEnd = false),
@@ -43,68 +31,10 @@ class Game extends Events {
 	}
 
 	startNewGame = () => {
-		this.findActivePlayer();
-		this.addEventListenersToEachBox();
-	};
-
-	findActivePlayer = () => {
-		this.activePlayer = this.players.filter((player) => player.active);
-		setTimeout(() => {
-			// this.findComputerMove();
-		}, 1000);
-		console.log(this.activePlayer);
-	};
-
-	findComputerMove = () => {
-		console.log("click");
-		if (this.activePlayer.includes(this.computer)) {
-			const click = new Click(
-				this.emptyBoxes,
-				this.player,
-				this.computer,
-				this.players,
-				this.board,
-				this.activePlayer
-			);
-			// this.setComputerMove();
-		}
-	};
-
-	setComputerMove = () => {
-		if (
-			this.emptyBoxes.length > 0 &&
-			!this.player.wins &&
-			!this.computer.wins
-		) {
-			const randomBox = Math.floor(
-				Math.random() * this.emptyBoxes.length
-			);
-			const box = this.emptyBoxes[randomBox];
-			this.removeEventListeners(box);
-			box.textContent = this.computer.mark;
-			this.addBoxToBoard(box);
-			this.pushBoxIntoActivePlayerArr(box, this.activePlayer[0]);
-			this.filterEmptyBoxes();
-			this.checkPlayerArrLength();
-			this.changeActivePlayer();
-		}
-	};
-
-	filterEmptyBoxes = () => {
-		this.emptyBoxes = this.emptyBoxes.filter(
-			(box) => box.textContent == ""
-		);
-	};
-
-	addBoxToBoard = (box) => {
-		const boxRow = box.dataset.row;
-		const boxColumn = box.dataset.column;
-		this.board[boxRow][boxColumn] = box.id;
-	};
-
-	pushBoxIntoActivePlayerArr = (box, player) => {
-		player.arr.push(Number(box.id));
-		box.textContent = `${player.mark}`;
+		// this.findActivePlayer();
+		new FindActivePlayer(this.activePlayer, this.players);
+		// this.addEventListenersToEachBox();
+		// console.log(this.emptyBoxes);
 	};
 
 	checkPlayerArrLength = () => {
@@ -210,8 +140,8 @@ class Game extends Events {
 		newGameBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
 			resetPageAfterNewGameBtn(
-				this.player,
-				this.computer,
+				this.player1,
+				this.player2,
 				this.players,
 				this.board,
 				this.activePlayer
@@ -224,8 +154,8 @@ class Game extends Events {
 			newGameBtn.classList.add("disabled");
 			bodyOverflow.classList.add("body-hidden");
 			resetPageAfterResetBtn(
-				this.player,
-				this.computer,
+				this.player1,
+				this.player2,
 				this.players,
 				this.board
 			);
@@ -234,28 +164,48 @@ class Game extends Events {
 
 	clickBox = (e) => {
 		e.target.classList.remove("board--box--hover");
-		// const click = new Click(
-		// 	e,
-		// 	this.board,
-		// 	this.activePlayer,
-		// 	this.player,
-		// 	this.computer,
-		// 	this.players,
-		// 	this.winningCombinations,
-		// 	this.latestResults
-		// );
+		const click = new Click(
+			e,
+			this.board,
+			this.activePlayer,
+			this.player1,
+			this.player2,
+			this.players,
+			this.winningCombinations,
+			this.latestResults
+		);
 		this.removeEventListeners(e.target);
-		if (this.player.winner || this.computer.winner) {
+		this.changeActivePlayer();
+		if (this.player1.winner || this.player2.winner) {
 			this.removeListenersForEachBox();
 		}
-		this.changeActivePlayer();
-		this.filterEmptyBoxes();
-		this.findComputerMove();
+	};
+
+	removeListenersForEachBox = () => {
+		boxes.forEach((box) => {
+			this.removeEventListeners(box);
+		});
+	};
+
+	removeEventListeners = (el) => {
+		el.removeEventListener("click", this.clickBox);
+		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
+		el.removeEventListener("mouseover", this.showElementOnMouseOver);
+	};
+
+	showElementOnMouseOver = (e) => {
+		e.target.textContent = `${this.activePlayer[0].mark}`;
+		e.target.classList.add("board--box--hover");
+	};
+
+	hideElementOnMouseOut = (e) => {
+		e.target.textContent = "";
+		e.target.classList.remove("board--box--hover");
 	};
 
 	changeActivePlayer = () => {
-		this.player.active = !this.player.active;
-		this.computer.active = !this.computer.active;
+		this.player1.active = !this.player1.active;
+		this.player2.active = !this.player2.active;
 		this.activePlayer = this.players.filter((player) => player.active);
 	};
 }
