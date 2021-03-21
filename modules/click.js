@@ -11,6 +11,8 @@ import {
 	resultDefeats,
 } from "./dom-elems.js";
 import { LatestResults } from "./latest-results.js";
+import { AddBoxToBoard } from "./addBoxToBoard.js";
+import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 
 class Click {
 	constructor(
@@ -20,6 +22,8 @@ class Click {
 		player1,
 		player2,
 		players,
+		draws,
+		emptyBoxes,
 		winningCombinations,
 		latestResults
 	) {
@@ -29,32 +33,25 @@ class Click {
 			(this.player1 = player1),
 			(this.player2 = player2),
 			(this.players = players),
+			(this.draws = draws),
+			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
 			this.click(this.e);
 	}
 	click = (e) => {
-		e.target.classList.remove("board--box--hover");
-		this.addBoxToBoard(e);
-		this.pushBoxIntoPlayerArr(e, this.activePlayer[0]);
+		const box = e.target;
+		box.classList.remove("board--box--hover");
+		new AddBoxToBoard(box, this.board);
+		new PushBoxIntoPlayerArr(box, this.activePlayer);
+
 		this.checkPlayerArrLength(e);
 		const emptyBoxes = boxes.filter((box) => box.textContent === "");
-		if (emptyBoxes.length % 2 === 0) {
-			emptyBoxes[
-				Math.floor(Math.random() * (emptyBoxes.length + 1))
-			].textContent = "O";
-		}
-	};
-
-	addBoxToBoard = (e) => {
-		const boxRow = e.target.dataset.row;
-		const boxColumn = e.target.dataset.column;
-		this.board[boxRow][boxColumn] = e.target.id;
-	};
-
-	pushBoxIntoPlayerArr = (e, player) => {
-		player.arr.push(Number(e.target.id));
-		e.target.textContent = `${player.mark}`;
+		// if (emptyBoxes.length % 2 === 0) {
+		// 	emptyBoxes[
+		// 		Math.floor(Math.random() * (emptyBoxes.length + 1))
+		// 	].textContent = "O";
+		// }
 	};
 
 	checkPlayerArrLength = (e) => {
@@ -64,7 +61,7 @@ class Click {
 	};
 
 	checkForWinner = () => {
-		const player = this.activePlayer[0];
+		const player = this.activePlayer;
 		this.findWinningCombination(player);
 	};
 
@@ -112,7 +109,7 @@ class Click {
 			console.log(this.draws);
 			resultDraws.textContent = this.draws;
 			// const results = new LatestResults("", this.latestResults);
-			resultDraws.textContent = this.showDrawMessage();
+			// resultDraws.textContent = this.showDrawMessage();
 		}
 	};
 

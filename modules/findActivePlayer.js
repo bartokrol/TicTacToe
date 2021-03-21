@@ -6,7 +6,6 @@ class FindActivePlayer {
 
 	findActivePlayer = () => {
 		this.activePlayer = this.players.filter((player) => player.active);
-		console.log(this.activePlayer);
 	};
 }
 

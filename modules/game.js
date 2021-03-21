@@ -1,7 +1,10 @@
 import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { Click } from "./click.js";
-import { FindActivePlayer } from "./find-active-player.js";
+// import { FindActivePlayer } from "./find-active-player.js";
+// import { EventListeners } from "./event-listeners.js";
+import { EventListeners } from "./event-listeners.js";
+import { FindActivePlayer } from "./findActivePlayer.js";
 
 class Game {
 	constructor(player1, player2) {
@@ -30,11 +33,23 @@ class Game {
 			(this.latestResults = []);
 	}
 
+	// new StartNewGame(this.activePlayer, this.players);
 	startNewGame = () => {
-		// this.findActivePlayer();
-		new FindActivePlayer(this.activePlayer, this.players);
-		// this.addEventListenersToEachBox();
-		// console.log(this.emptyBoxes);
+		this.activePlayer = new FindActivePlayer(
+			this.activePlayer,
+			this.players
+		).activePlayer;
+		new EventListeners(
+			this.board,
+			...this.activePlayer,
+			this.player1,
+			this.player2,
+			this.players,
+			this.draws,
+			this.emptyBoxes,
+			this.winningCombinations,
+			this.latestResults
+		).addEventListenersToEachBox();
 	};
 
 	checkPlayerArrLength = () => {
@@ -147,7 +162,11 @@ class Game {
 				this.activePlayer
 			);
 			this.emptyBoxes = boxes;
-			this.findActivePlayer();
+			const activePlayer = new FindActivePlayer(
+				this.activePlayer,
+				this.players
+			);
+			this.activePlayer = activePlayer.activePlayer;
 			this.addEventListenersToEachBox();
 		});
 		resetBtn.addEventListener("click", () => {
@@ -162,24 +181,32 @@ class Game {
 		});
 	};
 
-	clickBox = (e) => {
-		e.target.classList.remove("board--box--hover");
-		const click = new Click(
-			e,
-			this.board,
-			this.activePlayer,
-			this.player1,
-			this.player2,
-			this.players,
-			this.winningCombinations,
-			this.latestResults
-		);
-		this.removeEventListeners(e.target);
-		this.changeActivePlayer();
-		if (this.player1.winner || this.player2.winner) {
-			this.removeListenersForEachBox();
-		}
-	};
+	// clickBox = (e) => {
+	// 	e.target.classList.remove("board--box--hover");
+	// 	const click = new Click(
+	// 		e,
+	// 		this.board,
+	// 		this.activePlayer,
+	// 		this.player1,
+	// 		this.player2,
+	// 		this.players,
+	// 		this.draws,
+	// 		this.emptyBoxes,
+	// 		this.winningCombinations,
+	// 		this.latestResults
+	// 	);
+	// 	this.removeEventListeners(e.target);
+	// 	this.changeActivePlayer();
+	// 	const activePlayer = new FindActivePlayer(
+	// 		this.activePlayer,
+	// 		this.players
+	// 	);
+	// 	this.activePlayer = activePlayer.activePlayer;
+	// 	console.log(activePlayer);
+	// 	if (this.player1.winner || this.player2.winner) {
+	// 		this.removeListenersForEachBox();
+	// 	}
+	// };
 
 	removeListenersForEachBox = () => {
 		boxes.forEach((box) => {
