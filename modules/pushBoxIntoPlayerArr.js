@@ -7,7 +7,6 @@ class PushBoxIntoPlayerArr {
 	pushBoxIntoPlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
 		box.textContent = `${player.mark}`;
-		console.log(player.arr);
 	};
 }
 
