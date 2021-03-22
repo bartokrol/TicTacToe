@@ -37,12 +37,13 @@ class EventListeners {
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults);
+		this.addEventListenersToEachBox();
 		this.checkComputerMove();
 	}
 
 	checkComputerMove = () => {
-		if (this.activePlayer == this.player2) {
-			new ComputerClick(
+		if (this.player2.active) {
+			const computerMove = new ComputerClick(
 				this.board,
 				this.activePlayer,
 				this.player1,
@@ -53,8 +54,10 @@ class EventListeners {
 				this.winningCombinations,
 				this.latestResults
 			);
+			this.removeEventListeners(computerMove.computerBox);
 		}
 	};
+
 	addEventListenersToEachBox = () => {
 		boxes.forEach((box) => {
 			box.addEventListener("mouseout", this.hideElementOnMouseOut);
@@ -100,9 +103,10 @@ class EventListeners {
 			this.winningCombinations,
 			this.latestResults
 		);
+		console.log(e.target);
 		this.removeEventListeners(e.target);
 
-		new ComputerClick(
+		const computerMove = new ComputerClick(
 			this.board,
 			this.activePlayer,
 			this.player1,
@@ -113,6 +117,7 @@ class EventListeners {
 			this.winningCombinations,
 			this.latestResults
 		);
+		this.removeEventListeners(computerMove.computerBox);
 	};
 
 	showElementOnMouseOver = (e) => {
@@ -132,6 +137,7 @@ class EventListeners {
 	};
 
 	removeEventListeners = (el) => {
+		console.log(el);
 		el.removeEventListener("click", this.clickBox);
 		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		el.removeEventListener("mouseover", this.showElementOnMouseOver);

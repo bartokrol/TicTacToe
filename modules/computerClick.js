@@ -12,7 +12,8 @@ class ComputerClick {
 		winningCombinations,
 		latestResults
 	) {
-		(this.board = board),
+		(this.computerBox = null),
+			(this.board = board),
 			(this.activePlayer = activePlayer),
 			(this.player1 = player1),
 			(this.player2 = player2),
@@ -27,10 +28,9 @@ class ComputerClick {
 	computerClick = () => {
 		const emptyBoxes = boxes.filter((box) => box.textContent === "");
 		const computerBox =
-			emptyBoxes[Math.floor(Math.random() * (emptyBoxes.length + 1))];
-		if (emptyBoxes.length % 2 === 0) {
-			computerBox.textContent = this.player2.mark;
-		}
+			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+		computerBox.textContent = this.player2.mark;
+		this.computerBox = computerBox;
 	};
 }
 

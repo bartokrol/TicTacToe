@@ -46,7 +46,7 @@ class Game {
 			this.emptyBoxes,
 			this.winningCombinations,
 			this.latestResults
-		).addEventListenersToEachBox();
+		);
 	};
 }
 
