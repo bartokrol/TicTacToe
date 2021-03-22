@@ -1,6 +1,6 @@
 import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { EventListeners } from "./event-listeners.js";
+import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
 class Game {

@@ -10,7 +10,7 @@ import {
 	resultDraws,
 	resultDefeats,
 } from "./dom-elems.js";
-import { LatestResults } from "./latest-results.js";
+import { LatestResults } from "./latestResults.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
