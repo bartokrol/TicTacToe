@@ -15,7 +15,6 @@ class ActivePlayerChange {
 		player.active = !player.active;
 		computer.active = !computer.active;
 		activePlayer = players.filter((player) => player.active);
-		console.log(activePlayer);
 	};
 }
 

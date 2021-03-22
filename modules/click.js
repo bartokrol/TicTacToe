@@ -15,6 +15,7 @@ import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
 import { ActivePlayerChange } from "./activePlayerChange.js";
+import { ComputerClick } from "./computerClick.js";
 
 class Click {
 	constructor(
@@ -60,13 +61,6 @@ class Click {
 			this.activePlayer,
 			this.players
 		);
-
-		const emptyBoxes = boxes.filter((box) => box.textContent === "");
-		// if (emptyBoxes.length % 2 === 0) {
-		// 	emptyBoxes[
-		// 		Math.floor(Math.random() * (emptyBoxes.length + 1))
-		// 	].textContent = "O";
-		// }
 	};
 }
 

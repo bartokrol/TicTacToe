@@ -14,6 +14,7 @@ import {
 	bodyOverflow,
 } from "./dom-elems.js";
 import { Click } from "./click.js";
+import { ComputerClick } from "./computerClick.js";
 
 class EventListeners {
 	constructor(
@@ -36,7 +37,24 @@ class EventListeners {
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults);
+		this.checkComputerMove();
 	}
+
+	checkComputerMove = () => {
+		if (this.activePlayer == this.player2) {
+			new ComputerClick(
+				this.board,
+				this.activePlayer,
+				this.player1,
+				this.player2,
+				this.players,
+				this.draws,
+				this.emptyBoxes,
+				this.winningCombinations,
+				this.latestResults
+			);
+		}
+	};
 	addEventListenersToEachBox = () => {
 		boxes.forEach((box) => {
 			box.addEventListener("mouseout", this.hideElementOnMouseOut);
@@ -70,7 +88,7 @@ class EventListeners {
 
 	clickBox = (e) => {
 		e.target.classList.remove("board--box--hover");
-		const click = new Click(
+		new Click(
 			e,
 			this.board,
 			this.activePlayer,
@@ -83,16 +101,18 @@ class EventListeners {
 			this.latestResults
 		);
 		this.removeEventListeners(e.target);
-		// this.changeActivePlayer();
-		// const activePlayer = new FindActivePlayer(
-		// 	this.activePlayer,
-		// 	this.players
-		// );
-		// this.activePlayer = activePlayer.activePlayer;
-		// console.log(activePlayer);
-		// if (this.player1.winner || this.player2.winner) {
-		// 	this.removeListenersForEachBox();
-		// }
+
+		new ComputerClick(
+			this.board,
+			this.activePlayer,
+			this.player1,
+			this.player2,
+			this.players,
+			this.draws,
+			this.emptyBoxes,
+			this.winningCombinations,
+			this.latestResults
+		);
 	};
 
 	showElementOnMouseOver = (e) => {
