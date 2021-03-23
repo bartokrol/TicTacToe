@@ -15,6 +15,7 @@ import {
 } from "./dom-elems.js";
 import { Click } from "./click.js";
 import { ComputerClick } from "./computerClick.js";
+import { ActivePlayerChange } from "./activePlayerChange.js";
 
 class EventListeners {
 	constructor(
@@ -103,25 +104,28 @@ class EventListeners {
 			this.winningCombinations,
 			this.latestResults
 		);
-		console.log(e.target);
 		this.removeEventListeners(e.target);
 
-		const computerMove = new ComputerClick(
-			this.board,
-			this.activePlayer,
-			this.player1,
-			this.player2,
-			this.players,
-			this.draws,
-			this.emptyBoxes,
-			this.winningCombinations,
-			this.latestResults
-		);
-		this.removeEventListeners(computerMove.computerBox);
+		if (this.player1.winner || this.player2.winner) {
+			this.removeListenersForEachBox();
+		} else {
+			const computerMove = new ComputerClick(
+				this.board,
+				this.activePlayer,
+				this.player1,
+				this.player2,
+				this.players,
+				this.draws,
+				this.emptyBoxes,
+				this.winningCombinations,
+				this.latestResults
+			);
+			this.removeEventListeners(computerMove.computerBox);
+		}
 	};
 
 	showElementOnMouseOver = (e) => {
-		e.target.textContent = `${this.activePlayer.mark}`;
+		e.target.textContent = `${this.player1.mark}`;
 		e.target.classList.add("board--box--hover");
 	};
 
@@ -137,7 +141,6 @@ class EventListeners {
 	};
 
 	removeEventListeners = (el) => {
-		console.log(el);
 		el.removeEventListener("click", this.clickBox);
 		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		el.removeEventListener("mouseover", this.showElementOnMouseOver);

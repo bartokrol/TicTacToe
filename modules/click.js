@@ -46,9 +46,8 @@ class Click {
 		const box = e.target;
 		box.classList.remove("board--box--hover");
 		new AddBoxToBoard(box, this.board);
-		new PushBoxIntoPlayerArr(box, this.activePlayer);
+		new PushBoxIntoPlayerArr(box, this.player1);
 		new CheckPlayerArrLength(
-			e,
 			this.player1,
 			this.player2,
 			this.draws,

@@ -28,7 +28,6 @@ const choosePlayer = (e) => {
 	newGameBtn.disabled = true;
 	markChoice.classList.add("inactive");
 	game.startNewGame();
-	// game.addEventListenersToEachBox();
 };
 
 const addListeners = () => {
