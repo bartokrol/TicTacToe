@@ -14,7 +14,8 @@ class EventListeners {
 		draws,
 		emptyBoxes,
 		winningCombinations,
-		latestResults
+		latestResults,
+		isGameEnd
 	) {
 		(this.board = board),
 			(this.activePlayer = activePlayer),
@@ -24,8 +25,9 @@ class EventListeners {
 			(this.draws = draws),
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
-			(this.latestResults = latestResults);
-		this.addEventListenersToEachBox();
+			(this.latestResults = latestResults),
+			(this.isGameEnd = isGameEnd),
+			this.addEventListenersToEachBox();
 		this.checkComputerMove();
 	}
 
@@ -40,7 +42,8 @@ class EventListeners {
 				this.draws,
 				this.emptyBoxes,
 				this.winningCombinations,
-				this.latestResults
+				this.latestResults,
+				this.isGameEnd
 			);
 			this.removeEventListeners(computerMove.computerBox);
 		}
@@ -88,11 +91,13 @@ class EventListeners {
 			this.draws,
 			this.emptyBoxes,
 			this.winningCombinations,
-			this.latestResults
+			this.latestResults,
+			this.isGameEnd
 		);
 		this.removeEventListeners(e.target);
 
 		if (this.player.winner || this.computer.winner) {
+			console.log(this.isGameEnd);
 			this.removeListenersForEachBox();
 		} else {
 			const computerMove = new ComputerClick(
@@ -104,8 +109,12 @@ class EventListeners {
 				this.draws,
 				this.emptyBoxes,
 				this.winningCombinations,
-				this.latestResults
+				this.latestResults,
+				this.isGameEnd
 			);
+			if (this.player.winner || this.computer.winner) {
+				this.removeListenersForEachBox();
+			}
 			this.removeEventListeners(computerMove.computerBox);
 		}
 	};

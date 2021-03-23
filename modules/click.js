@@ -28,7 +28,8 @@ class Click {
 		draws,
 		emptyBoxes,
 		winningCombinations,
-		latestResults
+		latestResults,
+		isGameEnd
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -40,6 +41,7 @@ class Click {
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
+			(this.isGameEnd = isGameEnd),
 			this.click(this.e);
 	}
 	click = (e) => {
@@ -51,7 +53,8 @@ class Click {
 			this.player,
 			this.players,
 			this.draws,
-			this.winningCombinations
+			this.winningCombinations,
+			this.isGameEnd
 		);
 		new ActivePlayerChange(
 			this.player,

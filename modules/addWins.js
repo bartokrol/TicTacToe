@@ -1,10 +1,13 @@
 import { resultWins, resultDefeats } from "./dom-elems.js";
 
 class AddWins {
-	constructor(activePlayer) {
-		(this.activePlayer = activePlayer), this.addWins(this.activePlayer);
+	constructor(player, isGameEnd) {
+		(this.player = player),
+			(this.isGameEnd = isGameEnd),
+			this.addWins(this.player);
 	}
 	addWins = (player) => {
+		this.isGameEnd = !this.isGameEnd;
 		player.winner = true;
 		player.wins++;
 		if (player.name == "Player") {

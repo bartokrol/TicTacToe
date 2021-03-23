@@ -4,23 +4,23 @@ import { DrawCheck } from "./drawCheck.js";
 import { ActivePlayerChange } from "./activePlayerChange.js";
 
 class FindWinner {
-	constructor(winningCombinations, player, draws, players) {
+	constructor(winningCombinations, player, draws, players, isGameEnd) {
 		(this.winningCombinations = winningCombinations),
 			(this.player = player),
 			(this.draws = draws),
-			(this.players = players);
-		this.findWinner(this.player);
+			(this.players = players),
+			(this.isGameEnd = isGameEnd),
+			this.findWinner(this.player);
 	}
 
 	findWinner = (player) => {
-		console.log(player.arr);
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
-				new SetWinner(player);
+				new SetWinner(player, this.isGameEnd);
 				new ShowWinningMarks(combination);
 			}
 		}
-		// new DrawCheck(this.player1, this.player2, this.draws);
+		new DrawCheck(player, this.draws, this.isGameEnd);
 	};
 }
 

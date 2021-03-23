@@ -43,7 +43,8 @@ class Game {
 			this.draws,
 			this.emptyBoxes,
 			this.winningCombinations,
-			this.latestResults
+			this.latestResults,
+			this.isGameEnd
 		);
 	};
 }

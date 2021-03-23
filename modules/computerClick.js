@@ -14,7 +14,8 @@ class ComputerClick {
 		draws,
 		emptyBoxes,
 		winningCombinations,
-		latestResults
+		latestResults,
+		isGameEnd
 	) {
 		(this.computerBox = null),
 			(this.board = board),
@@ -26,6 +27,7 @@ class ComputerClick {
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
+			(this.isGameEnd = isGameEnd),
 			this.computerClick();
 	}
 
@@ -40,7 +42,8 @@ class ComputerClick {
 			this.computer,
 			this.players,
 			this.draws,
-			this.winningCombinations
+			this.winningCombinations,
+			this.isGameEnd
 		);
 		new ActivePlayerChange(
 			this.player,

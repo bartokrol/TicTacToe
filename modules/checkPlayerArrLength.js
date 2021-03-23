@@ -1,11 +1,12 @@
 import { FindWinner } from "./findWinner.js";
 
 class CheckPlayerArrLength {
-	constructor(player, players, draws, winningCombination) {
+	constructor(player, players, draws, winningCombination, isGameEnd) {
 		(this.player = player),
 			(this.players = players),
 			(this.draws = draws),
 			(this.winningCombination = winningCombination),
+			(this.isGameEnd = isGameEnd),
 			this.checkPlayerArrLength();
 	}
 
@@ -15,7 +16,8 @@ class CheckPlayerArrLength {
 				this.winningCombination,
 				this.player,
 				this.draws,
-				this.players
+				this.players,
+				this.isGameEnd
 			);
 		}
 	};
