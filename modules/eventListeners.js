@@ -8,8 +8,8 @@ class EventListeners {
 	constructor(
 		board,
 		activePlayer,
-		player1,
-		player2,
+		player,
+		computer,
 		players,
 		draws,
 		emptyBoxes,
@@ -18,8 +18,8 @@ class EventListeners {
 	) {
 		(this.board = board),
 			(this.activePlayer = activePlayer),
-			(this.player1 = player1),
-			(this.player2 = player2),
+			(this.player = player),
+			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
 			(this.emptyBoxes = emptyBoxes),
@@ -30,12 +30,12 @@ class EventListeners {
 	}
 
 	checkComputerMove = () => {
-		if (this.player2.active) {
+		if (this.computer.active) {
 			const computerMove = new ComputerClick(
 				this.board,
 				this.activePlayer,
-				this.player1,
-				this.player2,
+				this.player,
+				this.computer,
 				this.players,
 				this.draws,
 				this.emptyBoxes,
@@ -55,8 +55,8 @@ class EventListeners {
 		newGameBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
 			resetPageAfterNewGameBtn(
-				this.player1,
-				this.player2,
+				this.player,
+				this.computer,
 				this.players,
 				this.board,
 				this.activePlayer
@@ -69,8 +69,8 @@ class EventListeners {
 			newGameBtn.classList.add("disabled");
 			bodyOverflow.classList.add("body-hidden");
 			resetPageAfterResetBtn(
-				this.player1,
-				this.player2,
+				this.player,
+				this.computer,
 				this.players,
 				this.board
 			);
@@ -82,8 +82,8 @@ class EventListeners {
 			e,
 			this.board,
 			this.activePlayer,
-			this.player1,
-			this.player2,
+			this.player,
+			this.computer,
 			this.players,
 			this.draws,
 			this.emptyBoxes,
@@ -92,14 +92,14 @@ class EventListeners {
 		);
 		this.removeEventListeners(e.target);
 
-		if (this.player1.winner || this.player2.winner) {
+		if (this.player.winner || this.computer.winner) {
 			this.removeListenersForEachBox();
 		} else {
 			const computerMove = new ComputerClick(
 				this.board,
 				this.activePlayer,
-				this.player1,
-				this.player2,
+				this.player,
+				this.computer,
 				this.players,
 				this.draws,
 				this.emptyBoxes,
@@ -111,7 +111,7 @@ class EventListeners {
 	};
 
 	showElementOnMouseOver = (e) => {
-		e.target.textContent = `${this.player1.mark}`;
+		e.target.textContent = `${this.player.mark}`;
 		e.target.classList.add("board--box--hover");
 	};
 

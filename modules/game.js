@@ -3,10 +3,10 @@ import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
 class Game {
-	constructor(player1, player2) {
-		(this.player1 = player1),
-			(this.player2 = player2),
-			(this.players = [this.player1, this.player2]),
+	constructor(player, computer) {
+		(this.player = player),
+			(this.computer = computer),
+			(this.players = [this.player, this.computer]),
 			(this.activePlayer = null),
 			(this.draws = 0),
 			(this.isGameEnd = false),
@@ -37,8 +37,8 @@ class Game {
 		new EventListeners(
 			this.board,
 			...this.activePlayer,
-			this.player1,
-			this.player2,
+			this.player,
+			this.computer,
 			this.players,
 			this.draws,
 			this.emptyBoxes,

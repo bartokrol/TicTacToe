@@ -22,8 +22,8 @@ class Click {
 		e,
 		board,
 		activePlayer,
-		player1,
-		player2,
+		player,
+		computer,
 		players,
 		draws,
 		emptyBoxes,
@@ -33,8 +33,8 @@ class Click {
 		(this.e = e),
 			(this.board = board),
 			(this.activePlayer = activePlayer),
-			(this.player1 = player1),
-			(this.player2 = player2),
+			(this.player = player),
+			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
 			(this.emptyBoxes = emptyBoxes),
@@ -46,17 +46,16 @@ class Click {
 		const box = e.target;
 		box.classList.remove("board--box--hover");
 		new AddBoxToBoard(box, this.board);
-		new PushBoxIntoPlayerArr(box, this.player1);
+		new PushBoxIntoPlayerArr(box, this.player);
 		new CheckPlayerArrLength(
-			this.player1,
-			this.player2,
+			this.player,
+			this.players,
 			this.draws,
-			this.activePlayer,
 			this.winningCombinations
 		);
 		new ActivePlayerChange(
-			this.player1,
-			this.player2,
+			this.player,
+			this.computer,
 			this.activePlayer,
 			this.players
 		);

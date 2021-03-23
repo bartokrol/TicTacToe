@@ -8,8 +8,8 @@ class ComputerClick {
 	constructor(
 		board,
 		activePlayer,
-		player1,
-		player2,
+		player,
+		computer,
 		players,
 		draws,
 		emptyBoxes,
@@ -19,8 +19,8 @@ class ComputerClick {
 		(this.computerBox = null),
 			(this.board = board),
 			(this.activePlayer = activePlayer),
-			(this.player1 = player1),
-			(this.player2 = player2),
+			(this.player = player),
+			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
 			(this.emptyBoxes = emptyBoxes),
@@ -35,17 +35,16 @@ class ComputerClick {
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 		this.computerBox = computerBox;
 		new AddBoxToBoard(computerBox, this.board);
-		new PushBoxIntoPlayerArr(computerBox, this.player2);
+		new PushBoxIntoPlayerArr(computerBox, this.computer);
 		new CheckPlayerArrLength(
-			this.player1,
-			this.player2,
+			this.computer,
+			this.players,
 			this.draws,
-			this.activePlayer,
 			this.winningCombinations
 		);
 		new ActivePlayerChange(
-			this.player1,
-			this.player2,
+			this.player,
+			this.computer,
 			this.activePlayer,
 			this.players
 		);
