@@ -33,7 +33,6 @@ const resetBoxes = () => {
 };
 
 const resetResults = (player1, player2) => {
-	console.log(resultWins, resultDraws, resultDefeats);
 	resultWins.textContent = player1.wins;
 	resultDraws.textContent = player2.wins;
 	resultDefeats.textContent = player2.wins;

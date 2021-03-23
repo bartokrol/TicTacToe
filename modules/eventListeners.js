@@ -1,21 +1,8 @@
-import {
-	boxes,
-	markChoice,
-	buttons,
-	resultWins,
-	resultDraws,
-	resultDefeats,
-	latest,
-	resetBtn,
-	newGameBtn,
-	winnerAnnoucement,
-	winner,
-	endgameMessage,
-	bodyOverflow,
-} from "./dom-elems.js";
+import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
 import { Click } from "./click.js";
 import { ComputerClick } from "./computerClick.js";
-import { ActivePlayerChange } from "./activePlayerChange.js";
+import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
+import { FindActivePlayer } from "./findActivePlayer.js";
 
 class EventListeners {
 	constructor(
@@ -63,7 +50,7 @@ class EventListeners {
 		boxes.forEach((box) => {
 			box.addEventListener("mouseout", this.hideElementOnMouseOut);
 			box.addEventListener("mouseover", this.showElementOnMouseOver);
-			box.addEventListener("click", this.clickBox);
+			box.addEventListener("click", this.handleClick);
 		});
 		newGameBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
@@ -75,7 +62,7 @@ class EventListeners {
 				this.activePlayer
 			);
 			this.emptyBoxes = boxes;
-			this.findActivePlayer();
+			new FindActivePlayer(this.activePlayer, this.players);
 			this.addEventListenersToEachBox();
 		});
 		resetBtn.addEventListener("click", () => {
@@ -90,8 +77,7 @@ class EventListeners {
 		});
 	};
 
-	clickBox = (e) => {
-		e.target.classList.remove("board--box--hover");
+	handleClick = (e) => {
 		new Click(
 			e,
 			this.board,
@@ -141,7 +127,7 @@ class EventListeners {
 	};
 
 	removeEventListeners = (el) => {
-		el.removeEventListener("click", this.clickBox);
+		el.removeEventListener("click", this.handleClick);
 		el.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		el.removeEventListener("mouseover", this.showElementOnMouseOver);
 	};

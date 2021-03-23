@@ -24,10 +24,14 @@ const choosePlayer = (e) => {
 			winner: false,
 		}
 	);
+	setBackground();
+	game.startNewGame();
+};
+
+const setBackground = () => {
 	bodyOverflow.classList.remove("body-hidden");
 	newGameBtn.disabled = true;
 	markChoice.classList.add("inactive");
-	game.startNewGame();
 };
 
 const addListeners = () => {

@@ -1,8 +1,6 @@
-import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
-import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
+import { boxes } from "./dom-elems.js";
 import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
-import { ComputerClick } from "./computerClick.js";
 
 class Game {
 	constructor(player1, player2) {
