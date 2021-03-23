@@ -6,10 +6,12 @@ class AddWins {
 			(this.isGameEnd = isGameEnd),
 			this.addWins(this.player);
 	}
+
 	addWins = (player) => {
-		this.isGameEnd = !this.isGameEnd;
 		player.winner = true;
 		player.wins++;
+		this.isGameEnd = !this.isGameEnd;
+		console.log(this.isGameEnd);
 		if (player.name == "Player") {
 			resultWins.textContent = player.wins;
 		} else if (player.name == "Computer") {
