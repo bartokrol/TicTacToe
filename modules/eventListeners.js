@@ -27,8 +27,8 @@ class EventListeners {
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
 			(this.isGameEnd = isGameEnd),
-			this.addEventListenersToEachBox();
-		this.checkComputerMove();
+			this.addEventListenersToEachBox(),
+			this.checkComputerMove();
 	}
 
 	checkComputerMove = () => {
@@ -95,9 +95,8 @@ class EventListeners {
 			this.isGameEnd
 		);
 		this.removeEventListeners(e.target);
-
+		console.log(this.isGameEnd);
 		if (this.player.winner || this.computer.winner) {
-			console.log(this.isGameEnd);
 			this.removeListenersForEachBox();
 		} else {
 			const computerMove = new ComputerClick(

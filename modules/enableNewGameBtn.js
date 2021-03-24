@@ -5,11 +5,7 @@ class EnableNewGameBtn {
 		this.enableNewGameBtn();
 	}
 	enableNewGameBtn = () => {
-		this.isGameEnd = true;
-
-		if (this.isGameEnd) {
-			newGameBtn.disabled = false;
-		}
+		newGameBtn.disabled = false;
 		newGameBtn.classList.remove("disabled");
 	};
 }

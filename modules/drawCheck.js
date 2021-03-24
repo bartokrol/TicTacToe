@@ -12,8 +12,7 @@ class DrawCheck {
 	drawCheck = (player, draws) => {
 		if (player.arr.length === 5 && player.winner === false) {
 			draws++;
-			resultDraws.textContent = this.draws;
-			this.isGameEnd = !this.isGameEnd;
+			resultDraws.textContent = draws;
 			// const results = new LatestResults("", this.latestResults);
 			new DrawMessage();
 		}
