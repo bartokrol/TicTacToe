@@ -8,20 +8,22 @@ import {
 	newGameBtn,
 } from "./dom-elems.js";
 
-function resetPageAfterResetBtn(player1, player2, players, board) {
+function resetPageAfterResetBtn(player1, player2, players, board, isGameEnd) {
 	resetBoxes();
 	resetPlayersWins(player1, player2);
 	resetPlayersArr(players);
 	resetResults(player1, player2);
 	resetBoard(board);
+	isGameEnd = false;
 	markChoice.classList.remove("inactive");
 }
 
-function resetPageAfterNewGameBtn(player1, player2, players, board) {
+function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
 	resetBoxes();
 	resetPlayers(player1, player2);
 	resetPlayersArr(players);
 	resetBoard(board);
+	isGameEnd = !isGameEnd;
 	newGameBtn.disabled = true;
 }
 

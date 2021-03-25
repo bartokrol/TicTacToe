@@ -12,10 +12,10 @@ class ComputerClick {
 		computer,
 		players,
 		draws,
+		isGameEnd,
 		emptyBoxes,
 		winningCombinations,
-		latestResults,
-		isGameEnd
+		latestResults
 	) {
 		(this.computerBox = null),
 			(this.board = board),
@@ -24,10 +24,10 @@ class ComputerClick {
 			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
+			(this.isGameEnd = isGameEnd),
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
-			(this.isGameEnd = isGameEnd),
 			this.computerClick();
 	}
 
@@ -42,8 +42,8 @@ class ComputerClick {
 			this.computer,
 			this.players,
 			this.draws,
-			this.winningCombinations,
-			this.isGameEnd
+			this.isGameEnd,
+			this.winningCombinations
 		);
 		new ActivePlayerChange(
 			this.player,

@@ -12,10 +12,10 @@ class EventListeners {
 		computer,
 		players,
 		draws,
+		isGameEnd,
 		emptyBoxes,
 		winningCombinations,
-		latestResults,
-		isGameEnd
+		latestResults
 	) {
 		(this.board = board),
 			(this.activePlayer = activePlayer),
@@ -23,10 +23,10 @@ class EventListeners {
 			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
+			(this.isGameEnd = isGameEnd),
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
-			(this.isGameEnd = isGameEnd),
 			this.addEventListenersToEachBox(),
 			this.checkComputerMove();
 	}
@@ -40,10 +40,10 @@ class EventListeners {
 				this.computer,
 				this.players,
 				this.draws,
+				this.isGameEnd,
 				this.emptyBoxes,
 				this.winningCombinations,
-				this.latestResults,
-				this.isGameEnd
+				this.latestResults
 			);
 			this.removeEventListeners(computerMove.computerBox);
 		}
@@ -57,13 +57,16 @@ class EventListeners {
 		});
 		newGameBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
-			resetPageAfterNewGameBtn(
+			const newGameReset = resetPageAfterNewGameBtn(
 				this.player,
 				this.computer,
 				this.players,
 				this.board,
-				this.activePlayer
+				this.isGameEnd
 			);
+			console.log(newGameReset);
+			// this.isGameEnd = newGameReset;
+			console.log(this.isGameEnd);
 			this.emptyBoxes = boxes;
 			new FindActivePlayer(this.activePlayer, this.players);
 			this.addEventListenersToEachBox();
@@ -75,13 +78,14 @@ class EventListeners {
 				this.player,
 				this.computer,
 				this.players,
-				this.board
+				this.board,
+				this.isGameEnd
 			);
 		});
 	};
 
 	handleClick = (e) => {
-		new Click(
+		const playerClick = new Click(
 			e,
 			this.board,
 			this.activePlayer,
@@ -89,14 +93,15 @@ class EventListeners {
 			this.computer,
 			this.players,
 			this.draws,
+			this.isGameEnd,
 			this.emptyBoxes,
 			this.winningCombinations,
-			this.latestResults,
-			this.isGameEnd
+			this.latestResults
 		);
+		this.isGameEnd = playerClick.isGameEnd;
 		this.removeEventListeners(e.target);
 		console.log(this.isGameEnd);
-		if (this.player.winner || this.computer.winner) {
+		if (this.player.winner || this.computer.winner || this.isGameEnd) {
 			this.removeListenersForEachBox();
 		} else {
 			const computerMove = new ComputerClick(
@@ -106,12 +111,13 @@ class EventListeners {
 				this.computer,
 				this.players,
 				this.draws,
+				this.isGameEnd,
 				this.emptyBoxes,
 				this.winningCombinations,
-				this.latestResults,
-				this.isGameEnd
+				this.latestResults
 			);
-			if (this.player.winner || this.computer.winner) {
+			this.isGameEnd = computerMove.isGameEnd;
+			if (this.player.winner || this.computer.winner || this.isGameEnd) {
 				this.removeListenersForEachBox();
 			}
 			this.removeEventListeners(computerMove.computerBox);

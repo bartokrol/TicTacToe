@@ -2,10 +2,9 @@ import { resultDraws } from "./dom-elems.js";
 import { DrawMessage } from "./drawMessage.js";
 
 class DrawCheck {
-	constructor(player, draws, isGameEnd) {
+	constructor(player, draws) {
 		(this.player = player),
 			(this.draws = draws),
-			(this.isGameEnd = isGameEnd),
 			this.drawCheck(this.player, this.draws);
 	}
 

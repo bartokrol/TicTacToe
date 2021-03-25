@@ -1,4 +1,4 @@
-import { Game } from "./modules/game.js";
+import { StartGame } from "./modules/startGame.js";
 import {
 	markChoice,
 	buttons,
@@ -6,7 +6,7 @@ import {
 	bodyOverflow,
 } from "./modules/dom-elems.js";
 const choosePlayer = (e) => {
-	const game = new Game(
+	const game = new StartGame(
 		{
 			name: "Player",
 			mark: e.target.value,

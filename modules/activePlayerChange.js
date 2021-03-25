@@ -1,16 +1,16 @@
 import { FindActivePlayer } from "./findActivePlayer.js";
 
 class ActivePlayerChange {
-	constructor(player1, player2, activePlayer, players) {
-		(this.player1 = player1),
-			(this.player2 = player2),
+	constructor(player, computer, activePlayer, players) {
+		(this.player = player),
+			(this.computer = computer),
 			(this.activePlayer = activePlayer),
 			(this.players = players),
 			this.changeActivePlayer();
 	}
 	changeActivePlayer = () => {
-		this.player1.active = !this.player1.active;
-		this.player2.active = !this.player2.active;
+		this.player.active = !this.player.active;
+		this.computer.active = !this.computer.active;
 		new FindActivePlayer(this.activePlayer, this.players);
 	};
 }

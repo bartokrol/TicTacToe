@@ -1,21 +1,9 @@
-import {
-	boxes,
-	resetBtn,
-	newGameBtn,
-	winnerAnnoucement,
-	winner,
-	bodyOverflow,
-	endgameMessage,
-	resultWins,
-	resultDraws,
-	resultDefeats,
-} from "./dom-elems.js";
+import { boxes } from "./dom-elems.js";
 import { LatestResults } from "./latestResults.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
 import { ActivePlayerChange } from "./activePlayerChange.js";
-import { ComputerClick } from "./computerClick.js";
 
 class Click {
 	constructor(
@@ -26,10 +14,10 @@ class Click {
 		computer,
 		players,
 		draws,
+		isGameEnd,
 		emptyBoxes,
 		winningCombinations,
-		latestResults,
-		isGameEnd
+		latestResults
 	) {
 		(this.e = e),
 			(this.board = board),
@@ -38,24 +26,26 @@ class Click {
 			(this.computer = computer),
 			(this.players = players),
 			(this.draws = draws),
+			(this.isGameEnd = isGameEnd),
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
-			(this.isGameEnd = isGameEnd),
 			this.click(this.e);
 	}
 	click = (e) => {
 		const box = e.target;
+		this.emptyBoxes = boxes.filter((box) => box.textContent === "");
 		box.classList.remove("board--box--hover");
 		new AddBoxToBoard(box, this.board);
 		new PushBoxIntoPlayerArr(box, this.player);
-		new CheckPlayerArrLength(
+		const checkPlayerArr = new CheckPlayerArrLength(
 			this.player,
 			this.players,
 			this.draws,
-			this.winningCombinations,
-			this.isGameEnd
+			this.isGameEnd,
+			this.winningCombinations
 		);
+		this.isGameEnd = checkPlayerArr.isGameEnd;
 		new ActivePlayerChange(
 			this.player,
 			this.computer,

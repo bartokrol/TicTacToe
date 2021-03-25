@@ -2,7 +2,7 @@ import { boxes } from "./dom-elems.js";
 import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
-class Game {
+class StartGame {
 	constructor(player, computer) {
 		(this.player = player),
 			(this.computer = computer),
@@ -41,12 +41,12 @@ class Game {
 			this.computer,
 			this.players,
 			this.draws,
+			this.isGameEnd,
 			this.emptyBoxes,
 			this.winningCombinations,
-			this.latestResults,
-			this.isGameEnd
+			this.latestResults
 		);
 	};
 }
 
-export { Game };
+export { StartGame };
