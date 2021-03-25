@@ -56,7 +56,6 @@ class EventListeners {
 			box.addEventListener("click", this.handleClick);
 		});
 		newGameBtn.addEventListener("click", () => {
-			newGameBtn.classList.add("disabled");
 			const newGameReset = resetPageAfterNewGameBtn(
 				this.player,
 				this.computer,
@@ -98,7 +97,6 @@ class EventListeners {
 		);
 		this.isGameEnd = playerClick.isGameEnd;
 		this.removeEventListeners(e.target);
-		console.log(this.isGameEnd);
 		if (this.player.winner || this.computer.winner || this.isGameEnd) {
 			this.removeListenersForEachBox();
 		} else {

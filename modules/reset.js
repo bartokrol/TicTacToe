@@ -16,6 +16,7 @@ function resetPageAfterResetBtn(player1, player2, players, board, isGameEnd) {
 	resetBoard(board);
 	isGameEnd = false;
 	markChoice.classList.remove("inactive");
+	return isGameEnd;
 }
 
 function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
@@ -25,6 +26,7 @@ function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
 	resetBoard(board);
 	isGameEnd = false;
 	newGameBtn.disabled = true;
+	newGameBtn.classList.add("disabled");
 	return isGameEnd;
 }
 
