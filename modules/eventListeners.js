@@ -64,9 +64,7 @@ class EventListeners {
 				this.board,
 				this.isGameEnd
 			);
-			console.log(newGameReset);
-			// this.isGameEnd = newGameReset;
-			console.log(this.isGameEnd);
+			this.isGameEnd = newGameReset;
 			this.emptyBoxes = boxes;
 			new FindActivePlayer(this.activePlayer, this.players);
 			this.addEventListenersToEachBox();

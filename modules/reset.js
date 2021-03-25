@@ -23,8 +23,9 @@ function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
 	resetPlayers(player1, player2);
 	resetPlayersArr(players);
 	resetBoard(board);
-	isGameEnd = !isGameEnd;
+	isGameEnd = false;
 	newGameBtn.disabled = true;
+	return isGameEnd;
 }
 
 const resetBoxes = () => {
