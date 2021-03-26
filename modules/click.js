@@ -43,7 +43,8 @@ class Click {
 			this.players,
 			this.draws,
 			this.isGameEnd,
-			this.winningCombinations
+			this.winningCombinations,
+			this.latestResults
 		);
 		this.isGameEnd = checkPlayerArr.isGameEnd;
 		new ActivePlayerChange(

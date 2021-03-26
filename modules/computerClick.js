@@ -43,7 +43,8 @@ class ComputerClick {
 			this.players,
 			this.draws,
 			this.isGameEnd,
-			this.winningCombinations
+			this.winningCombinations,
+			this.latestResults
 		);
 		new ActivePlayerChange(
 			this.player,

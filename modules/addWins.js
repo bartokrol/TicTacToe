@@ -1,8 +1,11 @@
 import { resultWins, resultDefeats } from "./dom-elems.js";
+import { LatestResults } from "./latestResults.js";
 
 class AddWins {
-	constructor(player) {
-		(this.player = player), this.addWins(this.player);
+	constructor(player, latestResults) {
+		(this.player = player),
+			(this.latestResults = latestResults),
+			this.addWins(this.player);
 	}
 
 	addWins = (player) => {
@@ -14,7 +17,7 @@ class AddWins {
 			resultDefeats.textContent = player.wins;
 		}
 
-		// const results = new LatestResults(player, this.latestResults);
+		const results = new LatestResults(player, this.latestResults);
 	};
 }
 

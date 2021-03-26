@@ -3,12 +3,20 @@ import { ShowWinningMarks } from "./showWinningMarks.js";
 import { DrawCheck } from "./drawCheck.js";
 
 class FindWinner {
-	constructor(winningCombinations, player, draws, isGameEnd, players) {
+	constructor(
+		winningCombinations,
+		player,
+		draws,
+		isGameEnd,
+		players,
+		latestResults
+	) {
 		(this.winningCombinations = winningCombinations),
 			(this.player = player),
 			(this.draws = draws),
 			(this.isGameEnd = isGameEnd),
 			(this.players = players),
+			(this.latestResults = latestResults),
 			this.findWinner(this.player);
 	}
 
@@ -16,12 +24,18 @@ class FindWinner {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.isGameEnd = true;
-				new SetWinner(player, this.isGameEnd);
+				new SetWinner(player, this.latestResults, this.isGameEnd);
 				new ShowWinningMarks(combination);
 				return;
 			}
 		}
-		new DrawCheck(player, this.draws, this.isGameEnd);
+		const drawCheck = new DrawCheck(
+			player,
+			this.draws,
+			this.isGameEnd,
+			this.latestResults
+		);
+		this.isGameEnd = drawCheck.isGameEnd;
 	};
 }
 

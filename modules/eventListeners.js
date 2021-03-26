@@ -99,6 +99,7 @@ class EventListeners {
 		this.removeEventListeners(e.target);
 		if (this.player.winner || this.computer.winner || this.isGameEnd) {
 			this.removeListenersForEachBox();
+			console.log(this.isGameEnd);
 		} else {
 			const computerMove = new ComputerClick(
 				this.board,

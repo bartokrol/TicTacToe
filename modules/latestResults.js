@@ -2,7 +2,9 @@ import { latest } from "./dom-elems.js";
 
 class LatestResults {
 	constructor(player, latestResults) {
-		(this.latestResults = latestResults), this.setLatestResults(player);
+		(this.player = player),
+			(this.latestResults = latestResults),
+			this.setLatestResults(player);
 	}
 
 	setLatestResults = (player) => {
@@ -10,10 +12,7 @@ class LatestResults {
 		if (player.winner) {
 			let winner = `${player.name} wygrał rundę!`;
 			this.latestResults.unshift({ winner, date });
-			const resultPlayer = document.querySelector(
-				`.game-container__current-result__${player.name}__wins`
-			);
-			resultPlayer.textContent = `${player.wins}`;
+			console.log(this.latestResults);
 		} else {
 			let winner = "It was a draw!";
 			this.latestResults.unshift({ winner, date });
