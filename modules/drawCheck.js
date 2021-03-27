@@ -1,4 +1,4 @@
-import { resultDraws } from "./dom-elems.js";
+import { resultDraws } from "./domElems.js";
 import { DrawMessage } from "./drawMessage.js";
 import { LatestResults } from "./latestResults.js";
 

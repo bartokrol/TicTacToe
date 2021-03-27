@@ -1,4 +1,4 @@
-import { boxes } from "./dom-elems.js";
+import { boxes } from "./domElems.js";
 import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 

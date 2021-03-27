@@ -1,4 +1,4 @@
-import { newGameBtn } from "./dom-elems.js";
+import { newGameBtn } from "./domElems.js";
 
 class EnableNewGameBtn {
 	constructor() {

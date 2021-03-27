@@ -1,4 +1,4 @@
-import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./dom-elems.js";
+import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./domElems.js";
 import { Click } from "./click.js";
 import { ComputerClick } from "./computerClick.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
@@ -99,7 +99,6 @@ class EventListeners {
 		this.removeEventListeners(e.target);
 		if (this.player.winner || this.computer.winner || this.isGameEnd) {
 			this.removeListenersForEachBox();
-			console.log(this.isGameEnd);
 		} else {
 			const computerMove = new ComputerClick(
 				this.board,

@@ -1,10 +1,12 @@
 import { StartGame } from "./modules/startGame.js";
 import {
 	markChoice,
-	buttons,
+	startingBtns,
 	newGameBtn,
 	bodyOverflow,
-} from "./modules/dom-elems.js";
+} from "./modules/domElems.js";
+
+// Function that starts the whole game. Player and computer marks are set. Also active player is set, player with "X" mark always starts the game.
 const choosePlayer = (e) => {
 	const game = new StartGame(
 		{
@@ -28,18 +30,21 @@ const choosePlayer = (e) => {
 	game.startNewGame();
 };
 
+// Function that is called after one of the startingBtns is clicked.
 const setBackground = () => {
 	bodyOverflow.classList.remove("body-hidden");
 	newGameBtn.disabled = true;
 	markChoice.classList.add("inactive");
 };
 
+// Add click listeners to both of the startingBtns to call choosePlayer function after one of the btns is clicked
 const addListeners = () => {
-	buttons.forEach((button) => {
+	startingBtns.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
 	});
 };
 
+// When DOM is loaded, addListeners is called
 document.addEventListener("DOMContentLoaded", () => {
 	addListeners();
 });

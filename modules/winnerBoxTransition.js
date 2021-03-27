@@ -1,4 +1,4 @@
-import { resetBtn, winnerAnnoucement, newGameBtn } from "./dom-elems.js";
+import { resetBtn, winnerAnnoucement, newGameBtn } from "./domElems.js";
 import { EnableNewGameBtn } from "./enableNewGameBtn.js";
 class WinnerBoxTransition {
 	constructor() {

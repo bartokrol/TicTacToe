@@ -1,4 +1,4 @@
-import { resultWins, resultDefeats } from "./dom-elems.js";
+import { resultWins, resultDefeats } from "./domElems.js";
 import { LatestResults } from "./latestResults.js";
 
 class AddWins {

@@ -1,5 +1,5 @@
 import { ActivePlayerChange } from "./activePlayerChange.js";
-import { boxes } from "./dom-elems.js";
+import { boxes } from "./domElems.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
