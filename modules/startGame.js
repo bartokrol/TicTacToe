@@ -2,7 +2,7 @@ import { boxes } from "./domElems.js";
 import { setEventListeners } from "./setEventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
-// StartGame function is called inside "script.js".
+// startGame function is called inside "script.js".
 // Game objects values are set, player and computer values are set inside "script.js".
 
 class StartGame {

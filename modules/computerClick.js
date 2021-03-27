@@ -4,6 +4,7 @@ import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
 
+// ComputerClick class is called inside module - "setEventListeners.js"
 class ComputerClick {
 	constructor(
 		board,
@@ -31,6 +32,8 @@ class ComputerClick {
 			this.computerClick();
 	}
 
+	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
+	// After computer "click" the classes that can be seen below are called
 	computerClick = () => {
 		const emptyBoxes = boxes.filter((box) => box.textContent === "");
 		const computerBox =

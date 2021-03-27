@@ -1,10 +1,10 @@
 import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./domElems.js";
-import { Click } from "./click.js";
+import { PlayerClick } from "./playerClick.js";
 import { ComputerClick } from "./computerClick.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
-// EventsListeners module is called inside module - "startGame.js"
+// EventsListeners class is called inside module - "startGame.js"
 class setEventListeners {
 	constructor(
 		board,
@@ -90,7 +90,7 @@ class setEventListeners {
 	// After each click the event listener to specific box is removed
 	handleClick = (e) => {
 		// Player click
-		const playerClick = new Click(
+		const click = new PlayerClick(
 			e,
 			this.board,
 			this.activePlayer,
@@ -103,7 +103,7 @@ class setEventListeners {
 			this.winningCombinations,
 			this.latestResults
 		);
-		this.isGameEnd = playerClick.isGameEnd;
+		this.isGameEnd = click.isGameEnd;
 		this.removeEventListeners(e.target);
 
 		// Validation that remove listeners for each box if game is finished (is called after player click)
