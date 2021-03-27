@@ -1,4 +1,4 @@
-import { latest } from "./dom-elems.js";
+import { latest } from "./domElems.js";
 
 class LatestResults {
 	constructor(player, latestResults) {
@@ -12,7 +12,6 @@ class LatestResults {
 		if (player.winner) {
 			let winner = `${player.name} wygrał rundę!`;
 			this.latestResults.unshift({ winner, date });
-			console.log(this.latestResults);
 		} else {
 			let winner = "It was a draw!";
 			this.latestResults.unshift({ winner, date });

@@ -1,11 +1,11 @@
-import { boxes } from "./dom-elems.js";
-import { LatestResults } from "./latestResults.js";
+import { boxes } from "./domElems.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
 import { ActivePlayerChange } from "./activePlayerChange.js";
 
-class Click {
+// PlayerClick class is called inside module - "setEventListeners.js"
+class PlayerClick {
 	constructor(
 		e,
 		board,
@@ -32,6 +32,9 @@ class Click {
 			(this.latestResults = latestResults),
 			this.click(this.e);
 	}
+
+	// Function filters for empty boxes on the board
+	// After player "click" the classes that can be seen below are called
 	click = (e) => {
 		const box = e.target;
 		this.emptyBoxes = boxes.filter((box) => box.textContent === "");
@@ -56,4 +59,4 @@ class Click {
 	};
 }
 
-export { Click };
+export { PlayerClick };

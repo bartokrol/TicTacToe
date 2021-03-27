@@ -1,4 +1,4 @@
-import { boxes } from "./dom-elems.js";
+import { boxes } from "./domElems.js";
 
 class ShowWinningMarks {
 	constructor(combination) {

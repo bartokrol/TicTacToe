@@ -1,4 +1,4 @@
-import { endgameMessage, winner } from "./dom-elems.js";
+import { endgameMessage, winner } from "./domElems.js";
 import { WinnerBoxTransition } from "./winnerBoxTransition.js";
 
 class WinningMessage {

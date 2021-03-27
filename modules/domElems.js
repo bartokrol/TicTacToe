@@ -1,10 +1,10 @@
-// DOM Elements
+// DOM Elements of index.html
 
 const boxes = Array.from(
 	document.querySelectorAll(".game-container__board-container__box")
 );
 const markChoice = document.querySelector(".starting-page");
-const buttons = [...document.querySelectorAll(".starting-page--btn")];
+const startingBtns = [...document.querySelectorAll(".starting-page--btn")];
 const resultWins = document.querySelector(
 	".game-container__current-result__wins__number"
 );
@@ -23,7 +23,6 @@ const resetBtn = document.querySelector(
 const newGameBtn = document.querySelector(
 	".game-container__buttons-container--new-game-btn"
 );
-
 const winnerAnnoucement = document.querySelector(
 	".winner-annoucement-container"
 );
@@ -31,13 +30,12 @@ const winner = document.querySelector(".winner-annoucement-container__winner");
 const endgameMessage = document.querySelector(
 	".winner-annoucement-container__heading"
 );
-
 const bodyOverflow = document.querySelector(".body");
 
 export {
 	boxes,
 	markChoice,
-	buttons,
+	startingBtns,
 	resultWins,
 	resultDraws,
 	resultDefeats,

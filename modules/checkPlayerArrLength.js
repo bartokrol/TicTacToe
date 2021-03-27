@@ -1,5 +1,6 @@
 import { FindWinner } from "./findWinner.js";
 
+// CheckPlayerArrLength is called inside modules - "computerClick.js" and "playerClick.js".
 class CheckPlayerArrLength {
 	constructor(
 		player,
@@ -18,6 +19,7 @@ class CheckPlayerArrLength {
 			this.checkPlayerArrLength();
 	}
 
+	// checkPlayerArrLength are calling FindWinner class after active player array are longer then 2 elements
 	checkPlayerArrLength = () => {
 		if (this.player.arr.length > 2) {
 			const findWinner = new FindWinner(
