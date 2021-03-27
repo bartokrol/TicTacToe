@@ -27,7 +27,6 @@ const choosePlayer = (e) => {
 		}
 	);
 	setBackground();
-	game.startNewGame();
 };
 
 // Function that is called after one of the startingBtns is clicked.

@@ -2,6 +2,9 @@ import { boxes } from "./domElems.js";
 import { EventListeners } from "./eventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
+// StartGame function is called inside "script.js".
+// Game objects values are set, player and computer values are set inside "script.js".
+
 class StartGame {
 	constructor(player, computer) {
 		(this.player = player),
@@ -26,9 +29,11 @@ class StartGame {
 				[1, 5, 9],
 				[3, 5, 7],
 			]),
-			(this.latestResults = []);
+			(this.latestResults = []),
+			this.startNewGame();
 	}
 
+	// Function that findActivePlayer (it depends of mark that each player has ("X" starts the game)) and adds EventListeners to resetBtn, neGameBtn and to each of the boxes on the board.
 	startNewGame = () => {
 		this.activePlayer = new FindActivePlayer(
 			this.activePlayer,
