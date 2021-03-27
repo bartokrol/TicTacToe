@@ -184,6 +184,10 @@
   opacity: 0.5;
 }
 
+.game-container__buttons-container--reset-btn.disabled {
+  opacity: 0.5;
+}
+
 .game-container__board-container {
   -ms-grid-row: 2;
   grid-row: 2;

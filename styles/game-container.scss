@@ -74,6 +74,11 @@
 				opacity: 0.5;
 			}
 		}
+		&--reset-btn {
+			&.disabled {
+				opacity: 0.5;
+			}
+		}
 	}
 	&__board-container {
 		grid-row: 2;
