@@ -1,4 +1,4 @@
-import { WinningMessage } from "./winningMessage.js";
+import { ResultMessage } from "./resultMessage.js";
 import { AddWins } from "./addWins.js";
 
 class SetWinner {
@@ -9,7 +9,7 @@ class SetWinner {
 	}
 
 	setWinner = (player) => {
-		new WinningMessage(player);
+		new ResultMessage(player);
 		new AddWins(player, this.latestResults);
 	};
 }
