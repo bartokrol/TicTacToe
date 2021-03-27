@@ -1,4 +1,4 @@
-// FindActivePlayer is called inside module - "startGame.js"
+// FindActivePlayer is called inside module - "startGame.js" and "setEventListeners.js" (is called after newGameBtn is clicked)
 class FindActivePlayer {
 	constructor(activePlayer, players) {
 		(this.activePlayer = activePlayer), (this.players = players);

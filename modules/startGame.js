@@ -1,5 +1,5 @@
 import { boxes } from "./domElems.js";
-import { EventListeners } from "./eventListeners.js";
+import { setEventListeners } from "./setEventListeners.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
 // StartGame function is called inside "script.js".
@@ -39,7 +39,7 @@ class StartGame {
 			this.activePlayer,
 			this.players
 		).activePlayer;
-		new EventListeners(
+		new setEventListeners(
 			this.board,
 			...this.activePlayer,
 			this.player,
