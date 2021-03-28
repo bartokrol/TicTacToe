@@ -71,6 +71,7 @@ class setEventListeners {
 			this.emptyBoxes = boxes;
 			new FindActivePlayer(this.activePlayer, this.players);
 			this.addEventListenersToEachBox();
+			this.checkComputerMove();
 		});
 		resetBtn.addEventListener("click", () => {
 			newGameBtn.classList.add("disabled");
@@ -79,6 +80,7 @@ class setEventListeners {
 			resetPageAfterResetBtn(
 				this.player,
 				this.computer,
+				this.draws,
 				this.players,
 				this.board,
 				this.isGameEnd

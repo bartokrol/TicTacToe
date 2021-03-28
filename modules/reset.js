@@ -8,20 +8,30 @@ import {
 	newGameBtn,
 } from "./domElems.js";
 
-function resetPageAfterResetBtn(player1, player2, players, board, isGameEnd) {
+// Function that reset page after reset btn is clicked
+function resetPageAfterResetBtn(
+	player,
+	computer,
+	draws,
+	players,
+	board,
+	isGameEnd
+) {
 	resetBoxes();
-	resetPlayersWins(player1, player2);
+	resetPlayersWins(player, computer, draws);
+	resetPlayers(player, computer);
 	resetPlayersArr(players);
-	resetResults(player1, player2);
+	resetResults(player, computer, draws);
 	resetBoard(board);
 	isGameEnd = false;
 	markChoice.classList.remove("inactive");
 	return isGameEnd;
 }
 
-function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
+// Function that reset page after new game btn is clicked
+function resetPageAfterNewGameBtn(player, computer, players, board, isGameEnd) {
 	resetBoxes();
-	resetPlayers(player1, player2);
+	resetPlayersForNewGame(player, computer);
 	resetPlayersArr(players);
 	resetBoard(board);
 	isGameEnd = false;
@@ -30,6 +40,7 @@ function resetPageAfterNewGameBtn(player1, player2, players, board, isGameEnd) {
 	return isGameEnd;
 }
 
+// Function cleares classNames and textContents of every box
 const resetBoxes = () => {
 	boxes.forEach((box) => {
 		box.className = "game-container__board-container__box board--box";
@@ -37,26 +48,36 @@ const resetBoxes = () => {
 	});
 };
 
-const resetResults = (player1, player2) => {
-	resultWins.textContent = player1.wins;
-	resultDraws.textContent = player2.wins;
-	resultDefeats.textContent = player2.wins;
+// Function resets players wins and latest unordered list
+const resetResults = (player, computer, draws) => {
+	resultWins.textContent = player.wins;
+	resultDraws.textContent = draws;
+	resultDefeats.textContent = computer.wins;
 	latest.innerHTML = "";
 };
 
-const resetPlayersWins = (player1, player2) => {
-	player1.wins = 0;
-	player2.wins = 0;
-	resetPlayers(player1, player2);
+// Function that resets player and computer wins and draws number
+const resetPlayersWins = (player, computer, draws) => {
+	player.wins = 0;
+	computer.wins = 0;
+	draws = 0;
 };
 
-const resetPlayers = (player1, player2) => {
-	player1.active = true;
-	player2.active = false;
-	player1.winner = false;
-	player2.winner = false;
+//
+const resetPlayers = (player, computer) => {
+	player.active = false;
+	computer.active = false;
+	player.winner = false;
+	computer.winner = false;
 };
 
+const resetPlayersForNewGame = (player, computer) => {
+	player.mark === "X"
+		? (player.active = true) && (computer.active = false)
+		: (computer.active = true) && (player.active = false);
+};
+
+// Function that reset the board
 const resetBoard = (board) => {
 	board = [
 		[null, null, null],
@@ -65,6 +86,7 @@ const resetBoard = (board) => {
 	];
 };
 
+// Function that reset the each players array
 const resetPlayersArr = (players) => {
 	for (let player of players) {
 		player.arr = [];

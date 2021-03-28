@@ -1,7 +1,7 @@
 import { endgameMessage, winner } from "./domElems.js";
-import { WinnerBoxTransition } from "./winnerBoxTransition.js";
+import { ResultBoxTransition } from "./resultBoxTransition.js";
 
-class WinningMessage {
+class ResultMessage {
 	constructor(activePlayer) {
 		(this.activePlayer = activePlayer),
 			this.showWinningMessage(this.activePlayer);
@@ -10,8 +10,8 @@ class WinningMessage {
 	showWinningMessage = (player) => {
 		endgameMessage.textContent = "Winner!";
 		winner.textContent = `${player.name} ( ${player.mark} )`;
-		new WinnerBoxTransition();
+		new ResultBoxTransition();
 	};
 }
 
-export { WinningMessage };
+export { ResultMessage };

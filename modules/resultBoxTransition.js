@@ -1,8 +1,8 @@
 import { resetBtn, winnerAnnoucement } from "./domElems.js";
 import { EnableNewGameBtn } from "./enableNewGameBtn.js";
 
-// WinnerBoxTransition is called inside "drawMessage.js" module.
-class WinnerBoxTransition {
+// ResultBoxTransition is called inside "drawMessage.js" module.
+class ResultBoxTransition {
 	constructor() {
 		this.showAndHideWinnerBox();
 	}
@@ -21,4 +21,4 @@ class WinnerBoxTransition {
 	};
 }
 
-export { WinnerBoxTransition };
+export { ResultBoxTransition };
