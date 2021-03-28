@@ -34,6 +34,7 @@ class setEventListeners {
 
 	// Function is called to find if computer is an active player. If true the computerClick class is called. After this the box events are removed.
 	checkComputerMove = () => {
+		console.log("computerCheck");
 		if (this.computer.active) {
 			const computerMove = new ComputerClick(
 				this.board,
@@ -47,17 +48,14 @@ class setEventListeners {
 				this.winningCombinations,
 				this.latestResults
 			);
+			console.log(computerMove.computerBox);
 			this.removeEventListeners(computerMove.computerBox);
 		}
 	};
 
 	// Function that add mouseout, mouseover, click events to all of the boxes on the board and click event to newGameBtn, resetBtn after new game is started.
 	addEventListenersToEachBox = () => {
-		boxes.forEach((box) => {
-			box.addEventListener("mouseout", this.hideElementOnMouseOut);
-			box.addEventListener("mouseover", this.showElementOnMouseOver);
-			box.addEventListener("click", this.handleClick);
-		});
+		this.addListenersToBoxes();
 		newGameBtn.addEventListener("click", () => {
 			// resetPageAfterNewGameBtn is set inside "reset.js".
 			const newGameReset = resetPageAfterNewGameBtn(
@@ -70,7 +68,7 @@ class setEventListeners {
 			this.isGameEnd = newGameReset;
 			this.emptyBoxes = boxes;
 			new FindActivePlayer(this.activePlayer, this.players);
-			this.addEventListenersToEachBox();
+			this.addListenersToBoxes();
 			this.checkComputerMove();
 		});
 		resetBtn.addEventListener("click", () => {
@@ -133,6 +131,14 @@ class setEventListeners {
 		}
 	};
 
+	addListenersToBoxes = () => {
+		boxes.forEach((box) => {
+			box.addEventListener("mouseout", this.hideElementOnMouseOut);
+			box.addEventListener("mouseover", this.showElementOnMouseOver);
+			box.addEventListener("click", this.handleClick);
+		});
+	};
+
 	// Function that shows player.mark after specific box is hovered
 	showElementOnMouseOver = (e) => {
 		e.target.textContent = `${this.player.mark}`;
@@ -154,6 +160,7 @@ class setEventListeners {
 
 	// Function that remove event listeners for specific box
 	removeEventListeners = (box) => {
+		console.log(box);
 		box.removeEventListener("click", this.handleClick);
 		box.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		box.removeEventListener("mouseover", this.showElementOnMouseOver);
