@@ -63,6 +63,7 @@ class setEventListeners {
 			const newGameReset = resetPageAfterNewGameBtn(
 				this.player,
 				this.computer,
+				this.draws,
 				this.players,
 				this.board,
 				this.isGameEnd
@@ -79,6 +80,7 @@ class setEventListeners {
 			resetPageAfterResetBtn(
 				this.player,
 				this.computer,
+				this.draws,
 				this.players,
 				this.board,
 				this.isGameEnd

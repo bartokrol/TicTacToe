@@ -1,11 +1,15 @@
 import { latest } from "./domElems.js";
 
+// LatestResults is called in "drawCheck.js" and "addWins.js" modules
 class LatestResults {
 	constructor(player, latestResults) {
 		(this.player = player),
 			(this.latestResults = latestResults),
 			this.setLatestResults(player);
 	}
+
+	// Function gets fullDate from getDate function. If there is a winner then specific string is send to latestResults array, if there is a draw then "it was a draw!" message is sent inside latestResults array.
+	// Then map function shows specific li elements in index.html
 
 	setLatestResults = (player) => {
 		const date = this.getDate();
@@ -25,6 +29,7 @@ class LatestResults {
 		this.removeLatestResult();
 	};
 
+	// Function get's actual date and time and return fullDate;
 	getDate = () => {
 		const date = new Date();
 		const year = date.getFullYear();
@@ -41,6 +46,7 @@ class LatestResults {
 		return fullDate;
 	};
 
+	// Function removes last element of the array if length is more then 4 elements
 	removeLatestResult = () => {
 		if (this.latestResults.length > 4) {
 			this.latestResults.pop();
