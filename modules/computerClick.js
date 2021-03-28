@@ -35,7 +35,6 @@ class ComputerClick {
 	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
 	// After computer "click" the classes that can be seen below are called
 	computerClick = () => {
-		console.log("computerClick");
 		const emptyBoxes = boxes.filter((box) => box.textContent === "");
 		const computerBox =
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];

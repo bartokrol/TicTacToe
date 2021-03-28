@@ -48,7 +48,6 @@ class setEventListeners {
 				this.latestResults
 			);
 			this.removeEventListeners(computerMove.computerBox);
-			return;
 		}
 	};
 
@@ -98,7 +97,6 @@ class setEventListeners {
 		if (this.isGameEnd) {
 			this.removeListenersForEachBox();
 			newGameBtn.addEventListener("click", this.newGameListener);
-			return;
 		} else {
 			const computerMove = new ComputerClick(
 				this.board,
@@ -118,7 +116,6 @@ class setEventListeners {
 				this.removeListenersForEachBox();
 				newGameBtn.addEventListener("click", this.newGameListener);
 			}
-			return;
 			// The same validation that remove listeners for each box if game is finished (but is called after computer click)
 		}
 	};
@@ -134,11 +131,9 @@ class setEventListeners {
 		this.isGameEnd = newGameReset;
 		this.emptyBoxes = boxes;
 		new FindActivePlayer(this.activePlayer, this.players);
-		console.log(this.activePlayer);
 		this.addListenersToBoxes();
 		this.checkComputerMove();
 		newGameBtn.removeEventListener("click", this.newGameListener);
-		console.log("usunięto");
 	};
 
 	addListenersToBoxes = () => {
