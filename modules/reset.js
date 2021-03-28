@@ -19,6 +19,7 @@ function resetPageAfterResetBtn(
 ) {
 	resetBoxes();
 	resetPlayersWins(player, computer, draws);
+	resetPlayers(player, computer);
 	resetPlayersArr(players);
 	resetResults(player, computer, draws);
 	resetBoard(board);
@@ -28,16 +29,9 @@ function resetPageAfterResetBtn(
 }
 
 // Function that reset page after new game btn is clicked
-function resetPageAfterNewGameBtn(
-	player,
-	computer,
-	draws,
-	players,
-	board,
-	isGameEnd
-) {
+function resetPageAfterNewGameBtn(player, computer, players, board, isGameEnd) {
 	resetBoxes();
-	// resetPlayers(player, computer);
+	resetPlayersForNewGame(player, computer);
 	resetPlayersArr(players);
 	resetBoard(board);
 	isGameEnd = false;
@@ -67,16 +61,21 @@ const resetPlayersWins = (player, computer, draws) => {
 	player.wins = 0;
 	computer.wins = 0;
 	draws = 0;
-	// resetPlayers(player, computer);
 };
 
 //
-// const resetPlayers = (player, computer) => {
-// 	player.active = true;
-// 	computer.active = false;
-// 	player.winner = false;
-// 	computer.winner = false;
-// };
+const resetPlayers = (player, computer) => {
+	player.active = false;
+	computer.active = false;
+	player.winner = false;
+	computer.winner = false;
+};
+
+const resetPlayersForNewGame = (player, computer) => {
+	player.mark === "X"
+		? (player.active = true) && (computer.active = false)
+		: (computer.active = true) && (player.active = false);
+};
 
 // Function that reset the board
 const resetBoard = (board) => {
