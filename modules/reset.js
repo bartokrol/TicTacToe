@@ -31,6 +31,7 @@ function resetPageAfterResetBtn(
 // Function that reset page after new game btn is clicked
 function resetPageAfterNewGameBtn(player, computer, players, board, isGameEnd) {
 	resetBoxes();
+	resetPlayers(player, computer);
 	resetPlayersForNewGame(player, computer);
 	resetPlayersArr(players);
 	resetBoard(board);

@@ -8,6 +8,7 @@ class EnableNewGameBtn {
 
 	// Function that enables newGameBtn
 	enableNewGameBtn = () => {
+		console.log("button enabled");
 		newGameBtn.disabled = false;
 		newGameBtn.classList.remove("disabled");
 	};
