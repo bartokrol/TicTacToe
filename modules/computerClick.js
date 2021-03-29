@@ -35,14 +35,13 @@ class ComputerClick {
 	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
 	// After computer "click" the classes that can be seen below are called
 	computerClick = () => {
-		console.log("computerClick");
 		const emptyBoxes = boxes.filter((box) => box.textContent === "");
 		const computerBox =
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 		this.computerBox = computerBox;
 		new AddBoxToBoard(computerBox, this.board);
 		new PushBoxIntoPlayerArr(computerBox, this.computer);
-		new CheckPlayerArrLength(
+		const checkPlayerArr = new CheckPlayerArrLength(
 			this.computer,
 			this.players,
 			this.draws,
@@ -50,6 +49,7 @@ class ComputerClick {
 			this.winningCombinations,
 			this.latestResults
 		);
+		this.isGameEnd = checkPlayerArr.isGameEnd;
 		new ActivePlayerChange(
 			this.player,
 			this.computer,

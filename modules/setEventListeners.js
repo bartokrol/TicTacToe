@@ -48,7 +48,6 @@ class setEventListeners {
 				this.latestResults
 			);
 			this.removeEventListeners(computerMove.computerBox);
-			return;
 		}
 	};
 
@@ -56,22 +55,7 @@ class setEventListeners {
 	addEventListeners = () => {
 		this.addListenersToBoxes();
 		newGameBtn.addEventListener("click", this.newGameListener);
-		// resetPageAfterNewGameBtn is set inside "reset.js".
-		resetBtn.addEventListener("click", () => {
-			newGameBtn.classList.add("disabled");
-			bodyOverflow.classList.add("body-hidden");
-			// resetPageAfterResetBtn is set inside "reset.js".
-			resetPageAfterResetBtn(
-				this.player,
-				this.computer,
-				this.draws,
-				this.players,
-				this.board,
-				this.isGameEnd
-			);
-			this.removeListenersForEachBox();
-			newGameBtn.removeEventListener("click", this.newGameListener);
-		});
+		resetBtn.addEventListener("click", this.resetListener);
 	};
 
 	// Function is called after one of the box on board is clicked. The player click is set on the board and after that computerClick also lands on the board.
@@ -98,7 +82,6 @@ class setEventListeners {
 		if (this.isGameEnd) {
 			this.removeListenersForEachBox();
 			newGameBtn.addEventListener("click", this.newGameListener);
-			return;
 		} else {
 			const computerMove = new ComputerClick(
 				this.board,
@@ -118,12 +101,17 @@ class setEventListeners {
 				this.removeListenersForEachBox();
 				newGameBtn.addEventListener("click", this.newGameListener);
 			}
-			return;
 			// The same validation that remove listeners for each box if game is finished (but is called after computer click)
+		}
+		if (this.isGameEnd) {
+			this.removeListenersForEachBox();
+			newGameBtn.addEventListener("click", this.newGameListener);
 		}
 	};
 
+	// Function that resets the game after newGameBtn is clicked
 	newGameListener = () => {
+		// resetPageAfterNewGameBtn is set inside "reset.js".
 		const newGameReset = resetPageAfterNewGameBtn(
 			this.player,
 			this.computer,
@@ -134,13 +122,28 @@ class setEventListeners {
 		this.isGameEnd = newGameReset;
 		this.emptyBoxes = boxes;
 		new FindActivePlayer(this.activePlayer, this.players);
-		console.log(this.activePlayer);
 		this.addListenersToBoxes();
 		this.checkComputerMove();
 		newGameBtn.removeEventListener("click", this.newGameListener);
-		console.log("usunięto");
 	};
 
+	resetListener = () => {
+		newGameBtn.classList.add("disabled");
+		bodyOverflow.classList.add("body-hidden");
+		// resetPageAfterResetBtn is set inside "reset.js".
+		resetPageAfterResetBtn(
+			this.player,
+			this.computer,
+			this.draws,
+			this.players,
+			this.board,
+			this.isGameEnd
+		);
+		this.removeListenersForEachBox();
+		newGameBtn.removeEventListener("click", this.newGameListener);
+	};
+
+	// Function that adds event listeners to every box
 	addListenersToBoxes = () => {
 		boxes.forEach((box) => {
 			box.addEventListener("mouseout", this.hideElementOnMouseOut);
@@ -170,6 +173,7 @@ class setEventListeners {
 
 	// Function that remove event listeners for specific box
 	removeEventListeners = (box) => {
+		console.log("usunięto");
 		box.removeEventListener("click", this.handleClick);
 		box.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		box.removeEventListener("mouseover", this.showElementOnMouseOver);
