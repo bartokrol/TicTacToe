@@ -103,6 +103,10 @@ class setEventListeners {
 			}
 			// The same validation that remove listeners for each box if game is finished (but is called after computer click)
 		}
+		if (this.isGameEnd) {
+			this.removeListenersForEachBox();
+			newGameBtn.addEventListener("click", this.newGameListener);
+		}
 	};
 
 	// Function that resets the game after newGameBtn is clicked
@@ -169,6 +173,7 @@ class setEventListeners {
 
 	// Function that remove event listeners for specific box
 	removeEventListeners = (box) => {
+		console.log("usunięto");
 		box.removeEventListener("click", this.handleClick);
 		box.removeEventListener("mouseout", this.hideElementOnMouseOut);
 		box.removeEventListener("mouseover", this.showElementOnMouseOver);

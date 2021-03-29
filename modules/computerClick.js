@@ -41,7 +41,7 @@ class ComputerClick {
 		this.computerBox = computerBox;
 		new AddBoxToBoard(computerBox, this.board);
 		new PushBoxIntoPlayerArr(computerBox, this.computer);
-		new CheckPlayerArrLength(
+		const checkPlayerArr = new CheckPlayerArrLength(
 			this.computer,
 			this.players,
 			this.draws,
@@ -49,6 +49,7 @@ class ComputerClick {
 			this.winningCombinations,
 			this.latestResults
 		);
+		this.isGameEnd = checkPlayerArr.isGameEnd;
 		new ActivePlayerChange(
 			this.player,
 			this.computer,

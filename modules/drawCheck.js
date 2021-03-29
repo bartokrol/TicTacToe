@@ -16,8 +16,6 @@ class DrawCheck {
 	// If this is true the game is drawn, and "isGameEnd" is set true.
 	// After this new LatestResults is called and DrawMessage appears on the screen.
 	drawCheck = (player, draws) => {
-		console.log(player.arr.length);
-		console.log(player);
 		if (player.arr.length === 5 && player.winner === false) {
 			this.isGameEnd = true;
 			draws++;
