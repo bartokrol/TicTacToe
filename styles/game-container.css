@@ -1,5 +1,5 @@
 .won {
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .game-container {
@@ -10,7 +10,7 @@
   -ms-grid-rows: 1fr 3fr 3fr;
       grid-template-rows: 1fr 3fr 3fr;
   grid-gap: 20px;
-  background-color: #112d4e;
+  background-color: #3f72af;
 }
 
 .game-container__results-container {
@@ -36,19 +36,19 @@
 }
 
 .game-container__current-result__heading {
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .game-container__current-result__wins__number {
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .game-container__current-result__draws__number {
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .game-container__current-result__defeats__number {
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .game-container__latest-results {
@@ -56,7 +56,11 @@
 }
 
 .game-container__latest-results__heading {
-  color: #3f72af;
+  color: #112d4e;
+}
+
+.game-container__latest-results__info {
+  color: #112d4e;
 }
 
 .game-container__latest-results__results {
@@ -86,8 +90,8 @@
   height: 80%;
   margin: 5px;
   padding: 5px;
-  background-color: #112d4e;
-  border: 3px solid #3f72af;
+  background-color: #3f72af;
+  border: 3px solid #112d4e;
   border-radius: 5px;
   color: #f9f7f7;
   font-family: "Akaya Telivigala", cursive;
@@ -96,7 +100,7 @@
 
 .game-container__buttons-container--btn:hover {
   background-color: #f9f7f7;
-  color: #112d4e;
+  color: #3f72af;
 }
 
 .game-container__buttons-container--new-game-btn.disabled {

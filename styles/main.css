@@ -194,6 +194,10 @@
   color: #112d4e;
 }
 
+.game-container__latest-results__info {
+  color: #112d4e;
+}
+
 .game-container__latest-results__results {
   text-align: center;
   width: 90%;
