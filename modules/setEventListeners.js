@@ -1,8 +1,5 @@
 import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./domElems.js";
-import { PlayerClick } from "./playerClick.js";
 import { Click } from "./click.js";
-import { ComputerClick } from "./computerClick.js";
-import { ActivePlayerChange } from "./activePlayerChange.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
 
