@@ -19,7 +19,7 @@ Player with "X" mark is always the starting player.
 
 ### Game
 
-If player choose "O" as his mark the computer click starts the game with his "X" mark.
+If player choose "O" as his mark the computer click starts the game with his "X" mark.              
 After every click on the empty box on the board the active player changes.
 When the game is finished, the boxes that match the winning combinations change their color which shows the exact winning combination.
 After this the new game can be started (the players' marks stay the same and the results are still being counted) or the whole page can be reset and the game starts from the beginning.

@@ -45,11 +45,12 @@
 			color: $winningClr;
 		}
 		&__results {
-			text-align: center;
+			text-align: left;
 			width: 90%;
 			list-style: decimal;
 			margin: 0 auto;
 			&__latest-result {
+				margin-left: 20px;
 				color: $winningClr;
 				&__winner {
 					color: $basicClr;
