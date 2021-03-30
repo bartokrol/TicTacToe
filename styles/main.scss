@@ -52,4 +52,9 @@ body {
 		height: 100vh;
 		@include centerBox();
 	}
+	.body {
+		&__game-name {
+			font-size: 100px;
+		}
+	}
 }

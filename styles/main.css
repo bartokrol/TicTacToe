@@ -617,5 +617,8 @@ body.body-hidden {
         -ms-flex-align: center;
             align-items: center;
   }
+  .body__game-name {
+    font-size: 100px;
+  }
 }
 /*# sourceMappingURL=main.css.map */
