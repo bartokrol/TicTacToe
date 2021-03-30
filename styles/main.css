@@ -239,6 +239,7 @@
   color: #f9f7f7;
   font-family: "Akaya Telivigala", cursive;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .game-container__buttons-container--btn:hover {
@@ -246,8 +247,16 @@
   color: #3f72af;
 }
 
+.game-container__buttons-container--new-game-btn {
+  cursor: pointer;
+}
+
 .game-container__buttons-container--new-game-btn.disabled {
   opacity: 0.5;
+}
+
+.game-container__buttons-container--reset-btn {
+  cursor: pointer;
 }
 
 .game-container__buttons-container--reset-btn.disabled {
@@ -271,6 +280,7 @@
 }
 
 .game-container__board-container__box {
+  cursor: default;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -301,6 +311,7 @@
 }
 
 .game-container__board-container__box.board--box--hover {
+  cursor: pointer;
   opacity: 0.5;
 }
 

@@ -10,7 +10,7 @@ class AddWins {
 	}
 
 	// Function sets player.winner to true, add wins which show inside "current results" as wins or defeats (depends on which player has won).
-	// Then new LatestResults is called. 
+	// Then new LatestResults is called.
 	addWins = (player) => {
 		player.winner = true;
 		player.wins++;
