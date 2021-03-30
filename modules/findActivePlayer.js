@@ -7,7 +7,7 @@ class FindActivePlayer {
 
 	// Function that filter inside "players" array which contain player and computer.
 	findActivePlayer = () => {
-		this.activePlayer = this.players.filter((player) => player.active);
+		this.activePlayer = this.players.find((el) => el.active);
 	};
 }
 

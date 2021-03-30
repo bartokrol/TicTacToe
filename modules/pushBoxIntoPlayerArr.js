@@ -7,6 +7,7 @@ class PushBoxIntoPlayerArr {
 
 	// Clicked element is send into the player array.
 	pushBoxIntoPlayerArr = (box, player) => {
+		// console.log(player);
 		player.arr.push(Number(box.id));
 		box.textContent = `${player.mark}`;
 	};

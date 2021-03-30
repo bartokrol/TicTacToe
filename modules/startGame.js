@@ -41,7 +41,7 @@ class StartGame {
 		).activePlayer;
 		new setEventListeners(
 			this.board,
-			...this.activePlayer,
+			this.activePlayer,
 			this.player,
 			this.computer,
 			this.players,
