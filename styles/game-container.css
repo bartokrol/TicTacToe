@@ -70,6 +70,14 @@
   margin: 0 auto;
 }
 
+.game-container__latest-results__results__latest-result {
+  color: #112d4e;
+}
+
+.game-container__latest-results__results__latest-result__winner {
+  color: #f9f7f7;
+}
+
 .game-container__buttons-container {
   -ms-grid-row: 1;
   grid-row: 1;

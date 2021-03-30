@@ -49,6 +49,12 @@
 			width: 90%;
 			list-style: decimal;
 			margin: 0 auto;
+			&__latest-result {
+				color: $winningClr;
+				&__winner {
+					color: $basicClr;
+				}
+			}
 		}
 	}
 

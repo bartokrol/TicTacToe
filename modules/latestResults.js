@@ -14,10 +14,10 @@ class LatestResults {
 	setLatestResults = (player) => {
 		const date = this.getDate();
 		if (player.winner) {
-			let winner = `${player.name} wygrał rundę!`;
+			let winner = `${player.name} has won the round!`;
 			this.latestResults.unshift({ winner, date });
 		} else {
-			let winner = "It was a draw!";
+			let winner = "It was a draw...";
 			this.latestResults.unshift({ winner, date });
 		}
 		latest.innerHTML = this.latestResults
