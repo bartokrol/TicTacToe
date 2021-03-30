@@ -5,6 +5,7 @@ The game can be played in here -> https://bartokrol.github.io/TicTacToe/
 
 ### Rules
 
+-   Player vs. Computer
 -   The player with the "X" mark starts the game.
 -   The first player to get 3 of his marks in a row (up, down, across, or diagonally) is the winner.
 -   When all 9 squares are full and there is no winner, there is a draw.
