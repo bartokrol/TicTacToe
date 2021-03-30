@@ -1,8 +1,7 @@
-$startBgrClr: rgba(244, 209, 96, 0.7);
-$basicClr: #8ac4d0;
-$boxClr: #f4d160;
-$backgroundClr: #fbeeac;
-$winningClr: #28527a;
+$startBgrClr: rgba(63, 114, 175, 0.7);
+$basicClr: #f9f7f7;
+$winningClr: #112d4e;
+$backgroundClr: #3f72af;
 
 @mixin centerBox {
 	display: flex;

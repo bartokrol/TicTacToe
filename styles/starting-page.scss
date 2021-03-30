@@ -14,7 +14,7 @@
 	&__window {
 		width: 100%;
 		height: 200px;
-		background-color: $backgroundClr;
+		background-color: $winningClr;
 		padding: 20px;
 		display: grid;
 		justify-content: center;
@@ -37,9 +37,9 @@
 		font-size: 40px;
 		width: 50%;
 		margin: 0 auto;
-		border: 3px solid $winningClr;
+		border: 3px solid $basicClr;
 		background-color: $backgroundClr;
-		color: $winningClr;
+		color: $basicClr;
 		&:hover {
 			background-color: $winningClr;
 			color: $backgroundClr;
