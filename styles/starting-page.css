@@ -14,8 +14,55 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   z-index: 10;
   overflow: hidden;
+}
+
+.starting-page__rules {
+  width: 100%;
+  height: auto;
+  background-color: #112d4e;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 5px;
+  border: 3px solid #f9f7f7;
+}
+
+.starting-page__rules.hidden {
+  visibility: hidden;
+}
+
+.starting-page__rules--button {
+  font-family: "Akaya Telivigala", cursive;
+  border-radius: 2px;
+  font-size: 30px;
+  width: 100px;
+  margin: 0 auto;
+  border: 3px solid #f9f7f7;
+  background-color: #3f72af;
+  color: #f9f7f7;
+  cursor: pointer;
+}
+
+.starting-page__rules--button:hover {
+  background-color: #112d4e;
+  color: #3f72af;
 }
 
 .starting-page__window {
@@ -56,6 +103,7 @@
   border: 3px solid #f9f7f7;
   background-color: #3f72af;
   color: #f9f7f7;
+  cursor: pointer;
 }
 
 .starting-page--btn:hover {
@@ -68,12 +116,18 @@
 }
 
 @media (min-width: 351px) {
+  .starting-page__rules {
+    width: 350px;
+  }
   .starting-page__window {
     width: 350px;
   }
 }
 
 @media (orientation: landscape) {
+  .starting-page__rules {
+    width: 350px;
+  }
   .starting-page__window {
     width: 350px;
   }

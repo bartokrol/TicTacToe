@@ -1,5 +1,7 @@
 import { StartGame } from "./modules/startGame.js";
 import {
+	rulesBtn,
+	rules,
 	markChoice,
 	startingBtns,
 	newGameBtn,
@@ -40,6 +42,9 @@ const setBackground = () => {
 const addListeners = () => {
 	startingBtns.forEach((button) => {
 		button.addEventListener("click", choosePlayer);
+	});
+	rulesBtn.addEventListener("click", () => {
+		rules.classList.toggle("hidden");
 	});
 };
 
