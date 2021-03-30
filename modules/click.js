@@ -1,13 +1,13 @@
+import { ActivePlayerChange } from "./activePlayerChange.js";
 import { boxes } from "./domElems.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
-import { ActivePlayerChange } from "./activePlayerChange.js";
 
-// PlayerClick class is called inside module - "setEventListeners.js"
-class PlayerClick {
+// Click class is called inside module - "setEventListeners.js"
+class Click {
 	constructor(
-		e,
+		box,
 		board,
 		activePlayer,
 		player,
@@ -19,7 +19,7 @@ class PlayerClick {
 		winningCombinations,
 		latestResults
 	) {
-		(this.e = e),
+		(this.box = box),
 			(this.board = board),
 			(this.activePlayer = activePlayer),
 			(this.player = player),
@@ -30,19 +30,23 @@ class PlayerClick {
 			(this.emptyBoxes = emptyBoxes),
 			(this.winningCombinations = winningCombinations),
 			(this.latestResults = latestResults),
-			this.click(this.e);
+			this.click();
 	}
 
-	// Function filters for empty boxes on the board
-	// After player "click" the classes that can be seen below are called
-	click = (e) => {
-		const box = e.target;
-		this.emptyBoxes = boxes.filter((box) => box.textContent === "");
-		box.classList.remove("board--box--hover");
-		new AddBoxToBoard(box, this.board);
-		new PushBoxIntoPlayerArr(box, this.player);
+	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
+	// After computer "click" the classes that can be seen below are called
+	click = () => {
+		// console.log(this.activePlayer);
+		// const emptyBoxes = boxes.filter((box) => box.textContent === "");
+		// const computerBox =
+		// 	emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+		// this.computerBox = computerBox;
+		// console.log(this.activePlayer);
+		this.box.classList.remove("board--box--hover");
+		new AddBoxToBoard(this.box, this.board);
+		new PushBoxIntoPlayerArr(this.box, this.activePlayer);
 		const checkPlayerArr = new CheckPlayerArrLength(
-			this.player,
+			this.activePlayer,
 			this.players,
 			this.draws,
 			this.isGameEnd,
@@ -50,13 +54,14 @@ class PlayerClick {
 			this.latestResults
 		);
 		this.isGameEnd = checkPlayerArr.isGameEnd;
-		new ActivePlayerChange(
+		const activePlayer = new ActivePlayerChange(
 			this.player,
 			this.computer,
 			this.activePlayer,
 			this.players
 		);
+		this.activePlayer = activePlayer.activePlayer;
 	};
 }
 
-export { PlayerClick };
+export { Click };

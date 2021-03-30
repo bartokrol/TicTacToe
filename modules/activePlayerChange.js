@@ -14,7 +14,11 @@ class ActivePlayerChange {
 	changeActivePlayer = () => {
 		this.player.active = !this.player.active;
 		this.computer.active = !this.computer.active;
-		new FindActivePlayer(this.activePlayer, this.players);
+		const findActivePlayer = new FindActivePlayer(
+			this.activePlayer,
+			this.players
+		);
+		this.activePlayer = findActivePlayer.activePlayer;
 	};
 }
 

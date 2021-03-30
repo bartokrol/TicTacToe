@@ -20,7 +20,7 @@ class DrawCheck {
 			this.isGameEnd = true;
 			draws++;
 			resultDraws.textContent = draws;
-			const results = new LatestResults("", this.latestResults);
+			new LatestResults("", this.latestResults);
 			new DrawMessage();
 		}
 	};
