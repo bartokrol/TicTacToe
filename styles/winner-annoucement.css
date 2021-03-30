@@ -6,7 +6,7 @@
   height: 150px;
   border-radius: 50px;
   background-color: #f9f7f7;
-  color: #112d4e;
+  color: #3f72af;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   -webkit-transition: 1s all ease;
@@ -37,7 +37,7 @@
   font-size: 40px;
   -webkit-transition: 1s all ease;
   transition: 1s all ease;
-  color: #3f72af;
+  color: #112d4e;
 }
 
 .winner-annoucement-container.hidden {

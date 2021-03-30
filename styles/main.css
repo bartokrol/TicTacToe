@@ -199,13 +199,14 @@
 }
 
 .game-container__latest-results__results {
-  text-align: center;
+  text-align: left;
   width: 90%;
   list-style: decimal;
   margin: 0 auto;
 }
 
 .game-container__latest-results__results__latest-result {
+  margin-left: 20px;
   color: #112d4e;
 }
 
