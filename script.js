@@ -2,6 +2,7 @@ import { StartGame } from "./modules/startGame.js";
 import {
 	rulesBtn,
 	rules,
+	gameContainer,
 	markChoice,
 	startingBtns,
 	newGameBtn,
@@ -33,6 +34,7 @@ const choosePlayer = (e) => {
 
 // Function that is called after one of the startingBtns is clicked.
 const setBackground = () => {
+	gameContainer.classList.remove("hidden");
 	bodyOverflow.classList.remove("body-hidden");
 	newGameBtn.disabled = true;
 	markChoice.classList.add("inactive");

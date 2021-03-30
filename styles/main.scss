@@ -18,9 +18,25 @@ body {
 	}
 }
 
+.body {
+	&__game-name {
+		font-size: 70px;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: -10;
+	}
+}
+
 @media (orientation: portrait) and (min-width: 450px) {
 	body {
 		@include centerBox();
+	}
+	.body {
+		&__game-name {
+			font-size: 100px;
+		}
 	}
 }
 

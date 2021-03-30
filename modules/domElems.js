@@ -2,6 +2,7 @@
 
 const rulesBtn = document.querySelector(".starting-page__rules--button");
 const rules = document.querySelector(".starting-page__rules");
+const gameContainer = document.querySelector(".game-container");
 
 const boxes = Array.from(
 	document.querySelectorAll(".game-container__board-container__box")
@@ -38,6 +39,7 @@ const bodyOverflow = document.querySelector(".body");
 export {
 	rulesBtn,
 	rules,
+	gameContainer,
 	boxes,
 	markChoice,
 	startingBtns,

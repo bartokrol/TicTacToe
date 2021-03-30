@@ -2,7 +2,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -52,7 +53,7 @@
   border-radius: 2px;
   font-size: 30px;
   width: 100px;
-  margin: 0 auto;
+  margin: 5px auto;
   border: 3px solid #f9f7f7;
   background-color: #3f72af;
   color: #f9f7f7;

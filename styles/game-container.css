@@ -13,6 +13,10 @@
   background-color: #3f72af;
 }
 
+.game-container.hidden {
+  visibility: hidden;
+}
+
 .game-container__results-container {
   -ms-grid-row: 3;
   grid-row: 3;

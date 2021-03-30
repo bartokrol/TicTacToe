@@ -1,4 +1,10 @@
-import { boxes, resetBtn, newGameBtn, bodyOverflow } from "./domElems.js";
+import {
+	gameContainer,
+	boxes,
+	resetBtn,
+	newGameBtn,
+	bodyOverflow,
+} from "./domElems.js";
 import { Click } from "./click.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
 import { FindActivePlayer } from "./findActivePlayer.js";
@@ -118,6 +124,7 @@ class setEventListeners {
 	};
 
 	resetListener = () => {
+		gameContainer.classList.add("hidden");
 		newGameBtn.classList.add("disabled");
 		bodyOverflow.classList.add("body-hidden");
 		// resetPageAfterResetBtn is set inside "reset.js".
