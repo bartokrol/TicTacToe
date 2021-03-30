@@ -41,11 +41,20 @@
 		&__heading {
 			color: $winningClr;
 		}
+		&__info {
+			color: $winningClr;
+		}
 		&__results {
 			text-align: center;
 			width: 90%;
 			list-style: decimal;
 			margin: 0 auto;
+			&__latest-result {
+				color: $winningClr;
+				&__winner {
+					color: $basicClr;
+				}
+			}
 		}
 	}
 
@@ -64,17 +73,20 @@
 			color: $basicClr;
 			font-family: "Akaya Telivigala", cursive;
 			font-size: 30px;
+			cursor: pointer;
 			&:hover {
 				background-color: $basicClr;
 				color: $backgroundClr;
 			}
 		}
 		&--new-game-btn {
+			cursor: pointer;
 			&.disabled {
 				opacity: 0.5;
 			}
 		}
 		&--reset-btn {
+			cursor: pointer;
 			&.disabled {
 				opacity: 0.5;
 			}
@@ -90,6 +102,7 @@
 			height: 400px;
 		}
 		&__box {
+			cursor: default;
 			@include centerBox();
 			font-size: 75px;
 			border: 3px solid $basicClr;
@@ -114,6 +127,7 @@
 				border-bottom: none;
 			}
 			&.board--box--hover {
+				cursor: pointer;
 				opacity: 0.5;
 			}
 		}

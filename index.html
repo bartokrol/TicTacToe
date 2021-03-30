@@ -19,6 +19,29 @@
 	</head>
 	<body class="body body-hidden">
 		<div class="starting-page">
+			<div class="starting-page__rules hidden">
+				<h1>Rules</h1>
+				<ul>
+					<li>Player with "X" mark starts the game.</li>
+					<li>
+						The first player to get 3 of his marks in a row (up,
+						down, across, or diagonally) is the winner.
+					</li>
+					<li>
+						When all 9 squares are full and there is no winner, the
+						game is drawn.
+					</li>
+					<li>
+						"Reset all" button resets all of the previous results
+						and players mark has to be chosen again.
+					</li>
+					<li>
+						"New Game" button starts new game with previous results
+						still visible.
+					</li>
+				</ul>
+			</div>
+			<button class="starting-page__rules--button">Rules</button>
 			<div class="starting-page__window">
 				<h1 class="starting-page__window__title">Choose your mark</h1>
 				<button
@@ -67,6 +90,9 @@
 					<h1 class="game-container__latest-results__heading">
 						Latest Results
 					</h1>
+					<p class="game-container__latest-results__info">
+						Results of the last 5 games are shown
+					</p>
 					<ul class="game-container__latest-results__results"></ul>
 				</div>
 			</div>

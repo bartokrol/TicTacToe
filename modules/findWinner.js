@@ -30,7 +30,7 @@ class FindWinner {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.isGameEnd = true;
-				new SetWinner(player, this.latestResults, this.isGameEnd);
+				new SetWinner(player, this.latestResults);
 				new ShowWinningMarks(combination);
 				return;
 			}

@@ -1,5 +1,8 @@
 // DOM Elements of index.html
 
+const rulesBtn = document.querySelector(".starting-page__rules--button");
+const rules = document.querySelector(".starting-page__rules");
+
 const boxes = Array.from(
 	document.querySelectorAll(".game-container__board-container__box")
 );
@@ -33,6 +36,8 @@ const endgameMessage = document.querySelector(
 const bodyOverflow = document.querySelector(".body");
 
 export {
+	rulesBtn,
+	rules,
 	boxes,
 	markChoice,
 	startingBtns,

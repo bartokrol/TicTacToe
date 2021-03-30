@@ -9,7 +9,7 @@ class SetWinner {
 			this.setWinner(this.player);
 	}
 
-	// Function that calls "ResultMessage" and "AddWins" classes 
+	// Function that calls "ResultMessage" and "AddWins" classes
 	setWinner = (player) => {
 		new ResultMessage(player);
 		new AddWins(player, this.latestResults);
