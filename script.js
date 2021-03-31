@@ -1,4 +1,3 @@
-import { StartGame } from "./modules/startGame.js";
 import {
 	rulesBtn,
 	rules,
@@ -9,11 +8,11 @@ import {
 	newGameBtn,
 	bodyOverflow,
 } from "./modules/domElems.js";
-import { setEventListeners } from "./modules/setEventListeners.js";
+import { Game } from "./modules/Game.js";
 
 // Function that starts the whole game. Player and computer marks are set. Also active player is set, player with "X" mark always starts the game.
 const startTheGame = (e) => {
-	const newGame = new setEventListeners({
+	new Game({
 		players: [
 			{
 				name: "Player",

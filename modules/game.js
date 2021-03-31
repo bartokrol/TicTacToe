@@ -7,10 +7,9 @@ import {
 } from "./domElems.js";
 import { Click } from "./click.js";
 import { resetPageAfterResetBtn, resetPageAfterNewGameBtn } from "./reset.js";
-import { FindActivePlayer } from "./findActivePlayer.js";
 
 // EventsListeners class is called inside module - "startGame.js"
-class setEventListeners {
+class Game {
 	constructor(game) {
 		(this.player = game.players[0]),
 			(this.computer = game.players[1]),
@@ -23,7 +22,7 @@ class setEventListeners {
 			(this.winningCombinations = game.winningCombinations),
 			(this.latestResults = game.latestResults),
 			this.addEventListeners(),
-			this.findActivePlayer(),
+			this.getActivePlayer(),
 			this.checkComputerMove();
 	}
 
@@ -38,8 +37,14 @@ class setEventListeners {
 		}
 	};
 
-	findActivePlayer = () => {
+	getActivePlayer = () => {
 		this.activePlayer = this.players.find((el) => el.active);
+	};
+
+	setActivePlayer = () => {
+		this.player.active = !this.player.active;
+		this.computer.active = !this.computer.active;
+		this.getActivePlayer();
 	};
 
 	// Function that add mouseout, mouseover, click events to all of the boxes on the board and click event to newGameBtn, resetBtn after new game is started.
@@ -91,9 +96,9 @@ class setEventListeners {
 			this.latestResults
 		);
 		this.isGameEnd = playerClick.isGameEnd;
-		this.activePlayer = playerClick.activePlayer;
 		this.removeBoxListeners(playerBox);
 		this.emptyBoxes = boxes.filter((box) => box.textContent === "");
+		this.setActivePlayer();
 	};
 
 	// Function that resets the game after newGameBtn is clicked
@@ -108,11 +113,7 @@ class setEventListeners {
 		);
 		this.isGameEnd = newGameReset;
 		this.emptyBoxes = boxes;
-		const activePlayer = new FindActivePlayer(
-			this.activePlayer,
-			this.players
-		);
-		this.activePlayer = activePlayer.activePlayer;
+		this.getActivePlayer();
 		this.addListenersToBoxes();
 		this.checkComputerMove();
 		newGameBtn.removeEventListener("click", this.newGameListener);
@@ -171,4 +172,4 @@ class setEventListeners {
 	};
 }
 
-export { setEventListeners };
+export { Game };

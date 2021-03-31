@@ -1,4 +1,4 @@
-import { ActivePlayerChange } from "./activePlayerChange.js";
+// import { ActivePlayerChange } from "./activePlayerChange.js";
 import { AddBoxToBoard } from "./addBoxToBoard.js";
 import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
@@ -53,13 +53,12 @@ class Click {
 			this.latestResults
 		);
 		this.isGameEnd = checkPlayerArr.isGameEnd;
-		const activePlayer = new ActivePlayerChange(
-			this.player,
-			this.computer,
-			this.activePlayer,
-			this.players
-		);
-		this.activePlayer = activePlayer.activePlayer;
+		// const activePlayer = new ActivePlayerChange(
+		// 	this.player,
+		// 	this.computer,
+		// 	this.activePlayer,
+		// 	this.players
+		// );
 	};
 }
 
