@@ -11,40 +11,35 @@ import { FindActivePlayer } from "./findActivePlayer.js";
 
 // EventsListeners class is called inside module - "startGame.js"
 class setEventListeners {
-	constructor(
-		board,
-		activePlayer,
-		player,
-		computer,
-		players,
-		draws,
-		isGameEnd,
-		emptyBoxes,
-		winningCombinations,
-		latestResults
-	) {
-		(this.board = board),
-			(this.activePlayer = activePlayer),
-			(this.player = player),
-			(this.computer = computer),
-			(this.players = players),
-			(this.draws = draws),
-			(this.isGameEnd = isGameEnd),
-			(this.emptyBoxes = emptyBoxes),
-			(this.winningCombinations = winningCombinations),
-			(this.latestResults = latestResults),
-			this.addEventListeners();
-		this.checkComputerMove();
+	constructor(game) {
+		(this.player = game.players[0]),
+			(this.computer = game.players[1]),
+			(this.players = game.players),
+			(this.activePlayer = game.activePlayer),
+			(this.draws = game.draws),
+			(this.isGameEnd = game.isGameEnd),
+			(this.board = game.board),
+			(this.emptyBoxes = game.emptyBoxes),
+			(this.winningCombinations = game.winningCombinations),
+			(this.latestResults = game.latestResults),
+			this.addEventListeners(),
+			this.findActivePlayer(),
+			this.checkComputerMove();
 	}
 
 	// Function is called to find if computer is an active player. If true the computerClick class is called. After this the box events are removed.
 	checkComputerMove = () => {
+		// console.log(this);
 		if (this.computer.active) {
 			const computerBox = this.emptyBoxes[
 				Math.floor(Math.random() * this.emptyBoxes.length)
 			];
 			this.click(computerBox);
 		}
+	};
+
+	findActivePlayer = () => {
+		this.activePlayer = this.players.find((el) => el.active);
 	};
 
 	// Function that add mouseout, mouseover, click events to all of the boxes on the board and click event to newGameBtn, resetBtn after new game is started.
