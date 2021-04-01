@@ -9,10 +9,11 @@ import {
 	bodyOverflow,
 } from "./modules/domElems.js";
 import { Game } from "./modules/Game.js";
+import { Click } from "./modules/click.js";
 
 // Function that starts the whole game. Player and computer marks are set. Also active player is set, player with "X" mark always starts the game.
 const startTheGame = (e) => {
-	new Game({
+	const game = new Game({
 		players: [
 			{
 				name: "Player",
@@ -52,7 +53,128 @@ const startTheGame = (e) => {
 		],
 		latestResults: [],
 	});
+
+	let {
+		players,
+		player,
+		computer,
+		activePlayer,
+		draws,
+		isGameEnd,
+		board,
+		emptyBoxes,
+		winningCombinations,
+		latestResults,
+	} = game;
+
+	const checkComputerMove = () => {
+		if (computer.active) {
+			const computerBox =
+				emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+			click(computerBox, game);
+		}
+	};
+
+	const addEventListeners = (game) => {
+		addListenersToBoxes(game);
+		// newGameBtn.addEventListener("click", this.newGameListener);
+		// resetBtn.addEventListener("click", this.resetListener);
+	};
+
+	// Function that adds event listeners to every box
+	const addListenersToBoxes = () => {
+		boxes.forEach((box) => {
+			box.addEventListener("mouseout", mouseOutEvent);
+			box.addEventListener("mouseover", mouseOverEvent);
+			box.addEventListener("click", clickEvent);
+		});
+	};
+
+	const mouseOverEvent = (e) => {
+		showElementOnMouseOver(e, activePlayer);
+	};
+
+	const mouseOutEvent = (e) => {
+		hideElementOnMouseOut(e);
+	};
+
+	const clickEvent = (e) => {
+		handleClick(e, game);
+	};
+
+	const handleClick = (e, game) => {
+		// Player click
+		const playerBox = e.target;
+		click(playerBox, game);
+		// Check if game is end
+		if (isGameEnd) {
+			removeListenersForEachBox();
+			// newGameBtn.addEventListener("click", this.newGameListener);
+		} else {
+			// Computer click
+			const computerBox =
+				emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
+			click(computerBox, game);
+		}
+
+		// Another check if game is end to remove listeners if this condition is true
+		// if (game.isGameEnd) {
+		// 	removeListenersForEachBox();
+		// 	newGameBtn.addEventListener("click", newGameListener);
+		// }
+	};
+
+	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
+	// After each click the event listener to specific box is removed
+	const click = (playerBox, game) => {
+		const playerClick = new Click(
+			playerBox,
+			board,
+			activePlayer,
+			player,
+			computer,
+			players,
+			draws,
+			isGameEnd,
+			emptyBoxes,
+			winningCombinations,
+			latestResults
+		);
+		isGameEnd = playerClick.isGameEnd;
+		removeBoxListeners(playerBox);
+		emptyBoxes = boxes.filter((box) => box.textContent === "");
+		activePlayer = game.setActivePlayer();
+	};
+
+	// Function that remove boxes event listeners
+	const removeListenersForEachBox = () => {
+		boxes.forEach((box) => {
+			removeBoxListeners(box);
+		});
+	};
+
+	// Function that remove event listeners for specific box
+	const removeBoxListeners = (box) => {
+		box.removeEventListener("click", clickEvent);
+		box.removeEventListener("mouseout", mouseOutEvent);
+		box.removeEventListener("mouseover", mouseOverEvent);
+	};
+
+	// Function that shows player.mark after specific box is hovered
+	const showElementOnMouseOver = (e, activePlayer) => {
+		e.target.textContent = `${activePlayer.mark}`;
+		e.target.classList.add("board--box--hover");
+	};
+
+	// Function that hides player.mark after mouse is out of the box area
+	const hideElementOnMouseOut = (e) => {
+		e.target.textContent = "";
+		e.target.classList.remove("board--box--hover");
+	};
+
 	setBackground();
+	checkComputerMove();
+	addEventListeners(game);
 };
 
 // Function that is called after one of the startingBtns is clicked.
