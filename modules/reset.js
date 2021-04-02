@@ -22,7 +22,7 @@ function resetPageAfterResetBtn(
 	resetPlayers(player, computer);
 	resetPlayersArr(players);
 	resetResults(player, computer, draws);
-	resetBoard(board);
+	// resetBoard(board);
 	isGameEnd = false;
 	markChoice.classList.remove("inactive");
 	return isGameEnd;
@@ -34,7 +34,7 @@ function resetPageAfterNewGameBtn(player, computer, players, board, isGameEnd) {
 	resetPlayers(player, computer);
 	resetPlayersForNewGame(player, computer);
 	resetPlayersArr(players);
-	resetBoard(board);
+	// resetBoard(board);
 	isGameEnd = false;
 	newGameBtn.disabled = true;
 	newGameBtn.classList.add("disabled");
@@ -79,13 +79,13 @@ const resetPlayersForNewGame = (player, computer) => {
 };
 
 // Function that reset the board
-const resetBoard = (board) => {
-	board = [
-		[null, null, null],
-		[null, null, null],
-		[null, null, null],
-	];
-};
+// const resetBoard = (board) => {
+// 	board = [
+// 		[null, null, null],
+// 		[null, null, null],
+// 		[null, null, null],
+// 	];
+// };
 
 // Function that reset the each players array
 const resetPlayersArr = (players) => {

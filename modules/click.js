@@ -1,6 +1,3 @@
-// import { ActivePlayerChange } from "./activePlayerChange.js";
-import { AddBoxToBoard } from "./addBoxToBoard.js";
-import { PushBoxIntoPlayerArr } from "./pushBoxIntoPlayerArr.js";
 import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
 
 // Click class is called inside module - "setEventListeners.js"
@@ -36,8 +33,10 @@ class Click {
 	// After computer "click" the classes that can be seen below are called
 	click = () => {
 		this.box.classList.remove("board--box--hover");
-		new AddBoxToBoard(this.box, this.board);
-		new PushBoxIntoPlayerArr(this.box, this.activePlayer);
+		// this.addBoxToBoard(this.box, this.board);
+		// new AddBoxToBoard(this.box, this.board);
+		// new PushBoxIntoPlayerArr(this.box, this.activePlayer);
+		this.pushBoxIntoPlayerArr(this.box, this.activePlayer);
 		const checkPlayerArr = new CheckPlayerArrLength(
 			this.activePlayer,
 			this.players,
@@ -47,6 +46,19 @@ class Click {
 			this.latestResults
 		);
 		this.isGameEnd = checkPlayerArr.isGameEnd;
+	};
+
+	addBoxToBoard = (box) => {
+		box.classList.remove("board--box--hover");
+		const boxRow = box.dataset.row;
+		const boxColumn = box.dataset.column;
+		this.board[boxRow][boxColumn] = box.id;
+	};
+
+	// Clicked element is send into the player array.
+	pushBoxIntoPlayerArr = (box, player) => {
+		player.arr.push(Number(box.id));
+		box.textContent = `${player.mark}`;
 	};
 }
 

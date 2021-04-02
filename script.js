@@ -11,6 +11,7 @@ import {
 } from "./modules/domElems.js";
 import { Game } from "./modules/Game.js";
 import { Click } from "./modules/click.js";
+import { Board } from "./modules/board.js";
 import {
 	resetPageAfterResetBtn,
 	resetPageAfterNewGameBtn,
@@ -59,6 +60,8 @@ const startTheGame = (e) => {
 		latestResults: [],
 	});
 
+	const newBoard = new Board();
+
 	let {
 		players,
 		player,
@@ -95,6 +98,8 @@ const startTheGame = (e) => {
 			board,
 			isGameEnd
 		);
+		const newBoard = new Board();
+		board = newBoard.resetBoard(board);
 		isGameEnd = newGameReset;
 		emptyBoxes = boxes;
 		activePlayer = game.getActivePlayer();
@@ -179,6 +184,7 @@ const startTheGame = (e) => {
 			winningCombinations,
 			latestResults
 		);
+		board = newBoard.addBoxToBoard(playerBox, board);
 		isGameEnd = playerClick.isGameEnd;
 		removeBoxListeners(playerBox);
 		emptyBoxes = boxes.filter((box) => box.textContent === "");
@@ -212,8 +218,8 @@ const startTheGame = (e) => {
 	};
 
 	setBackground();
-	checkComputerMove();
 	addEventListeners(game);
+	checkComputerMove();
 };
 
 // Function that is called after one of the startingBtns is clicked.
