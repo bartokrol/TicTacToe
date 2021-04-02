@@ -10,7 +10,6 @@ class LatestResults {
 
 	// Function gets fullDate from getDate function. If there is a winner then specific string is send to latestResults array, if there is a draw then "it was a draw!" message is sent inside latestResults array.
 	// Then map function shows specific li elements in index.html
-
 	setLatestResults = (player) => {
 		const date = this.getDate();
 		if (player.winner) {

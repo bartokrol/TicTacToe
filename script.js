@@ -167,7 +167,6 @@ const startTheGame = (e) => {
 
 		// Another check if game is end to remove listeners if this condition is true
 		if (isGameEnd) {
-			console.log(isGameEnd);
 			removeListenersForEachBox();
 			newGameBtn.addEventListener("click", newGameListener);
 			return;

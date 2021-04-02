@@ -15,8 +15,10 @@ class ResultMessage {
 
 	// Function shows specific message to winningContainers after winner is set
 	showWinningMessage = (player) => {
-		endgameMessage.textContent = "Winner!";
-		winner.textContent = `${player.name} ( ${player.mark} )`;
+		endgameMessage.textContent = player ? "Winner!" : "";
+		winner.textContent = player
+			? `${player.name} ( ${player.mark} )`
+			: "It's a draw...";
 		this.showAndHideWinnerBox();
 	};
 
