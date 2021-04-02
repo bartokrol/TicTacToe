@@ -1,4 +1,5 @@
-import { CheckPlayerArrLength } from "./checkPlayerArrLength.js";
+import { SetWinner } from "./setWinner.js";
+import { boxes } from "./domElems.js";
 
 // Click class is called inside module - "setEventListeners.js"
 class Click {
@@ -32,33 +33,35 @@ class Click {
 	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
 	// After computer "click" the classes that can be seen below are called
 	click = () => {
-		this.box.classList.remove("board--box--hover");
-		// this.addBoxToBoard(this.box, this.board);
-		// new AddBoxToBoard(this.box, this.board);
-		// new PushBoxIntoPlayerArr(this.box, this.activePlayer);
-		this.pushBoxIntoPlayerArr(this.box, this.activePlayer);
-		const checkPlayerArr = new CheckPlayerArrLength(
-			this.activePlayer,
-			this.players,
-			this.draws,
-			this.isGameEnd,
-			this.winningCombinations,
-			this.latestResults
-		);
-		this.isGameEnd = checkPlayerArr.isGameEnd;
-	};
-
-	addBoxToBoard = (box) => {
-		box.classList.remove("board--box--hover");
-		const boxRow = box.dataset.row;
-		const boxColumn = box.dataset.column;
-		this.board[boxRow][boxColumn] = box.id;
+		this.setBoxIntoPlayerArr(this.box, this.activePlayer);
+		this.findWinningPlayer(this.activePlayer);
 	};
 
 	// Clicked element is send into the player array.
-	pushBoxIntoPlayerArr = (box, player) => {
+	setBoxIntoPlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
 		box.textContent = `${player.mark}`;
+	};
+
+	findWinningPlayer = (player) => {
+		for (let combination of this.winningCombinations) {
+			if (combination.every((el) => player.arr.includes(el))) {
+				this.isGameEnd = true;
+				new SetWinner(player, this.latestResults);
+				this.showWinningPlayersMarks(combination);
+				return;
+			}
+		}
+	};
+
+	showWinningPlayersMarks = (combination) => {
+		const winningArr = combination;
+
+		boxes.forEach((box) => {
+			if (winningArr.includes(Number(box.id))) {
+				box.classList.add("won");
+			}
+		});
 	};
 }
 

@@ -75,6 +75,7 @@ const startTheGame = (e) => {
 		latestResults,
 	} = game;
 
+	// Function is called to find if computer is an active player. If true the computerClick class is called. After this the box events are removed.
 	const checkComputerMove = () => {
 		if (computer.active) {
 			const computerBox =
@@ -82,13 +83,14 @@ const startTheGame = (e) => {
 			click(computerBox, game);
 		}
 	};
-
+	// Function that add mouseout, mouseover, click events to all of the boxes on the board and click event to newGameBtn, resetBtn after new game is started.
 	const addEventListeners = (game) => {
 		addListenersToBoxes(game);
 		newGameBtn.addEventListener("click", newGameListener);
 		resetBtn.addEventListener("click", resetListener);
 	};
 
+	// Function that resets the game after newGameBtn is clicked
 	const newGameListener = () => {
 		// resetPageAfterNewGameBtn is set inside "reset.js".
 		const newGameReset = resetPageAfterNewGameBtn(
@@ -146,6 +148,7 @@ const startTheGame = (e) => {
 		handleClick(e, game);
 	};
 
+	// Function is called after one of the box on board is clicked. The player click is set on the board and after that computer click also lands on the board.
 	const handleClick = (e, game) => {
 		// Player click
 		const playerBox = e.target;
@@ -184,6 +187,7 @@ const startTheGame = (e) => {
 			winningCombinations,
 			latestResults
 		);
+		isGameEnd = game.drawCheck(activePlayer, draws);
 		board = newBoard.addBoxToBoard(playerBox, board);
 		isGameEnd = playerClick.isGameEnd;
 		removeBoxListeners(playerBox);
