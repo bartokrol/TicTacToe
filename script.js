@@ -6,10 +6,15 @@ import {
 	markChoice,
 	startingBtns,
 	newGameBtn,
+	resetBtn,
 	bodyOverflow,
 } from "./modules/domElems.js";
 import { Game } from "./modules/Game.js";
 import { Click } from "./modules/click.js";
+import {
+	resetPageAfterResetBtn,
+	resetPageAfterNewGameBtn,
+} from "./modules/reset.js";
 
 // Function that starts the whole game. Player and computer marks are set. Also active player is set, player with "X" mark always starts the game.
 const startTheGame = (e) => {
@@ -77,8 +82,42 @@ const startTheGame = (e) => {
 
 	const addEventListeners = (game) => {
 		addListenersToBoxes(game);
-		// newGameBtn.addEventListener("click", this.newGameListener);
-		// resetBtn.addEventListener("click", this.resetListener);
+		newGameBtn.addEventListener("click", newGameListener);
+		resetBtn.addEventListener("click", resetListener);
+	};
+
+	const newGameListener = () => {
+		// resetPageAfterNewGameBtn is set inside "reset.js".
+		const newGameReset = resetPageAfterNewGameBtn(
+			player,
+			computer,
+			players,
+			board,
+			isGameEnd
+		);
+		isGameEnd = newGameReset;
+		emptyBoxes = boxes;
+		activePlayer = game.getActivePlayer();
+		addListenersToBoxes();
+		checkComputerMove();
+		newGameBtn.removeEventListener("click", newGameListener);
+	};
+
+	const resetListener = () => {
+		gameContainer.classList.add("hidden");
+		newGameBtn.classList.add("disabled");
+		bodyOverflow.classList.add("body-hidden");
+		// resetPageAfterResetBtn is set inside "reset.js".
+		resetPageAfterResetBtn(
+			player,
+			computer,
+			draws,
+			players,
+			board,
+			isGameEnd
+		);
+		removeListenersForEachBox();
+		newGameBtn.removeEventListener("click", newGameListener);
 	};
 
 	// Function that adds event listeners to every box
@@ -109,7 +148,7 @@ const startTheGame = (e) => {
 		// Check if game is end
 		if (isGameEnd) {
 			removeListenersForEachBox();
-			// newGameBtn.addEventListener("click", this.newGameListener);
+			newGameBtn.addEventListener("click", newGameListener);
 		} else {
 			// Computer click
 			const computerBox =
@@ -118,10 +157,10 @@ const startTheGame = (e) => {
 		}
 
 		// Another check if game is end to remove listeners if this condition is true
-		// if (game.isGameEnd) {
-		// 	removeListenersForEachBox();
-		// 	newGameBtn.addEventListener("click", newGameListener);
-		// }
+		if (isGameEnd) {
+			removeListenersForEachBox();
+			newGameBtn.addEventListener("click", newGameListener);
+		}
 	};
 
 	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)

@@ -39,6 +39,7 @@ class Game {
 
 	getActivePlayer = () => {
 		this.activePlayer = this.players.find((el) => el.active);
+		return this.activePlayer;
 	};
 
 	setActivePlayer = () => {
@@ -103,22 +104,22 @@ class Game {
 	// };
 
 	// Function that resets the game after newGameBtn is clicked
-	newGameListener = () => {
-		// resetPageAfterNewGameBtn is set inside "reset.js".
-		const newGameReset = resetPageAfterNewGameBtn(
-			this.player,
-			this.computer,
-			this.players,
-			this.board,
-			this.isGameEnd
-		);
-		this.isGameEnd = newGameReset;
-		this.emptyBoxes = boxes;
-		this.getActivePlayer();
-		this.addListenersToBoxes();
-		this.checkComputerMove();
-		newGameBtn.removeEventListener("click", this.newGameListener);
-	};
+	// newGameListener = () => {
+	// 	// resetPageAfterNewGameBtn is set inside "reset.js".
+	// 	const newGameReset = resetPageAfterNewGameBtn(
+	// 		this.player,
+	// 		this.computer,
+	// 		this.players,
+	// 		this.board,
+	// 		this.isGameEnd
+	// 	);
+	// 	this.isGameEnd = newGameReset;
+	// 	this.emptyBoxes = boxes;
+	// 	this.getActivePlayer();
+	// 	this.addListenersToBoxes();
+	// 	this.checkComputerMove();
+	// 	newGameBtn.removeEventListener("click", this.newGameListener);
+	// };
 
 	resetListener = () => {
 		gameContainer.classList.add("hidden");

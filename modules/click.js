@@ -35,12 +35,6 @@ class Click {
 	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
 	// After computer "click" the classes that can be seen below are called
 	click = () => {
-		// console.log(this.activePlayer);
-		// const emptyBoxes = boxes.filter((box) => box.textContent === "");
-		// const computerBox =
-		// 	emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
-		// this.computerBox = computerBox;
-		// console.log(this.activePlayer);
 		this.box.classList.remove("board--box--hover");
 		new AddBoxToBoard(this.box, this.board);
 		new PushBoxIntoPlayerArr(this.box, this.activePlayer);
@@ -53,12 +47,6 @@ class Click {
 			this.latestResults
 		);
 		this.isGameEnd = checkPlayerArr.isGameEnd;
-		// const activePlayer = new ActivePlayerChange(
-		// 	this.player,
-		// 	this.computer,
-		// 	this.activePlayer,
-		// 	this.players
-		// );
 	};
 }
 
