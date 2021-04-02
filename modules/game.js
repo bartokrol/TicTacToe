@@ -1,6 +1,4 @@
 import { resultDraws } from "./domElems.js";
-import { ResultMessage } from "./resultMessage.js";
-import { LatestResults } from "./latestResults.js";
 
 // EventsListeners class is called inside module - "startGame.js"
 class Game {
@@ -35,8 +33,6 @@ class Game {
 			this.isGameEnd = true;
 			draws++;
 			resultDraws.textContent = draws;
-			new LatestResults("", this.latestResults);
-			new ResultMessage();
 			return this.isGameEnd;
 		}
 	};

@@ -12,6 +12,8 @@ import {
 import { Game } from "./modules/Game.js";
 import { Click } from "./modules/click.js";
 import { Board } from "./modules/board.js";
+import { ResultMessage } from "./modules/resultMessage.js";
+import { LatestResults } from "./modules/latestResults.js";
 import {
 	resetPageAfterResetBtn,
 	resetPageAfterNewGameBtn,
@@ -190,8 +192,14 @@ const startTheGame = (e) => {
 			latestResults
 		);
 		isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
-			? game.drawCheck(activePlayer, draws, isGameEnd)
+			? (game.drawCheck(activePlayer, draws, isGameEnd),
+			  new ResultMessage(),
+			  new LatestResults("", latestResults))
 			: playerClick.isGameEnd;
+		if (playerClick.isGameEnd) {
+			new ResultMessage(activePlayer);
+			new LatestResults(activePlayer, latestResults);
+		}
 		board = newBoard.addBoxToBoard(playerBox, board);
 		removeBoxListeners(playerBox);
 		emptyBoxes = boxes.filter((box) => box.textContent === "");

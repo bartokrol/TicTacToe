@@ -1,7 +1,5 @@
 import { boxes } from "./domElems.js";
-import { ResultMessage } from "./resultMessage.js";
 import { resultWins, resultDefeats } from "./domElems.js";
-import { LatestResults } from "./latestResults.js";
 
 // Click class is called inside module - "setEventListeners.js"
 class Click {
@@ -49,19 +47,14 @@ class Click {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.isGameEnd = true;
-				this.setWinner(player);
+				this.addPlayerWins(player);
 				this.showWinningPlayersMarks(combination);
 				return;
 			}
 		}
 	};
 
-	setWinner = (player) => {
-		new ResultMessage(player);
-		this.addWins(player);
-	};
-
-	addWins = (player) => {
+	addPlayerWins = (player) => {
 		player.winner = true;
 		player.wins++;
 		if (player.name == "Player") {
@@ -69,8 +62,6 @@ class Click {
 		} else if (player.name == "Computer") {
 			resultDefeats.textContent = player.wins;
 		}
-
-		new LatestResults(player, this.latestResults);
 	};
 
 	showWinningPlayersMarks = (combination) => {
