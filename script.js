@@ -157,6 +157,7 @@ const startTheGame = (e) => {
 		if (isGameEnd) {
 			removeListenersForEachBox();
 			newGameBtn.addEventListener("click", newGameListener);
+			return;
 		} else {
 			// Computer click
 			const computerBox =
@@ -166,8 +167,10 @@ const startTheGame = (e) => {
 
 		// Another check if game is end to remove listeners if this condition is true
 		if (isGameEnd) {
+			console.log(isGameEnd);
 			removeListenersForEachBox();
 			newGameBtn.addEventListener("click", newGameListener);
+			return;
 		}
 	};
 
@@ -187,9 +190,10 @@ const startTheGame = (e) => {
 			winningCombinations,
 			latestResults
 		);
-		isGameEnd = game.drawCheck(activePlayer, draws);
+		isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
+			? game.drawCheck(activePlayer, draws, isGameEnd)
+			: playerClick.isGameEnd;
 		board = newBoard.addBoxToBoard(playerBox, board);
-		isGameEnd = playerClick.isGameEnd;
 		removeBoxListeners(playerBox);
 		emptyBoxes = boxes.filter((box) => box.textContent === "");
 		activePlayer = game.setActivePlayer();

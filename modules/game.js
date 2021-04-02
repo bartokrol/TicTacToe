@@ -37,6 +37,7 @@ class Game {
 			resultDraws.textContent = draws;
 			new LatestResults("", this.latestResults);
 			new DrawMessage();
+			return this.isGameEnd;
 		}
 	};
 }
