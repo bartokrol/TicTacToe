@@ -1,11 +1,9 @@
-import { latest } from "./domElems.js";
+import { latest, resultWins, resultDraws, resultDefeats } from "./domElems.js";
 
 // LatestResults is called in "drawCheck.js" and "addWins.js" modules
 class LatestResults {
-	constructor(player, latestResults) {
-		(this.player = player),
-			(this.latestResults = latestResults),
-			this.setLatestResults(player);
+	constructor(latestResults) {
+		this.latestResults = latestResults;
 	}
 
 	// Function gets fullDate from getDate function. If there is a winner then specific string is send to latestResults array, if there is a draw then "it was a draw!" message is sent inside latestResults array.
@@ -50,6 +48,14 @@ class LatestResults {
 		if (this.latestResults.length > 4) {
 			this.latestResults.pop();
 		}
+	};
+
+	// Function resets players wins and latest unordered list
+	resetResults = (player, computer, draws) => {
+		resultWins.textContent = player.wins;
+		resultDraws.textContent = draws;
+		resultDefeats.textContent = computer.wins;
+		latest.innerHTML = "";
 	};
 }
 

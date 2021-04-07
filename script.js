@@ -62,8 +62,6 @@ const startTheGame = (e) => {
 		latestResults: [],
 	});
 
-	const newBoard = new Board();
-
 	let {
 		players,
 		player,
@@ -76,6 +74,10 @@ const startTheGame = (e) => {
 		winningCombinations,
 		latestResults,
 	} = game;
+
+	const newBoard = new Board();
+	const results = new LatestResults(latestResults);
+	const playerClick = new Click();
 
 	// Function is called to find if computer is an active player. If true the computerClick class is called. After this the box events are removed.
 	const checkComputerMove = () => {
@@ -99,10 +101,8 @@ const startTheGame = (e) => {
 			player,
 			computer,
 			players,
-			board,
 			isGameEnd
 		);
-		const newBoard = new Board();
 		board = newBoard.resetBoard(board);
 		isGameEnd = newGameReset;
 		emptyBoxes = boxes;
@@ -125,6 +125,7 @@ const startTheGame = (e) => {
 			board,
 			isGameEnd
 		);
+		results.resetResults(player, computer, draws);
 		removeListenersForEachBox();
 		newGameBtn.removeEventListener("click", newGameListener);
 	};
@@ -178,28 +179,21 @@ const startTheGame = (e) => {
 	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
 	// After each click the event listener to specific box is removed
 	const click = (playerBox, game) => {
-		const playerClick = new Click(
+		isGameEnd = playerClick.click(
 			playerBox,
-			board,
 			activePlayer,
-			player,
-			computer,
-			players,
-			draws,
-			isGameEnd,
-			emptyBoxes,
-			winningCombinations,
-			latestResults
+			winningCombinations
 		);
 		isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
 			? (game.drawCheck(activePlayer, draws, isGameEnd),
 			  new ResultMessage(),
-			  new LatestResults("", latestResults))
-			: playerClick.isGameEnd;
-		if (playerClick.isGameEnd) {
+			  results.setLatestResults(""))
+			: isGameEnd;
+		if (activePlayer.winner) {
 			new ResultMessage(activePlayer);
-			new LatestResults(activePlayer, latestResults);
+			results.setLatestResults(activePlayer);
 		}
+
 		board = newBoard.addBoxToBoard(playerBox, board);
 		removeBoxListeners(playerBox);
 		emptyBoxes = boxes.filter((box) => box.textContent === "");
