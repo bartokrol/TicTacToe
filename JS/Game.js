@@ -30,12 +30,16 @@ class Game extends DomElems {
 	bodyOverflow = null;
 	gameContainer = null;
 
+	players = [this.player, this.computer];
 	activePlayer = this.player;
+
+	emptyBoxes = [];
 
 	initializeGame() {
 		this.setStartingBtnsEventListeners();
 		this.generateBoxes();
 		this.renderBoard();
+		this.setEmptyBoxes();
 	}
 
 	setStartingBtnsEventListeners() {
@@ -49,6 +53,7 @@ class Game extends DomElems {
 				this.startingPageContainer.classList.add("inactive");
 				this.bodyOverflow.classList.remove("body-hidden");
 				this.gameContainer.classList.remove("hidden");
+				this.getActivePlayer();
 			});
 		});
 		this.rulesBtn.addEventListener("click", () => {
@@ -78,6 +83,12 @@ class Game extends DomElems {
 		this.addBoxesEventListeners();
 	}
 
+	setEmptyBoxes() {
+		this.board
+			.flat()
+			.forEach((box) => this.emptyBoxes.push(box.element.textContent));
+	}
+
 	setStartingPageElements() {
 		this.startingPageContainer = this.getElement(
 			this.domElems.startingPageContainer
@@ -90,32 +101,107 @@ class Game extends DomElems {
 		this.boardContainer = this.getElement(this.domElems.boardContainer);
 	}
 
+	getActivePlayer = () => {
+		this.activePlayer = this.players.find((el) => el.active);
+	};
+
+	setActivePlayer = () => {
+		this.player.active = !this.player.active;
+		this.computer.active = !this.computer.active;
+		this.getActivePlayer();
+	};
+
 	addBoxesEventListeners() {
 		this.board.flat().forEach((box) => {
-			box.element.addEventListener("mouseout", this.mouseOutEvent);
-			box.element.addEventListener("mouseover", this.mouseOverEvent);
-			// box.addEventListener("click", clickEvent);
+			box.element.addEventListener(
+				"mouseout",
+				this.hideElementOnMouseOut
+			);
+			box.element.addEventListener(
+				"mouseover",
+				this.showElementOnMouseOver
+			);
+			box.element.addEventListener("click", this.handleClick);
 		});
 	}
 
-	mouseOverEvent = (e) => {
-		this.showElementOnMouseOver(e, this.activePlayer);
-	};
-
-	mouseOutEvent = (e) => {
-		this.hideElementOnMouseOut(e);
-	};
-
-	// Function that shows player.mark after specific box is hovered
-	showElementOnMouseOver = (e, activePlayer) => {
-		e.target.textContent = `${activePlayer.mark}`;
+	showElementOnMouseOver = (e) => {
+		e.target.textContent = `${this.activePlayer.mark}`;
 		e.target.classList.add("board--box--hover");
 	};
 
-	// Function that hides player.mark after mouse is out of the box area
 	hideElementOnMouseOut = (e) => {
 		e.target.textContent = "";
 		e.target.classList.remove("board--box--hover");
+	};
+
+	removeBoxListeners = (box) => {
+		box.removeEventListener("mouseout", this.hideElementOnMouseOut);
+		box.removeEventListener("click", this.handleClick);
+		box.removeEventListener("mouseover", this.showElementOnMouseOver);
+	};
+
+	handleClick = (e) => {
+		const playerBox = e.target;
+		this.click(playerBox, this.activePlayer);
+		// Check if game is end
+		// if (isGameEnd) {
+		// 	removeListenersForEachBox();
+		// 	newGameBtn.addEventListener("click", newGameListener);
+		// 	return;
+		// } else {
+		// this.setActivePlayer();
+		// this.filterEmptyBoxes();
+		// this.emptyBoxes = this.emptyBoxes.filter((box) => !box);
+		console.log(this.emptyBoxes);
+		// const computerBox = this.emptyBoxes[
+		// 	Math.floor(Math.random() * this.emptyBoxes.length)
+		// ];
+		// console.log(computerBox);
+		// this.click(computerBox, this.activePlayer);
+		// }
+
+		// // Another check if game is end to remove listeners if this condition is true
+		// if (isGameEnd) {
+		// 	removeListenersForEachBox();
+		// 	newGameBtn.addEventListener("click", newGameListener);
+		// 	return;
+		// }
+	};
+
+	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
+	// After each click the event listener to specific box is removed
+	click = (playerBox, activePlayer) => {
+		this.emptyBoxes[playerBox.id - 1] = activePlayer.mark;
+		playerBox.textContent = activePlayer.mark;
+		playerBox.classList.remove("board--box--hover");
+		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
+		// isGameEnd = playerClick.click(
+		// 	playerBox,
+		// 	activePlayer,
+		// 	winningCombinations
+		// );
+		// isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
+		// 	? (game.drawCheck(activePlayer, draws, isGameEnd),
+		// 	  new ResultMessage(),
+		// 	  results.setLatestResults(""))
+		// 	: isGameEnd;
+		// if (activePlayer.winner) {
+		// 	new ResultMessage(activePlayer);
+		// 	results.setLatestResults(activePlayer);
+		// }
+		// board = newBoard.addBoxToBoard(playerBox, board);
+		this.removeBoxListeners(playerBox);
+		// activePlayer = game.setActivePlayer();
+	};
+
+	// filterEmptyBoxes() {
+	// 	this.emptyBoxes = this.emptyBoxes.filter((box) => !box);
+	// }
+
+	pushBoxIdIntoActivePlayerArr = (box, player) => {
+		player.arr.push(Number(box.id));
+		box.textContent = `${player.mark}`;
 	};
 }
 
