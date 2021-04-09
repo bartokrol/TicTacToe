@@ -7,6 +7,9 @@ export class DomElems {
 		bodyOverflow: ".body",
 		gameContainer: ".game-container",
 		boardContainer: ".game-container__board-container__board",
+		resultWins: ".game-container__current-result__wins__number",
+		resultDraws: ".game-container__current-result__draws__number",
+		resultDefeats: ".game-container__current-result__defeats__number",
 	};
 
 	getElement(selector) {

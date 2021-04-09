@@ -19,6 +19,17 @@ class Game extends DomElems {
 		winner: false,
 	};
 
+	winningCombinations = [
+		[1, 2, 3],
+		[4, 5, 6],
+		[7, 8, 9],
+		[1, 4, 7],
+		[2, 5, 8],
+		[3, 6, 9],
+		[1, 5, 9],
+		[3, 5, 7],
+	];
+
 	boardContainer = null;
 	board = [];
 	boardRows = 3;
@@ -29,6 +40,9 @@ class Game extends DomElems {
 	rules = null;
 	bodyOverflow = null;
 	gameContainer = null;
+	resultWins = null;
+	resultDraws = null;
+	resultDefeats = null;
 
 	players = [this.player, this.computer];
 	activePlayer = this.player;
@@ -90,6 +104,9 @@ class Game extends DomElems {
 		this.bodyOverflow = this.getElement(this.domElems.bodyOverflow);
 		this.gameContainer = this.getElement(this.domElems.gameContainer);
 		this.boardContainer = this.getElement(this.domElems.boardContainer);
+		this.resultWins = this.getElement(this.domElems.resultWins);
+		this.resultDraws = this.getElement(this.domElems.resulDraws);
+		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
 	}
 
 	getActivePlayer = () => {
@@ -164,6 +181,7 @@ class Game extends DomElems {
 		playerBox.textContent = activePlayer.mark;
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
+		this.findWinningPlayer(activePlayer);
 		// isGameEnd = playerClick.click(
 		// 	playerBox,
 		// 	activePlayer,
@@ -186,6 +204,27 @@ class Game extends DomElems {
 	pushBoxIdIntoActivePlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
 		box.textContent = `${player.mark}`;
+	};
+
+	findWinningPlayer = (player) => {
+		for (let combination of this.winningCombinations) {
+			if (combination.every((el) => player.arr.includes(el))) {
+				this.isGameEnd = true;
+				console.log(this.isGameEnd);
+				this.addPlayerWins(player);
+				// this.showWinningPlayersMarks(combination);
+				return;
+			}
+		}
+	};
+
+	addPlayerWins = (player) => {
+		player.winner = true;
+		player.wins++;
+		if (player.name == "Computer") {
+			this.resultDefeats.textContent = player.wins;
+		}
+		this.resultWins.textContent = player.wins;
 	};
 }
 

@@ -32,37 +32,37 @@ class Click {
 	// Function firstly filters for empty boxes on the board, then set which box is going to be filled with computer.mark
 	// After computer "click" the classes that can be seen below are called
 	click = (box, activePlayer, winningCombinations) => {
-		this.setBoxIntoPlayerArr(box, activePlayer);
+		// this.setBoxIntoPlayerArr(box, activePlayer);
 		this.findWinningPlayer(activePlayer, winningCombinations);
 		return this.isGameEnd;
 	};
 
 	// Clicked element is send into the player array.
-	setBoxIntoPlayerArr = (box, player) => {
-		player.arr.push(Number(box.id));
-		box.textContent = `${player.mark}`;
-	};
+	// setBoxIntoPlayerArr = (box, player) => {
+	// 	player.arr.push(Number(box.id));
+	// 	box.textContent = `${player.mark}`;
+	// };
 
-	findWinningPlayer = (player, winningCombinations) => {
-		for (let combination of winningCombinations) {
-			if (combination.every((el) => player.arr.includes(el))) {
-				this.isGameEnd = true;
-				this.addPlayerWins(player);
-				this.showWinningPlayersMarks(combination);
-				return;
-			}
-		}
-	};
+	// findWinningPlayer = (player, winningCombinations) => {
+	// 	for (let combination of winningCombinations) {
+	// 		if (combination.every((el) => player.arr.includes(el))) {
+	// 			this.isGameEnd = true;
+	// 			this.addPlayerWins(player);
+	// 			this.showWinningPlayersMarks(combination);
+	// 			return;
+	// 		}
+	// 	}
+	// };
 
-	addPlayerWins = (player) => {
-		player.winner = true;
-		player.wins++;
-		if (player.name == "Player") {
-			resultWins.textContent = player.wins;
-		} else if (player.name == "Computer") {
-			resultDefeats.textContent = player.wins;
-		}
-	};
+	// addPlayerWins = (player) => {
+	// 	player.winner = true;
+	// 	player.wins++;
+	// 	if (player.name == "Player") {
+	// 		resultWins.textContent = player.wins;
+	// 	} else if (player.name == "Computer") {
+	// 		resultDefeats.textContent = player.wins;
+	// 	}
+	// };
 
 	showWinningPlayersMarks = (combination) => {
 		const winningArr = combination;
