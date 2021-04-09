@@ -33,13 +33,10 @@ class Game extends DomElems {
 	players = [this.player, this.computer];
 	activePlayer = this.player;
 
-	emptyBoxes = [];
-
 	initializeGame() {
 		this.setStartingBtnsEventListeners();
 		this.generateBoxes();
 		this.renderBoard();
-		this.setEmptyBoxes();
 	}
 
 	setStartingBtnsEventListeners() {
@@ -81,12 +78,6 @@ class Game extends DomElems {
 			box.element = box.getElement(box.selector);
 		});
 		this.addBoxesEventListeners();
-	}
-
-	setEmptyBoxes() {
-		this.board
-			.flat()
-			.forEach((box) => this.emptyBoxes.push(box.element.textContent));
 	}
 
 	setStartingPageElements() {
@@ -150,16 +141,13 @@ class Game extends DomElems {
 		// 	newGameBtn.addEventListener("click", newGameListener);
 		// 	return;
 		// } else {
-		// this.setActivePlayer();
-		// this.filterEmptyBoxes();
-		// this.emptyBoxes = this.emptyBoxes.filter((box) => !box);
-		console.log(this.emptyBoxes);
-		// const computerBox = this.emptyBoxes[
-		// 	Math.floor(Math.random() * this.emptyBoxes.length)
-		// ];
-		// console.log(computerBox);
-		// this.click(computerBox, this.activePlayer);
-		// }
+
+		const emptyBoxes = this.board
+			.flat()
+			.filter((box) => !box.element.textContent);
+		const computerBox =
+			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)].element;
+		this.click(computerBox, this.activePlayer);
 
 		// // Another check if game is end to remove listeners if this condition is true
 		// if (isGameEnd) {
@@ -172,7 +160,7 @@ class Game extends DomElems {
 	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
 	// After each click the event listener to specific box is removed
 	click = (playerBox, activePlayer) => {
-		this.emptyBoxes[playerBox.id - 1] = activePlayer.mark;
+		console.log(playerBox);
 		playerBox.textContent = activePlayer.mark;
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
@@ -192,12 +180,8 @@ class Game extends DomElems {
 		// }
 		// board = newBoard.addBoxToBoard(playerBox, board);
 		this.removeBoxListeners(playerBox);
-		// activePlayer = game.setActivePlayer();
+		this.setActivePlayer();
 	};
-
-	// filterEmptyBoxes() {
-	// 	this.emptyBoxes = this.emptyBoxes.filter((box) => !box);
-	// }
 
 	pushBoxIdIntoActivePlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
