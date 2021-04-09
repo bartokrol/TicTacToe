@@ -30,7 +30,6 @@ class Game extends DomElems {
 		[3, 5, 7],
 	];
 
-	boardContainer = null;
 	board = [];
 	boardRows = 3;
 
@@ -39,10 +38,14 @@ class Game extends DomElems {
 	rulesBtn = null;
 	rules = null;
 	bodyOverflow = null;
+
 	gameContainer = null;
+	boardContainer = null;
 	resultWins = null;
 	resultDraws = null;
 	resultDefeats = null;
+	newGameBtn = null;
+	resetBtn = null;
 
 	players = [this.player, this.computer];
 	activePlayer = this.player;
@@ -102,11 +105,14 @@ class Game extends DomElems {
 		this.rulesBtn = this.getElement(this.domElems.rulesBtn);
 		this.rules = this.getElement(this.domElems.rules);
 		this.bodyOverflow = this.getElement(this.domElems.bodyOverflow);
+
 		this.gameContainer = this.getElement(this.domElems.gameContainer);
 		this.boardContainer = this.getElement(this.domElems.boardContainer);
 		this.resultWins = this.getElement(this.domElems.resultWins);
 		this.resultDraws = this.getElement(this.domElems.resulDraws);
 		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
+		this.newGameBtn = this.getElement(this.domElems.newGameBtn);
+		this.resetBtn = this.getElement(this.domElems.resetBtn);
 	}
 
 	getActivePlayer = () => {
@@ -149,15 +155,45 @@ class Game extends DomElems {
 		box.removeEventListener("mouseover", this.showElementOnMouseOver);
 	};
 
+	removeBoxesEventListeners() {
+		this.board.flat().forEach((box) => {
+			box.element.removeEventListener(
+				"mouseout",
+				this.hideElementOnMouseOut
+			);
+			box.element.removeEventListener(
+				"mouseover",
+				this.showElementOnMouseOver
+			);
+			box.element.removeEventListener("click", this.handleClick);
+		});
+	}
+
+	newGameListener = () => {
+		console.log("tak");
+		// const newGameReset = resetPageAfterNewGameBtn(
+		// 	player,
+		// 	computer,
+		// 	players,
+		// 	isGameEnd
+		// );
+		// board = newBoard.resetBoard(board);
+		// isGameEnd = newGameReset;
+		// emptyBoxes = boxes;
+		// activePlayer = game.getActivePlayer();
+		// addListenersToBoxes();
+		// checkComputerMove();
+		// newGameBtn.removeEventListener("click", newGameListener);
+	};
+
 	handleClick = (e) => {
 		const playerBox = e.target;
 		this.click(playerBox, this.activePlayer);
-		// Check if game is end
-		// if (isGameEnd) {
-		// 	removeListenersForEachBox();
-		// 	newGameBtn.addEventListener("click", newGameListener);
-		// 	return;
-		// } else {
+
+		if (this.isGameEnd) {
+			this.setGameAfterGameIsEnd();
+			return;
+		}
 
 		const emptyBoxes = this.board
 			.flat()
@@ -166,12 +202,10 @@ class Game extends DomElems {
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)].element;
 		this.click(computerBox, this.activePlayer);
 
-		// // Another check if game is end to remove listeners if this condition is true
-		// if (isGameEnd) {
-		// 	removeListenersForEachBox();
-		// 	newGameBtn.addEventListener("click", newGameListener);
-		// 	return;
-		// }
+		if (this.isGameEnd) {
+			this.setGameAfterGameIsEnd();
+			return;
+		}
 	};
 
 	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
@@ -182,11 +216,7 @@ class Game extends DomElems {
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
 		this.findWinningPlayer(activePlayer);
-		// isGameEnd = playerClick.click(
-		// 	playerBox,
-		// 	activePlayer,
-		// 	winningCombinations
-		// );
+
 		// isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
 		// 	? (game.drawCheck(activePlayer, draws, isGameEnd),
 		// 	  new ResultMessage(),
@@ -210,9 +240,8 @@ class Game extends DomElems {
 		for (let combination of this.winningCombinations) {
 			if (combination.every((el) => player.arr.includes(el))) {
 				this.isGameEnd = true;
-				console.log(this.isGameEnd);
 				this.addPlayerWins(player);
-				// this.showWinningPlayersMarks(combination);
+				this.showWinningPlayersMarks(combination);
 				return;
 			}
 		}
@@ -226,6 +255,20 @@ class Game extends DomElems {
 		}
 		this.resultWins.textContent = player.wins;
 	};
+
+	showWinningPlayersMarks = (combination) => {
+		this.board.flat().forEach((box) => {
+			if (combination.includes(Number(box.id))) {
+				box.element.classList.add("won");
+			}
+		});
+	};
+
+	setGameAfterGameIsEnd() {
+		this.removeBoxesEventListeners();
+		this.newGameBtn.classList.remove("disabled");
+		this.newGameBtn.addEventListener("click", this.newGameListener);
+	}
 }
 
 document.addEventListener("DOMContentLoaded", () => {

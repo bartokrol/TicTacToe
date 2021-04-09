@@ -10,6 +10,8 @@ export class DomElems {
 		resultWins: ".game-container__current-result__wins__number",
 		resultDraws: ".game-container__current-result__draws__number",
 		resultDefeats: ".game-container__current-result__defeats__number",
+		newGameBtn: ".game-container__buttons-container--new-game-btn",
+		resetBtn: ".game-container__buttons-container--reset-btn",
 	};
 
 	getElement(selector) {

@@ -95,22 +95,22 @@ const startTheGame = (e) => {
 	};
 
 	// Function that resets the game after newGameBtn is clicked
-	const newGameListener = () => {
-		// resetPageAfterNewGameBtn is set inside "reset.js".
-		const newGameReset = resetPageAfterNewGameBtn(
-			player,
-			computer,
-			players,
-			isGameEnd
-		);
-		board = newBoard.resetBoard(board);
-		isGameEnd = newGameReset;
-		emptyBoxes = boxes;
-		activePlayer = game.getActivePlayer();
-		addListenersToBoxes();
-		checkComputerMove();
-		newGameBtn.removeEventListener("click", newGameListener);
-	};
+	// const newGameListener = () => {
+	// 	// resetPageAfterNewGameBtn is set inside "reset.js".
+	// 	const newGameReset = resetPageAfterNewGameBtn(
+	// 		player,
+	// 		computer,
+	// 		players,
+	// 		isGameEnd
+	// 	);
+	// 	board = newBoard.resetBoard(board);
+	// 	isGameEnd = newGameReset;
+	// 	emptyBoxes = boxes;
+	// 	activePlayer = game.getActivePlayer();
+	// 	addListenersToBoxes();
+	// 	checkComputerMove();
+	// 	newGameBtn.removeEventListener("click", newGameListener);
+	// };
 
 	const resetListener = () => {
 		gameContainer.classList.add("hidden");
