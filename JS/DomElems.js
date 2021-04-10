@@ -13,6 +13,9 @@ export class DomElems {
 		newGameBtn: ".game-container__buttons-container--new-game-btn",
 		resetBtn: ".game-container__buttons-container--reset-btn",
 		latestResults: ".game-container__latest-results__results",
+		resultMessage: ".winner-annoucement-container__heading",
+		resultWinner: ".winner-annoucement-container__winner",
+		winnerAnnouncement: ".winner-annoucement-container",
 	};
 
 	getElement(selector) {

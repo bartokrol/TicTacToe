@@ -1,6 +1,7 @@
 import { DomElems } from "./DomElems.js";
 import { Box } from "./Box.js";
 import { LatestResults } from "./LatestResults.js";
+import { WinningBox } from "./WinningBox.js";
 
 class Game extends DomElems {
 	player = {
@@ -52,6 +53,7 @@ class Game extends DomElems {
 	activePlayer = this.player;
 
 	latestResults = new LatestResults();
+	winningBox = new WinningBox();
 
 	initializeGame() {
 		this.setStartingBtnsEventListeners();
@@ -247,6 +249,7 @@ class Game extends DomElems {
 				this.isGameEnd = true;
 				this.addPlayerWins(player);
 				this.showWinningPlayersMarks(combination);
+				this.winningBox.showWinningMessage(player);
 				this.latestResults.setLatestResults(player);
 				return;
 			}
@@ -272,7 +275,6 @@ class Game extends DomElems {
 
 	setGameAfterGameIsEnd() {
 		this.removeBoxesEventListeners();
-		this.newGameBtn.classList.remove("disabled");
 		this.newGameBtn.addEventListener("click", this.newGameListener);
 	}
 }
