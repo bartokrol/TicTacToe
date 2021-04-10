@@ -12,6 +12,7 @@ export class DomElems {
 		resultDefeats: ".game-container__current-result__defeats__number",
 		newGameBtn: ".game-container__buttons-container--new-game-btn",
 		resetBtn: ".game-container__buttons-container--reset-btn",
+		latestResults: ".game-container__latest-results__results",
 	};
 
 	getElement(selector) {

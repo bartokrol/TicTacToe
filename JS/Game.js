@@ -1,5 +1,6 @@
 import { DomElems } from "./DomElems.js";
 import { Box } from "./Box.js";
+import { LatestResults } from "./LatestResults.js";
 
 class Game extends DomElems {
 	player = {
@@ -49,6 +50,8 @@ class Game extends DomElems {
 
 	players = [this.player, this.computer];
 	activePlayer = this.player;
+
+	latestResults = new LatestResults();
 
 	initializeGame() {
 		this.setStartingBtnsEventListeners();
@@ -170,20 +173,23 @@ class Game extends DomElems {
 	}
 
 	newGameListener = () => {
-		console.log("tak");
-		// const newGameReset = resetPageAfterNewGameBtn(
-		// 	player,
-		// 	computer,
-		// 	players,
-		// 	isGameEnd
-		// );
-		// board = newBoard.resetBoard(board);
-		// isGameEnd = newGameReset;
-		// emptyBoxes = boxes;
-		// activePlayer = game.getActivePlayer();
-		// addListenersToBoxes();
-		// checkComputerMove();
-		// newGameBtn.removeEventListener("click", newGameListener);
+		this.board.flat().forEach((box) => {
+			box.element.textContent = "";
+			box.element.classList.remove("won");
+		});
+		this.isGameEnd = false;
+
+		this.computer.winner = false;
+		this.player.winner = false;
+		this.computer.arr = [];
+		this.player.arr = [];
+		this.player.active = this.player.mark === "X" ? true : false;
+		this.computer.active = this.player.mark === "X" ? false : true;
+		this.getActivePlayer();
+
+		this.addBoxesEventListeners();
+		this.newGameBtn.classList.add("disabled");
+		this.newGameBtn.removeEventListener("click", this.newGameListener);
 	};
 
 	handleClick = (e) => {
@@ -211,7 +217,6 @@ class Game extends DomElems {
 	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
 	// After each click the event listener to specific box is removed
 	click = (playerBox, activePlayer) => {
-		console.log(playerBox);
 		playerBox.textContent = activePlayer.mark;
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
@@ -242,6 +247,7 @@ class Game extends DomElems {
 				this.isGameEnd = true;
 				this.addPlayerWins(player);
 				this.showWinningPlayersMarks(combination);
+				this.latestResults.setLatestResults(player);
 				return;
 			}
 		}
