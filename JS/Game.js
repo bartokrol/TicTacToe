@@ -45,6 +45,7 @@ class Game extends DomElems {
 	boardContainer = null;
 	resultWins = null;
 	resultDraws = null;
+	draws = 0;
 	resultDefeats = null;
 	newGameBtn = null;
 	resetBtn = null;
@@ -114,7 +115,7 @@ class Game extends DomElems {
 		this.gameContainer = this.getElement(this.domElems.gameContainer);
 		this.boardContainer = this.getElement(this.domElems.boardContainer);
 		this.resultWins = this.getElement(this.domElems.resultWins);
-		this.resultDraws = this.getElement(this.domElems.resulDraws);
+		this.resultDraws = this.getElement(this.domElems.resultDraws);
 		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
 		this.newGameBtn = this.getElement(this.domElems.newGameBtn);
 		this.resetBtn = this.getElement(this.domElems.resetBtn);
@@ -216,24 +217,12 @@ class Game extends DomElems {
 		}
 	};
 
-	// Function that calls new Click depends on which playerBox is set (could be e.target/playerBox or computerBox)
-	// After each click the event listener to specific box is removed
 	click = (playerBox, activePlayer) => {
 		playerBox.textContent = activePlayer.mark;
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
 		this.findWinningPlayer(activePlayer);
-
-		// isGameEnd = game.drawCheck(activePlayer, draws, isGameEnd)
-		// 	? (game.drawCheck(activePlayer, draws, isGameEnd),
-		// 	  new ResultMessage(),
-		// 	  results.setLatestResults(""))
-		// 	: isGameEnd;
-		// if (activePlayer.winner) {
-		// 	new ResultMessage(activePlayer);
-		// 	results.setLatestResults(activePlayer);
-		// }
-		// board = newBoard.addBoxToBoard(playerBox, board);
+		this.checkForDraw(activePlayer);
 		this.removeBoxListeners(playerBox);
 		this.setActivePlayer();
 	};
@@ -253,6 +242,17 @@ class Game extends DomElems {
 				this.latestResults.setLatestResults(player);
 				return;
 			}
+		}
+	};
+
+	checkForDraw = (player) => {
+		if (player.arr.length === 5 && player.winner === false) {
+			this.isGameEnd = true;
+			this.draws++;
+			this.resultDraws.textContent = this.draws;
+			this.winningBox.showWinningMessage("");
+			this.latestResults.setLatestResults("");
+			this.setGameAfterGameIsEnd();
 		}
 	};
 
