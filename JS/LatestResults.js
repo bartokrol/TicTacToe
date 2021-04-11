@@ -44,10 +44,7 @@ export class LatestResults extends DomElems {
 		}
 	};
 
-	resetResults = (player, computer, draws) => {
-		resultWins.textContent = player.wins;
-		resultDraws.textContent = draws;
-		resultDefeats.textContent = computer.wins;
-		latest.innerHTML = "";
+	resetResults = () => {
+		this.latestResultsElement.innerHTML = "";
 	};
 }

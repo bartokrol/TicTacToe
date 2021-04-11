@@ -73,7 +73,9 @@ class Game extends DomElems {
 				this.startingPageContainer.classList.add("inactive");
 				this.bodyOverflow.classList.remove("body-hidden");
 				this.gameContainer.classList.remove("hidden");
+				this.newGameBtn.classList.add("disabled");
 				this.getActivePlayer();
+				this.checkComputerMove();
 			});
 		});
 		this.rulesBtn.addEventListener("click", () => {
@@ -119,6 +121,10 @@ class Game extends DomElems {
 		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
 		this.newGameBtn = this.getElement(this.domElems.newGameBtn);
 		this.resetBtn = this.getElement(this.domElems.resetBtn);
+		this.resetBtn.addEventListener(
+			"click",
+			this.resetGameAfterResetBtnClick
+		);
 	}
 
 	getActivePlayer = () => {
@@ -175,7 +181,7 @@ class Game extends DomElems {
 		});
 	}
 
-	newGameListener = () => {
+	resetGameAfterNewGameBtnClick = () => {
 		this.board.flat().forEach((box) => {
 			box.element.textContent = "";
 			box.element.classList.remove("won");
@@ -192,12 +198,51 @@ class Game extends DomElems {
 
 		this.addBoxesEventListeners();
 		this.newGameBtn.classList.add("disabled");
-		this.newGameBtn.removeEventListener("click", this.newGameListener);
+		this.newGameBtn.removeEventListener(
+			"click",
+			this.resetGameAfterNewGameBtnClick
+		);
+	};
+
+	resetGameAfterResetBtnClick = () => {
+		console.log("klik");
+		this.startingPageContainer.classList.remove("inactive");
+		this.bodyOverflow.classList.add("body-hidden");
+		this.gameContainer.classList.add("hidden");
+		this.isGameEnd = false;
+
+		this.computer.winner = false;
+		this.player.winner = false;
+		this.computer.arr = [];
+		this.player.arr = [];
+
+		this.resultWins.textContent = "0";
+		this.resultDraws.textContent = "0";
+		this.resultDefeats.textContent = "0";
+		this.latestResults.resetResults();
+
+		this.board.flat().forEach((box) => {
+			box.element.textContent = "";
+			box.element.classList.remove("won");
+		});
+		this.addBoxesEventListeners();
+	};
+
+	checkComputerMove = () => {
+		if (this.computer.active) {
+			const emptyBoxes = this.board
+				.flat()
+				.filter((box) => !box.element.textContent);
+			const computerBox =
+				emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)]
+					.element;
+			this.setClick(computerBox, this.activePlayer);
+		}
 	};
 
 	handleClick = (e) => {
 		const playerBox = e.target;
-		this.click(playerBox, this.activePlayer);
+		this.setClick(playerBox, this.activePlayer);
 
 		if (this.isGameEnd) {
 			this.setGameAfterGameIsEnd();
@@ -209,7 +254,7 @@ class Game extends DomElems {
 			.filter((box) => !box.element.textContent);
 		const computerBox =
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)].element;
-		this.click(computerBox, this.activePlayer);
+		this.setClick(computerBox, this.activePlayer);
 
 		if (this.isGameEnd) {
 			this.setGameAfterGameIsEnd();
@@ -217,7 +262,7 @@ class Game extends DomElems {
 		}
 	};
 
-	click = (playerBox, activePlayer) => {
+	setClick = (playerBox, activePlayer) => {
 		playerBox.textContent = activePlayer.mark;
 		playerBox.classList.remove("board--box--hover");
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
@@ -275,7 +320,10 @@ class Game extends DomElems {
 
 	setGameAfterGameIsEnd() {
 		this.removeBoxesEventListeners();
-		this.newGameBtn.addEventListener("click", this.newGameListener);
+		this.newGameBtn.addEventListener(
+			"click",
+			this.resetGameAfterNewGameBtnClick
+		);
 	}
 }
 
