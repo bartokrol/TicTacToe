@@ -57,25 +57,16 @@ class Game extends DomElems {
 	winningBox = new WinningBox();
 
 	initializeGame() {
-		this.setStartingBtnsEventListeners();
+		this.setStartingPage();
 		this.generateBoxes();
 		this.renderBoard();
 	}
 
-	setStartingBtnsEventListeners() {
+	setStartingPage() {
 		this.setStartingPageElements();
 		this.startingBtns.forEach((button) => {
 			button.addEventListener("click", (e) => {
-				this.player.mark = e.target.value;
-				this.player.active = this.player.mark === "X" ? true : false;
-				this.computer.mark = this.player.mark === "X" ? "O" : "X";
-				this.computer.active = this.player.mark === "X" ? false : true;
-				this.startingPageContainer.classList.add("inactive");
-				this.bodyOverflow.classList.remove("body-hidden");
-				this.gameContainer.classList.remove("hidden");
-				this.newGameBtn.classList.add("disabled");
-				this.getActivePlayer();
-				this.checkComputerMove();
+				this.startTheGame(e);
 			});
 		});
 		this.rulesBtn.addEventListener("click", () => {
@@ -95,6 +86,9 @@ class Game extends DomElems {
 	}
 
 	renderBoard() {
+		while (this.boardContainer.firstChild) {
+			this.boardContainer.removeChild(this.boardContainer.lastChild);
+		}
 		this.board.flat().forEach((box) => {
 			this.boardContainer.insertAdjacentHTML(
 				"beforeend",
@@ -113,14 +107,31 @@ class Game extends DomElems {
 		this.rulesBtn = this.getElement(this.domElems.rulesBtn);
 		this.rules = this.getElement(this.domElems.rules);
 		this.bodyOverflow = this.getElement(this.domElems.bodyOverflow);
-
-		this.gameContainer = this.getElement(this.domElems.gameContainer);
 		this.boardContainer = this.getElement(this.domElems.boardContainer);
+	}
+
+	startTheGame(e) {
+		this.setGameElements();
+		this.player.mark = e.target.value;
+		this.player.active = this.player.mark === "X" ? true : false;
+		this.computer.mark = this.player.mark === "X" ? "O" : "X";
+		this.computer.active = this.player.mark === "X" ? false : true;
+		this.startingPageContainer.classList.add("inactive");
+		this.bodyOverflow.classList.remove("body-hidden");
+		this.gameContainer.classList.remove("hidden");
+		this.newGameBtn.classList.add("disabled");
+		this.getActivePlayer();
+		this.checkComputerMove();
+	}
+
+	setGameElements() {
+		this.gameContainer = this.getElement(this.domElems.gameContainer);
 		this.resultWins = this.getElement(this.domElems.resultWins);
 		this.resultDraws = this.getElement(this.domElems.resultDraws);
 		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
 		this.newGameBtn = this.getElement(this.domElems.newGameBtn);
 		this.resetBtn = this.getElement(this.domElems.resetBtn);
+
 		this.resetBtn.addEventListener(
 			"click",
 			this.resetGameAfterResetBtnClick
@@ -182,6 +193,7 @@ class Game extends DomElems {
 	}
 
 	resetGameAfterNewGameBtnClick = () => {
+		this.renderBoard();
 		this.board.flat().forEach((box) => {
 			box.element.textContent = "";
 			box.element.classList.remove("won");
@@ -205,7 +217,6 @@ class Game extends DomElems {
 	};
 
 	resetGameAfterResetBtnClick = () => {
-		console.log("klik");
 		this.startingPageContainer.classList.remove("inactive");
 		this.bodyOverflow.classList.add("body-hidden");
 		this.gameContainer.classList.add("hidden");
@@ -213,6 +224,9 @@ class Game extends DomElems {
 
 		this.computer.winner = false;
 		this.player.winner = false;
+		this.computer.wins = 0;
+		this.player.wins = 0;
+		this.draws = 0;
 		this.computer.arr = [];
 		this.player.arr = [];
 
@@ -242,6 +256,12 @@ class Game extends DomElems {
 
 	handleClick = (e) => {
 		const playerBox = e.target;
+		// const rowIndex = playerBox.getAttribute("data-row");
+		// const columnIndex = playerBox.getAttribute("data-column");
+		// this.board[rowIndex][columnIndex].mark = this.activePlayer.mark;
+		// this.board[rowIndex][columnIndex].element.textContent = this.board[
+		// 	rowIndex
+		// ][columnIndex].mark;
 		this.setClick(playerBox, this.activePlayer);
 
 		if (this.isGameEnd) {

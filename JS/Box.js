@@ -10,6 +10,7 @@ export class Box extends DomElems {
 	}
 
 	element = null;
+	mark = null;
 
 	createBox() {
 		const element = `<div class="game-container__board-container__box board--box" data-row=${this.dataRow} data-column=${this.dataColumn} id=${this.id}></div>`;

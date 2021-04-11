@@ -46,5 +46,6 @@ export class LatestResults extends DomElems {
 
 	resetResults = () => {
 		this.latestResultsElement.innerHTML = "";
+		this.latestResults = [];
 	};
 }
