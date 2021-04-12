@@ -1,6 +1,6 @@
 import { DomElems } from "./DomElems.js";
 import { Box } from "./Box.js";
-import { LatestResults } from "./LatestResults.js";
+import { Results } from "./Results.js";
 import { WinningBox } from "./WinningBox.js";
 
 class Game extends DomElems {
@@ -52,7 +52,7 @@ class Game extends DomElems {
 	players = [this.player, this.computer];
 	activePlayer = this.player;
 
-	latestResults = new LatestResults();
+	results = new Results();
 	winningBox = new WinningBox();
 
 	initializeGame() {
@@ -194,16 +194,10 @@ class Game extends DomElems {
 
 	resetGameAfterNewGameBtnClick = () => {
 		this.renderBoard();
-		this.board.flat().forEach((box) => {
-			box.element.textContent = "";
-			box.element.classList.remove("won");
-		});
+		this.resetGameWinnerAndPlayersArr();
+
 		this.isGameEnd = false;
 
-		this.computer.winner = false;
-		this.player.winner = false;
-		this.computer.arr = [];
-		this.player.arr = [];
 		this.player.active = this.player.mark === "X" ? true : false;
 		this.computer.active = this.player.mark === "X" ? false : true;
 		this.getActivePlayer();
@@ -217,28 +211,26 @@ class Game extends DomElems {
 	};
 
 	resetGameAfterResetBtnClick = () => {
+		this.renderBoard();
+		this.resetGameWinnerAndPlayersArr();
+		this.resetPlayersWins();
 		this.startingPageContainer.classList.remove("inactive");
 		this.bodyOverflow.classList.add("body-hidden");
 		this.gameContainer.classList.add("hidden");
 		this.isGameEnd = false;
-
-		this.resetPlayersAfterResetBtnClick();
-
-		this.latestResults.resetResults();
-
-		this.board.flat().forEach((box) => {
-			box.element.textContent = "";
-			box.element.classList.remove("won");
-		});
+		this.draws = 0;
+		this.results.resetResults();
 		this.addBoxesEventListeners();
 	};
 
-	resetPlayersAfterResetBtnClick() {
-		this.computer.winner = false;
-		this.player.winner = false;
+	resetPlayersWins() {
 		this.computer.wins = 0;
 		this.player.wins = 0;
-		this.draws = 0;
+	}
+
+	resetGameWinnerAndPlayersArr() {
+		this.computer.winner = false;
+		this.player.winner = false;
 		this.computer.arr = [];
 		this.player.arr = [];
 	}
@@ -283,6 +275,7 @@ class Game extends DomElems {
 		const box = this.board[rowIndex][columnIndex];
 		box.mark = this.activePlayer.mark;
 		box.setBoxClick();
+
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
 		this.findWinningPlayer(activePlayer);
 		this.checkForDraw(activePlayer);
@@ -301,7 +294,7 @@ class Game extends DomElems {
 				this.addPlayerWins(player);
 				this.showWinningPlayersMarks(combination);
 				this.winningBox.showWinningMessage(player);
-				this.latestResults.setLatestResults(player);
+				this.results.setLatestResults(player);
 				return;
 			}
 		}
@@ -312,8 +305,8 @@ class Game extends DomElems {
 			this.isGameEnd = true;
 			this.draws++;
 			this.winningBox.showWinningMessage("");
-			this.latestResults.setDrawsNumber(this.draws);
-			this.latestResults.setLatestResults("");
+			this.results.setDrawsNumber(this.draws);
+			this.results.setLatestResults("");
 			this.setGameAfterGameIsEnd();
 		}
 	};
@@ -322,17 +315,17 @@ class Game extends DomElems {
 		player.winner = true;
 		player.wins++;
 		if (player.name == "Computer") {
-			this.latestResults.setDefeatsNumber(player.wins);
+			this.results.setDefeatsNumber(player.wins);
 		}
 		if (player.name == "Player") {
-			this.latestResults.setWinsNumber(player.wins);
+			this.results.setWinsNumber(player.wins);
 		}
 	};
 
 	showWinningPlayersMarks = (combination) => {
 		this.board.flat().forEach((box) => {
 			if (combination.includes(Number(box.id))) {
-				box.element.classList.add("won");
+				box.setWinningBox();
 			}
 		});
 	};

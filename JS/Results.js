@@ -1,13 +1,25 @@
-import { latest, resultWins, resultDraws, resultDefeats } from "./domElems.js";
+import { DomElems } from "./DomElems.js";
 
-// LatestResults is called in "drawCheck.js" and "addWins.js" modules
-class LatestResults {
-	constructor(latestResults) {
-		this.latestResults = latestResults;
+export class Results extends DomElems {
+	resultWins = this.getElement(this.domElems.resultWins);
+	resultDraws = this.getElement(this.domElems.resultDraws);
+	resultDefeats = this.getElement(this.domElems.resultDefeats);
+
+	latestResultsElement = this.getElement(this.domElems.latestResults);
+	latestResults = [];
+
+	setWinsNumber(wins) {
+		this.resultWins.textContent = wins;
 	}
 
-	// Function gets fullDate from getDate function. If there is a winner then specific string is send to latestResults array, if there is a draw then "it was a draw!" message is sent inside latestResults array.
-	// Then map function shows specific li elements in index.html
+	setDefeatsNumber(defeats) {
+		this.resultDefeats.textContent = defeats;
+	}
+
+	setDrawsNumber(draws) {
+		this.resultDraws.textContent = draws;
+	}
+
 	setLatestResults = (player) => {
 		const date = this.getDate();
 		if (player.winner) {
@@ -17,7 +29,7 @@ class LatestResults {
 			let winner = "It was a draw...";
 			this.latestResults.unshift({ winner, date });
 		}
-		latest.innerHTML = this.latestResults
+		this.latestResultsElement.innerHTML = this.latestResults
 			.map(
 				(el) =>
 					`<li class="game-container__latest-results__results__latest-result">${el.date} <span class="game-container__latest-results__results__latest-result__winner">${el.winner}<span></li>`
@@ -26,7 +38,6 @@ class LatestResults {
 		this.removeLatestResult();
 	};
 
-	// Function get's actual date and time and return fullDate;
 	getDate = () => {
 		const date = new Date();
 		const year = date.getFullYear();
@@ -43,20 +54,17 @@ class LatestResults {
 		return fullDate;
 	};
 
-	// Function removes last element of the array if length is more then 4 elements
 	removeLatestResult = () => {
 		if (this.latestResults.length > 4) {
 			this.latestResults.pop();
 		}
 	};
 
-	// Function resets players wins and latest unordered list
-	resetResults = (player, computer, draws) => {
-		resultWins.textContent = player.wins;
-		resultDraws.textContent = draws;
-		resultDefeats.textContent = computer.wins;
-		latest.innerHTML = "";
+	resetResults = () => {
+		this.resultWins.textContent = "0";
+		this.resultDraws.textContent = "0";
+		this.resultDefeats.textContent = "0";
+		this.latestResultsElement.innerHTML = "";
+		this.latestResults = [];
 	};
 }
-
-export { LatestResults };

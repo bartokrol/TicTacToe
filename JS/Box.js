@@ -21,4 +21,13 @@ export class Box extends DomElems {
 		this.element.textContent = this.mark;
 		this.element.classList.remove("board--box--hover");
 	}
+
+	setWinningBox() {
+		this.element.classList.add("won");
+	}
+
+	resetBox() {
+		this.element.textContent = "";
+		this.element.classList.remove("won");
+	}
 }
