@@ -1,8 +1,24 @@
 import { DomElems } from "./DomElems.js";
 
 export class LatestResults extends DomElems {
+	resultWins = this.getElement(this.domElems.resultWins);
+	resultDraws = this.getElement(this.domElems.resultDraws);
+	resultDefeats = this.getElement(this.domElems.resultDefeats);
+
 	latestResultsElement = this.getElement(this.domElems.latestResults);
 	latestResults = [];
+
+	setWinsNumber(wins) {
+		this.resultWins.textContent = wins;
+	}
+
+	setDefeatsNumber(defeats) {
+		this.resultDefeats.textContent = defeats;
+	}
+
+	setDrawsNumber(draws) {
+		this.resultDraws.textContent = draws;
+	}
 
 	setLatestResults = (player) => {
 		const date = this.getDate();
@@ -45,6 +61,9 @@ export class LatestResults extends DomElems {
 	};
 
 	resetResults = () => {
+		this.resultWins.textContent = "0";
+		this.resultDraws.textContent = "0";
+		this.resultDefeats.textContent = "0";
 		this.latestResultsElement.innerHTML = "";
 		this.latestResults = [];
 	};

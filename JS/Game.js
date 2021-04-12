@@ -34,6 +34,7 @@ class Game extends DomElems {
 
 	board = [];
 	boardRows = 3;
+	boardCols = 3;
 
 	startingPageContainer = null;
 	startingBtns = null;
@@ -43,10 +44,8 @@ class Game extends DomElems {
 
 	gameContainer = null;
 	boardContainer = null;
-	resultWins = null;
-	resultDraws = null;
+
 	draws = 0;
-	resultDefeats = null;
 	newGameBtn = null;
 	resetBtn = null;
 
@@ -78,7 +77,7 @@ class Game extends DomElems {
 		let id = 0;
 		for (let row = 0; row < this.boardRows; row++) {
 			this.board[row] = [];
-			for (let col = 0; col < 3; col++) {
+			for (let col = 0; col < this.boardCols; col++) {
 				id++;
 				this.board[row].push(new Box(row, col, id));
 			}
@@ -123,9 +122,6 @@ class Game extends DomElems {
 
 	setGameElements() {
 		this.gameContainer = this.getElement(this.domElems.gameContainer);
-		this.resultWins = this.getElement(this.domElems.resultWins);
-		this.resultDraws = this.getElement(this.domElems.resultDraws);
-		this.resultDefeats = this.getElement(this.domElems.resultDefeats);
 		this.newGameBtn = this.getElement(this.domElems.newGameBtn);
 		this.resetBtn = this.getElement(this.domElems.resetBtn);
 
@@ -228,9 +224,6 @@ class Game extends DomElems {
 
 		this.resetPlayersAfterResetBtnClick();
 
-		this.resultWins.textContent = "0";
-		this.resultDraws.textContent = "0";
-		this.resultDefeats.textContent = "0";
 		this.latestResults.resetResults();
 
 		this.board.flat().forEach((box) => {
@@ -318,8 +311,8 @@ class Game extends DomElems {
 		if (player.arr.length === 5 && player.winner === false) {
 			this.isGameEnd = true;
 			this.draws++;
-			this.resultDraws.textContent = this.draws;
 			this.winningBox.showWinningMessage("");
+			this.latestResults.setDrawsNumber(this.draws);
 			this.latestResults.setLatestResults("");
 			this.setGameAfterGameIsEnd();
 		}
@@ -329,9 +322,11 @@ class Game extends DomElems {
 		player.winner = true;
 		player.wins++;
 		if (player.name == "Computer") {
-			this.resultDefeats.textContent = player.wins;
+			this.latestResults.setDefeatsNumber(player.wins);
 		}
-		this.resultWins.textContent = player.wins;
+		if (player.name == "Player") {
+			this.latestResults.setWinsNumber(player.wins);
+		}
 	};
 
 	showWinningPlayersMarks = (combination) => {
