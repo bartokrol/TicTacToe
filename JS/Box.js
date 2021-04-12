@@ -16,4 +16,9 @@ export class Box extends DomElems {
 		const element = `<div class="game-container__board-container__box board--box" data-row=${this.dataRow} data-column=${this.dataColumn} id=${this.id}></div>`;
 		return element;
 	}
+
+	setBoxClick() {
+		this.element.textContent = this.mark;
+		this.element.classList.remove("board--box--hover");
+	}
 }

@@ -112,10 +112,7 @@ class Game extends DomElems {
 
 	startTheGame(e) {
 		this.setGameElements();
-		this.player.mark = e.target.value;
-		this.player.active = this.player.mark === "X" ? true : false;
-		this.computer.mark = this.player.mark === "X" ? "O" : "X";
-		this.computer.active = this.player.mark === "X" ? false : true;
+		this.setPlayers(e);
 		this.startingPageContainer.classList.add("inactive");
 		this.bodyOverflow.classList.remove("body-hidden");
 		this.gameContainer.classList.remove("hidden");
@@ -136,6 +133,13 @@ class Game extends DomElems {
 			"click",
 			this.resetGameAfterResetBtnClick
 		);
+	}
+
+	setPlayers(e) {
+		this.player.mark = e.target.value;
+		this.player.active = this.player.mark === "X" ? true : false;
+		this.computer.mark = this.player.mark === "X" ? "O" : "X";
+		this.computer.active = this.player.mark === "X" ? false : true;
 	}
 
 	getActivePlayer = () => {
@@ -222,13 +226,7 @@ class Game extends DomElems {
 		this.gameContainer.classList.add("hidden");
 		this.isGameEnd = false;
 
-		this.computer.winner = false;
-		this.player.winner = false;
-		this.computer.wins = 0;
-		this.player.wins = 0;
-		this.draws = 0;
-		this.computer.arr = [];
-		this.player.arr = [];
+		this.resetPlayersAfterResetBtnClick();
 
 		this.resultWins.textContent = "0";
 		this.resultDraws.textContent = "0";
@@ -241,6 +239,16 @@ class Game extends DomElems {
 		});
 		this.addBoxesEventListeners();
 	};
+
+	resetPlayersAfterResetBtnClick() {
+		this.computer.winner = false;
+		this.player.winner = false;
+		this.computer.wins = 0;
+		this.player.wins = 0;
+		this.draws = 0;
+		this.computer.arr = [];
+		this.player.arr = [];
+	}
 
 	checkComputerMove = () => {
 		if (this.computer.active) {
@@ -256,12 +264,6 @@ class Game extends DomElems {
 
 	handleClick = (e) => {
 		const playerBox = e.target;
-		// const rowIndex = playerBox.getAttribute("data-row");
-		// const columnIndex = playerBox.getAttribute("data-column");
-		// this.board[rowIndex][columnIndex].mark = this.activePlayer.mark;
-		// this.board[rowIndex][columnIndex].element.textContent = this.board[
-		// 	rowIndex
-		// ][columnIndex].mark;
 		this.setClick(playerBox, this.activePlayer);
 
 		if (this.isGameEnd) {
@@ -283,8 +285,11 @@ class Game extends DomElems {
 	};
 
 	setClick = (playerBox, activePlayer) => {
-		playerBox.textContent = activePlayer.mark;
-		playerBox.classList.remove("board--box--hover");
+		const rowIndex = playerBox.getAttribute("data-row");
+		const columnIndex = playerBox.getAttribute("data-column");
+		const box = this.board[rowIndex][columnIndex];
+		box.mark = this.activePlayer.mark;
+		box.setBoxClick();
 		this.pushBoxIdIntoActivePlayerArr(playerBox, activePlayer);
 		this.findWinningPlayer(activePlayer);
 		this.checkForDraw(activePlayer);
@@ -294,7 +299,6 @@ class Game extends DomElems {
 
 	pushBoxIdIntoActivePlayerArr = (box, player) => {
 		player.arr.push(Number(box.id));
-		box.textContent = `${player.mark}`;
 	};
 
 	findWinningPlayer = (player) => {
