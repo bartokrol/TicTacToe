@@ -203,6 +203,7 @@ class Game extends DomElems {
 		this.getActivePlayer();
 
 		this.addBoxesEventListeners();
+		this.checkComputerMove();
 		this.newGameBtn.classList.add("disabled");
 		this.newGameBtn.removeEventListener(
 			"click",
@@ -261,6 +262,7 @@ class Game extends DomElems {
 			.filter((box) => !box.element.textContent);
 		const computerBox =
 			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)].element;
+
 		this.setClick(computerBox, this.activePlayer);
 
 		if (this.isGameEnd) {
