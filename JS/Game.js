@@ -36,6 +36,12 @@ class Game extends DomElems {
 	boardRows = 3;
 	boardCols = 3;
 
+	scores = {
+		X: 10,
+		O: -10,
+		tie: 0,
+	};
+
 	startingPageContainer = null;
 	startingBtns = null;
 	rulesBtn = null;
@@ -209,6 +215,7 @@ class Game extends DomElems {
 			"click",
 			this.resetGameAfterNewGameBtnClick
 		);
+		this.board.flat().forEach((box) => (box.mark = null));
 	};
 
 	resetGameAfterResetBtnClick = () => {
@@ -222,6 +229,7 @@ class Game extends DomElems {
 		this.draws = 0;
 		this.results.resetResults();
 		this.addBoxesEventListeners();
+		this.board.flat().forEach((box) => (box.mark = null));
 	};
 
 	resetPlayersWins() {
@@ -238,12 +246,7 @@ class Game extends DomElems {
 
 	checkComputerMove = () => {
 		if (this.computer.active) {
-			const emptyBoxes = this.board
-				.flat()
-				.filter((box) => !box.element.textContent);
-			const computerBox =
-				emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)]
-					.element;
+			const computerBox = this.findBestMove().element;
 			this.setClick(computerBox, this.activePlayer);
 		}
 	};
@@ -257,11 +260,7 @@ class Game extends DomElems {
 			return;
 		}
 
-		const emptyBoxes = this.board
-			.flat()
-			.filter((box) => !box.element.textContent);
-		const computerBox =
-			emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)].element;
+		const computerBox = this.findBestMove().element;
 
 		this.setClick(computerBox, this.activePlayer);
 
@@ -270,6 +269,195 @@ class Game extends DomElems {
 			return;
 		}
 	};
+
+	findBestMove() {
+		let board = this.board;
+		let bestScore = -Infinity;
+		let move;
+		for (let row = 0; row < this.boardRows; row++) {
+			for (let col = 0; col < this.boardCols; col++) {
+				if (!board[row][col].mark) {
+					board[row][col].mark = this.computer.mark;
+					this.computer.arr.push(board[row][col].id);
+					let score = this.minimax(board, 0, false);
+					const box = this.computer.arr.findIndex(
+						(el) => el === board[row][col].id
+					);
+					this.computer.arr.splice(box, 1);
+					board[row][col].mark = null;
+					if (score > bestScore) {
+						bestScore = score;
+						move = { row, col };
+					}
+				}
+			}
+		}
+		return board[move.row][move.col];
+	}
+
+	checkWinner(board) {
+		const emptyBoxes = board.flat().filter((box) => !box.mark);
+
+		// this.players.forEach((player) => {});
+		for (let combination of this.winningCombinations) {
+			if (combination.every((el) => this.player.arr.includes(el))) {
+				return this.player.mark;
+			}
+		}
+		for (let combination of this.winningCombinations) {
+			if (combination.every((el) => this.computer.arr.includes(el))) {
+				return this.computer.mark;
+			}
+		}
+		if (
+			emptyBoxes.length === 0 &&
+			!this.player.winner &&
+			!this.computer.winner
+		) {
+			return "tie";
+		}
+	}
+
+	minimax(board, depth, isMaximizing) {
+		let result = this.checkWinner(board) ? this.checkWinner(board) : null;
+
+		if (this.computer.mark === "X") {
+			this.scores.X = 10;
+			this.scores.O = -10;
+		}
+		if (this.computer.mark === "O") {
+			this.scores.X = -10;
+			this.scores.O = 10;
+		}
+		if (result !== null) {
+			return this.scores[result];
+		}
+
+		if (isMaximizing) {
+			let bestScore = -Infinity;
+			const maximizingPlayer =
+				this.computer.mark === "X" ? this.player : this.computer;
+
+			for (let row = 0; row < this.boardRows; row++) {
+				for (let col = 0; col < this.boardCols; col++) {
+					if (!board[row][col].mark) {
+						board[row][col].mark = maximizingPlayer.mark;
+						maximizingPlayer.arr.push(board[row][col].id);
+						let score = this.minimax(board, depth + 1, false);
+						const box = maximizingPlayer.arr.findIndex(
+							(el) => el === board[row][col].id
+						);
+						maximizingPlayer.arr.splice(box, 1);
+						board[row][col].mark = null;
+						bestScore = Math.max(score, bestScore);
+					}
+				}
+			}
+			return bestScore;
+		} else {
+			let bestScore = Infinity;
+			const minimizingPlayer =
+				this.computer.mark === "X" ? this.computer : this.player;
+
+			for (let row = 0; row < this.boardRows; row++) {
+				for (let col = 0; col < this.boardCols; col++) {
+					if (!board[row][col].mark) {
+						board[row][col].mark = minimizingPlayer.mark;
+						minimizingPlayer.arr.push(board[row][col].id);
+						let score = this.minimax(board, depth + 1, true);
+						const box = minimizingPlayer.arr.findIndex(
+							(el) => el === board[row][col].id
+						);
+						minimizingPlayer.arr.splice(box, 1);
+						board[row][col].mark = null;
+						bestScore = Math.min(score, bestScore);
+					}
+				}
+			}
+			return bestScore;
+		}
+	}
+
+	// findComputerMove() {
+	// 	if (this.player.arr.length === 1) {
+	// 		if (this.board[1][1].mark === this.player.mark) {
+	// 			const emptyBox = this.board[0][0];
+	// 			return emptyBox;
+	// 		}
+	// 		if (this.board[0][0].mark !== this.player.mark) {
+	// 			const emptyBox = this.board[1][1];
+	// 			return emptyBox;
+	// 		}
+	// 	}
+	// 	const fullPlayerBoxesInRow = [];
+	// 	const emptyBoxesInRowToUse = [];
+	// 	for (let row = 0; row < this.boardRows; row++) {
+	// 		const fullBoxesInRow = this.board[row].filter((box) => box.mark);
+	// 		const emptyBoxesInRow = this.board[row].filter((box) => !box.mark);
+	// 		if (fullBoxesInRow.length > 1) {
+	// 			for (let col = 0; col < this.boardCols; col++) {
+	// 				if (this.board[row][col].mark == this.player.mark) {
+	// 					fullPlayerBoxesInRow.push(this.board[row][col]);
+	// 				}
+	// 				if (this.board[row][col].mark == null) {
+	// 					emptyBoxesInRowToUse.push(this.board[row][col]);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+
+	// 	const turnedBoard = [
+	// 		[this.board[0][0], this.board[1][0], this.board[2][0]],
+	// 		[this.board[0][1], this.board[1][1], this.board[2][1]],
+	// 		[this.board[0][2], this.board[1][2], this.board[2][2]],
+	// 	];
+	// 	// if (this.board[row][col].dataColumn == 0) {
+	// 	// 	turnedBoard[0].push(this.board[row][col]);
+	// 	// }
+	// 	// if (this.board[row][col].dataColumn == 1) {
+	// 	// 	turnedBoard[1].push(this.board[row][col]);
+	// 	// }
+	// 	// if (this.board[row][col].dataColumn == 2) {
+	// 	// 	turnedBoard[2].push(this.board[row][col]);
+	// 	// }
+	// 	const fullPlayerBoxesInCol = [];
+	// 	const emptyBoxesInColToUse = [];
+	// 	for (let row = 0; row < this.boardRows; row++) {
+	// 		for (let col = 0; col < this.boardCols; col++) {
+	// 			const fullBoxesInCol = turnedBoard[row].filter(
+	// 				(box) => box.mark
+	// 			);
+	// 			const emptyBoxesInCol = turnedBoard[row].filter(
+	// 				(box) => !box.mark
+	// 			);
+
+	// 			if (fullBoxesInCol.length > 1) {
+	// 				if (turnedBoard[row][col].mark == this.player.mark) {
+	// 					fullPlayerBoxesInCol.push(turnedBoard[row][col]);
+	// 				}
+	// 				if (turnedBoard[row][col].mark == null) {
+	// 					emptyBoxesInColToUse.push(turnedBoard[row][col]);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+
+	// 	if (fullPlayerBoxesInRow.length == 2) {
+	// 		console.log("boxesrow");
+	// 		const emptyRowBox = emptyBoxesInRowToUse.pop();
+	// 		return emptyRowBox;
+	// 	} else if (fullPlayerBoxesInCol.length == 2) {
+	// 		console.log("boxescol");
+	// 		const emptyColBox = emptyBoxesInColToUse.pop();
+	// 		return emptyColBox;
+	// 	} else {
+	// 		console.log(this.board);
+	// 		const emptyBox = this.board
+	// 			.flat()
+	// 			.filter((box) => !box.element.textContent);
+	// 		return emptyBox;
+	// 	}
+	// }
 
 	setClick = (playerBox, activePlayer) => {
 		const rowIndex = playerBox.getAttribute("data-row");
@@ -297,9 +485,9 @@ class Game extends DomElems {
 				this.showWinningPlayersMarks(combination);
 				this.winningBox.showWinningMessage(player);
 				this.results.setLatestResults(player);
-				return;
 			}
 		}
+		return player;
 	};
 
 	checkForDraw = (player) => {
