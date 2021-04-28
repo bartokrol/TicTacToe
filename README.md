@@ -1,4 +1,4 @@
-# TicTacToe - Game in Vanilla JS
+# TicTacToe - Game in Vanilla JS with minimax algorithm
 
 This is a TicTacToe game made to train my programming skills, written in Vanilla JS using Object-oriented Programming.
 The game can be played in here -> https://bartokrol.github.io/TicTacToe/
