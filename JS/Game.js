@@ -246,7 +246,7 @@ class Game extends DomElems {
 
 	checkComputerMove = () => {
 		if (this.computer.active) {
-			const computerBox = this.findBestMove().element;
+			const computerBox = this.board.flat()[4].element;
 			this.setClick(computerBox, this.activePlayer);
 		}
 	};
